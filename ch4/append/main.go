@@ -26,4 +26,12 @@ func main() {
 		fmt.Printf("%d cap=%d\t%v\n", i, cap(y), y)
 		x = y
 	}
+	fmt.Println("-----------")
+	fmt.Println("-----------")
+	var z []int
+	z = append(z, 1)
+	z = append(z, 2, 3)
+	z = append(z, 4, 5, 6)
+	z = append(z, z...)
+	fmt.Println(z)
 }
