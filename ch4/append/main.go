@@ -13,8 +13,8 @@ func appendInt(x []int, y ...int) []int {
 			zcap = 2 * len(x)
 		}
 		z = make([]int, zlen, zcap)
-		copy(z[len(x):], y)
 	}
+	copy(z, x)
 	copy(z[len(x):], y)
 	// z[len(x)] = y
 	return z
