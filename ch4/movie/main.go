@@ -22,7 +22,13 @@ func main() {
 
 	data, err := json.Marshal(movies)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("JSON marshaling failed: %s", err)
 	}
 	fmt.Printf("%s\n", data)
+
+	formattedData, formatErr := json.MarshalIndent(movies, "", "  ")
+	if formatErr != nil {
+		log.Fatalf("JSON indent marshaling failed: %s", err)
+	}
+	fmt.Printf("%s\n", formattedData)
 }
