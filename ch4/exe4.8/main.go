@@ -37,7 +37,7 @@ func main() {
 		counts[r]++
 		utflen[n]++
 	}
-	fmt.Printf("Rune\tCount\n")
+	fmt.Printf("\nRune\tCount\n")
 	for c, n := range counts {
 		fmt.Printf("%q\t%d\n", c, n)
 	}
