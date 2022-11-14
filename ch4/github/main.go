@@ -3,8 +3,10 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"net/url"
+	"os"
 	"strings"
 	"time"
 )
@@ -50,4 +52,13 @@ func SearchIssues(terms []string) (*IssuesSearchResult, error) {
 	}
 	resp.Body.Close()
 	return &result, nil
+}
+
+func main() {
+	result, err := SearchIssues(os.Args[1:])
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%d issues:\n", result.TotalCount)
+
 }
