@@ -93,7 +93,7 @@ func main() {
 		}
 
 		if len(pastMonth) > 0 {
-			fmt.Printf("\nPast doy:\n")
+			fmt.Printf("\nPast day:\n")
 			for _, item := range pastMonth {
 				fmt.Printf(format, item.Number, item.User.Login, item.Title)
 			}
