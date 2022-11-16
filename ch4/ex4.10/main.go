@@ -106,15 +106,37 @@ search QUERY
 [read|edit|close|open] OWNER REPO ISSUE_NUMBER
 `
 
-func usageDie(){
+func usageDie() {
 	fmt.Fprintln(os.Stderr, usage)
 	os.Exit(1)
 }
 
-func main(){
+func main() {
 	if len(os.Args) < 2 {
 		usageDie()
 	}
 	cmd := os.Args[1]
-	args :=
+	args := os.Args[2:]
+
+	if cmd == "search" {
+		if len(args) < 1 {
+			usageDie()
+		}
+		search(args)
+		os.Exit(0)
+	}
+	if len(args) != 3 {
+		usageDie()
+	}
+	owner, repo, number := args[0], args[1], args[2]
+	switch cmd {
+	case "read":
+		read(owner, repo, number)
+	case "edit":
+		edit(owner, repo, number)
+	case "close":
+		close_(owner, repo, number)
+	case "open":
+		open(owner, repo, number)
+	}
 }
