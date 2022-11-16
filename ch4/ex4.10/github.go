@@ -19,7 +19,7 @@ type Issue struct {
 	Title     string
 	State     string
 	User      *User
-	CreatedAt time.Time `json:"createdat"`
+	CreatedAt time.Time `json:"created_at"`
 	Body      string
 }
 
