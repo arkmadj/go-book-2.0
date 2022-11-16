@@ -10,7 +10,7 @@ import (
 )
 
 func search(query []string) {
-	result, err := SearchISuues(query)
+	result, err := SearchIssues(query)
 	if err != nil {
 		log.Fatal(err)
 	}
