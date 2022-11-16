@@ -49,10 +49,23 @@ func GetIssue(owner string, repo string, number string) (*Issue, error) {
 	defer resp.Body.Close()
 
 	var issue Issue
-	if err := json.NewDecoder(resp.Body).Decode(&issue); err != nil{
+	if err := json.NewDecoder(resp.Body).Decode(&issue); err != nil {
 		return nil, err
 	}
 	return &issue, nil
 }
 
-func GetIssues(owner string, re)
+func GetIssues(owner string, repo string) ([]Issue, error) {
+	url := strings.Join([]string{APIURL, "repos", owner, repo, "issues"}, "/")
+	resp, err := get(url)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	var issues []Issue
+	if err := json.NewDecoder(resp.Body).Decode(&issues); err != nil {
+		return nil, err
+	}
+	return issues, err
+}
