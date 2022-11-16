@@ -86,3 +86,35 @@ func edit(owner, repo, number string) {
 		log.Fatal(err)
 	}
 }
+
+func close_(owner, repo, number string) {
+	_, err := EditIssue(owner, repo, number, map[string]string{"state": "closed"})
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func open(owner, repo, number string) {
+	_, err := EditIssue(owner, repo, number, map[string]string{"state": "open"})
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+var usage string = `usage:
+search QUERY
+[read|edit|close|open] OWNER REPO ISSUE_NUMBER
+`
+
+func usageDie(){
+	fmt.Fprintln(os.Stderr, usage)
+	os.Exit(1)
+}
+
+func main(){
+	if len(os.Args) < 2 {
+		usageDie()
+	}
+	cmd := os.Args[1]
+	args :=
+}
