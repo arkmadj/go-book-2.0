@@ -1,10 +1,12 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/url"
+	"os"
 	"strings"
 )
 
@@ -68,4 +70,34 @@ func GetIssues(owner string, repo string) ([]Issue, error) {
 		return nil, err
 	}
 	return issues, err
+}
+
+func EditIssue(owner, repo, number string, fields map[string]string) (*Issue, error) {
+	buf := &bytes.Buffer{}
+	encoder := json.NewEncoder(buf)
+	err := encoder.Encode(fields)
+	if err != nil {
+		return nil, err
+	}
+
+	client := &http.Client{}
+	url := strings.Join([]string{APIURL, "repos", owner, repo, "issues", number}, "/")
+	req, err := http.NewRequest("PATCH", url, buf)
+	req.SetBasicAuth(os.Getenv("GITHUB_USER"), os.Getenv("GITHUB_PASS"))
+	if err != nil {
+		return nil, err
+	}
+	resp, err := client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("Failed to edit issue: %s", resp.Status)
+	}
+	var issue Issue
+	if err = json.NewDecoder(resp.Body).Decode(&issue); err != nil {
+		return nil, err
+	}
+	return &issue, nil
 }
