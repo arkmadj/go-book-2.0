@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"encoding/gob"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -111,6 +112,30 @@ func indexComics(comics chan Comic) (WordIndex, NumIndex) {
 		}
 	}
 	return wordIndex, numIndex
+}
+
+func index(filename string) error {
+	comicChan, err := getComics()
+	if err != nil {
+		return err
+	}
+	wordIndex, numIndex := indexComics(comicChan)
+	file, err := os.Create(filename)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+	enc := gob.NewEncoder(file)
+	fmt.Println(wordIndex)
+	err = enc.Encode(wordIndex)
+	if err != nil {
+		return err
+	}
+	err = enc.Encode(numIndex)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func fetcher(comicNums chan int, comics chan Comic, done chan int) {
