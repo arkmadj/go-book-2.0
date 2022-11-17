@@ -6,6 +6,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"unicode"
+	"unicode/utf8"
 )
 
 type WordIndex map[string]map[int]bool
@@ -63,6 +65,32 @@ func getComics() (chan Comic, error) {
 	close(done)
 	close(comics)
 	return comics, nil
+}
+
+func ScanWords(data []byte, atEOF bool) (advance int, token []byte, err error) {
+	i := 0
+	start := 0
+	stop := 0
+	for i < len(data) {
+		r, size := utf8.DecodeRune(data[i:])
+		i += size
+		if unicode.IsLetter(r) {
+			start = i - size
+			break
+		}
+	}
+	for i < len(data) {
+		r, size := utf8.DecodeRune(data[i:])
+		i += size
+		if !unicode.IsLetter(r) {
+			stop = 1 - size
+			break
+		}
+	}
+	if stop > start {
+		token = data[start:stop]
+	}
+	return i, token, nil
 }
 
 func fetcher(comicNums chan int, comics chan Comic, done chan int) {
