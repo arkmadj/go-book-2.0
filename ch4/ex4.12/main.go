@@ -1,11 +1,13 @@
 package main
 
 import (
+	"bufio"
 	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
+	"strings"
 	"unicode"
 	"unicode/utf8"
 )
@@ -91,6 +93,24 @@ func ScanWords(data []byte, atEOF bool) (advance int, token []byte, err error) {
 		token = data[start:stop]
 	}
 	return i, token, nil
+}
+
+func indexComics(comics chan Comic) (WordIndex, NumIndex) {
+	wordIndex := make(WordIndex)
+	numIndex := make(NumIndex)
+	for comic := range comics {
+		numIndex[comic.Num] = comic
+		scanner := bufio.NewScanner(strings.NewReader(comic.Transcript))
+		scanner.Split(ScanWords)
+		for scanner.Scan() {
+			token := strings.ToLower(scanner.Text())
+			if _, ok := wordIndex[token]; !ok {
+				wordIndex[token] = make(map[int]bool, 1)
+			}
+			wordIndex[token][comic.Num] = true
+		}
+	}
+	return wordIndex, numIndex
 }
 
 func fetcher(comicNums chan int, comics chan Comic, done chan int) {
