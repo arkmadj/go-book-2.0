@@ -153,7 +153,21 @@ func readIndex(filename string) (WordIndex, NumIndex, error) {
 	return wordIndex, numIndex, nil
 }
 
-func comicsContainingWords()
+func comicsContainingWords(words []string, wordIndex WordIndex, numIndex NumIndex) []Comic {
+	found := make(map[int]int)
+	comics := make([]Comic, 0)
+	for _, word := range words {
+		for num := range wordIndex[word] {
+			found[num]++
+		}
+	}
+	for num, nfound := range found {
+		if nfound == len(words) {
+			comics = append(comics, numIndex[num])
+		}
+	}
+	return comics
+}
 
 func search(query, filename string) error {
 	wordIndex, numIndex, err := readIndex(filename)
