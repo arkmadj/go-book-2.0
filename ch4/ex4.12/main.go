@@ -174,6 +174,11 @@ func search(query, filename string) error {
 	if err != nil {
 		return err
 	}
+	comics := comicsContainingWords(strings.Fields(query), wordIndex, numIndex)
+	for _, comic := range comics {
+		fmt.Printf("%+v\n\n", comic)
+	}
+	return nil
 }
 
 func fetcher(comicNums chan int, comics chan Comic, done chan int) {
