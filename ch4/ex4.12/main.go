@@ -28,7 +28,7 @@ type Comic struct {
 
 func getComic(n int) (Comic, error) {
 	var comic Comic
-	url := fmt.Sprintf("https://xkcd.com/%d/info.0.jdon", n)
+	url := fmt.Sprintf("https://xkcd.com/%d/info.0.json", n)
 	fmt.Println(url)
 	resp, err := http.Get(url)
 	if err != nil {
