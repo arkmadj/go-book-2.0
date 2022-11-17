@@ -138,6 +138,23 @@ func index(filename string) error {
 	return nil
 }
 
+func readIndex(filename string) (WordIndex, NumIndex, error) {
+	file, err := os.Open(filename)
+	if err != nil {
+		return nil, nil, err
+	}
+	dec := gob.NewDecoder(file)
+	var wordIndex WordIndex
+	var numIndex NumIndex
+	err = dec.Decode(&wordIndex)
+	if err != nil {
+		return nil, nil, err
+	}
+	return wordIndex, numIndex, nil
+}
+
+func comicsContainingWords()
+
 func search(query, filename string) error {
 	wordIndex, numIndex, err := readIndex(filename)
 	if err != nil {
