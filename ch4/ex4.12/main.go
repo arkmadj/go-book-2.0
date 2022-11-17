@@ -240,5 +240,13 @@ func main() {
 			log.Fatal("Error getting comic", err)
 		}
 		fmt.Println(comic)
+	case "index":
+		if len(os.Args) != 3 {
+			usageDie()
+		}
+		err := index(os.Args[2])
+		if err != nil {
+			log.Fatal("Error serializing indexes", err)
+		}
 	}
 }
