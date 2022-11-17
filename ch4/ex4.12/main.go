@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 )
@@ -45,6 +46,35 @@ func getComics() (chan Comic, error) {
 	fmt.Println("Max: ", max)
 	max = 20
 
+	nworkers := 5
+	comics := make(chan Comic, 5*nworkers)
+	comicNums := make(chan int, 1*nworkers)
+	done := make(chan int, 0)
+	for i := 0; i < nworkers; i++ {
+		go fetcher(comicNums, comics, done)
+	}
+	for i := 1; i <= max; i++ {
+		comicNums <- i
+	}
+	close(comicNums)
+	for i := 0; i < nworkers; i++ {
+		<-done
+	}
+	close(done)
+	close(comics)
+	return comics, nil
+}
+
+func fetcher(comicNums chan int, comics chan Comic, done chan int) {
+	for n := range comicNums {
+		comic, err := getComic(n)
+		if err != nil {
+			log.Printf("Can't get comic %d: %s", n, err)
+			continue
+		}
+		comics <- comic
+	}
+	done <- 1
 }
 
 func getComicCount() (int, error) {
