@@ -248,5 +248,17 @@ func main() {
 		if err != nil {
 			log.Fatal("Error serializing indexes", err)
 		}
+	case "search":
+		if len(os.Args) != 4 {
+			usageDie()
+		}
+		filename := os.Args[2]
+		query := os.Args[3]
+		err := search(query, filename)
+		if err != nil {
+			log.Fatal("Error searching index", err)
+		}
+	default:
+		usageDie()
 	}
 }
