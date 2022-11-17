@@ -138,6 +138,13 @@ func index(filename string) error {
 	return nil
 }
 
+func search(query, filename string) error {
+	wordIndex, numIndex, err := readIndex(filename)
+	if err != nil {
+		return err
+	}
+}
+
 func fetcher(comicNums chan int, comics chan Comic, done chan int) {
 	for n := range comicNums {
 		comic, err := getComic(n)
