@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"net/url"
 	"os"
@@ -69,4 +70,26 @@ func (m Movie) writePoster() error {
 		return err
 	}
 	return nil
+}
+
+func main() {
+	if len(os.Args) != 2 {
+		fmt.Fprintln(os.Stderr, "Usage: poster MOVIE_TITLE")
+		os.Exit(1)
+	}
+	title := os.Args[1]
+	movie, err := getMovie(title)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if zero := new(Movie); movie == *zero {
+		fmt.Fprintf(os.Stderr, "No results for '%s'\n", title)
+		os.Exit(2)
+	}
+
+	err = movie.writePoster()
+	if err != nil {
+		log.Fatal(err)
+	}
 }
