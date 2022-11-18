@@ -1,10 +1,12 @@
 package main
 
 import (
+	"bufio"
 	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/url"
+	"os"
 	"path/filepath"
 
 	"github.com/metal3d/go-slugify"
@@ -40,4 +42,31 @@ func getMovie(title string) (movie Movie, err error) {
 		return
 	}
 	return
+}
+
+func (m Movie) writePoster() error {
+	url_ := m.Poster
+	resp, err := http.Get(url_)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode != 200 {
+		return fmt.Errorf("%d response from %s", resp.StatusCode, url_)
+	}
+	file, err := os.Create(m.posterFilename())
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+	writer := bufio.NewWriter(file)
+	_, err = writer.ReadFrom(resp.Body)
+	if err != nil {
+		return err
+	}
+	err = writer.Flush()
+	if err != nil {
+		return err
+	}
+	return nil
 }
