@@ -2,14 +2,18 @@ package main
 
 import (
 	"html/template"
+	"log"
+	"os"
 	"time"
+
+	"github.com/ahmad/go-book-2.0/ch4/github"
 )
 
 const templ = `{{.TotalCount}} issues:
 {{range .Items}}-------------------------------------
 Number: {{.Number}}
 Userr: {{.User.Login}}
-Title: {{.Tile | printf "%.64s}}
+Title: {{.Title | printf "%.64s"}}
 Age: {{.CreatedAt | daysAgo}} days
 {{end}}`
 
@@ -18,3 +22,13 @@ func daysAgo(t time.Time) int {
 }
 
 var report = template.Must(template.New("issueList").Funcs(template.FuncMap{"daysAgo": daysAgo}).Parse(templ))
+
+func main() {
+	result, err := github.SearchIssues(os.Args[1:])
+	if err != nil {
+		log.Fatal(err)
+	}
+	if err := report.Execute(os.Stdout, result); err != nil {
+		log.Fatal(err)
+	}
+}
