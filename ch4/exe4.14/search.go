@@ -28,3 +28,16 @@ func SearchIssues(terms []string) (*IssuesSearchResult, error) {
 	resp.Body.Close()
 	return &result, nil
 }
+
+func get(url string) (*http.Response, error) {
+	resp, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	}
+	if resp.StatusCode != http.StatusOK {
+		resp.Body.Close()
+		return nil, fmt.Errorf("Can't get %s: %s", url, resp.Status)
+	}
+	resp.Body.Close()
+	return resp, nil
+}
