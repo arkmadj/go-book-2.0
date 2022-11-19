@@ -1,6 +1,9 @@
 package main
 
-import "html/template"
+import (
+	"html/template"
+	"log"
+)
 
 var issueListTemplate = template.Must(template.New("issueList").Parse(`
 <h1>{{.Issues | len}} issues</h1>
@@ -49,4 +52,10 @@ func NewIssueCache(owner, repo string) (ic IssueCache, err error) {
 		ic.IssuesByNumber[issue.Number] = issue
 	}
 	return
+}
+
+func logNonNil(v interface{}) {
+	if v != nil {
+		log.Print(v)
+	}
 }
