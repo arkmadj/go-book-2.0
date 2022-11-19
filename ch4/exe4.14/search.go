@@ -41,3 +41,18 @@ func get(url string) (*http.Response, error) {
 	resp.Body.Close()
 	return resp, nil
 }
+
+func GetIssue(owner, repo, number string) (*Issue, error) {
+	url := strings.Join([]string{APIURL, "repos", owner, repo, "issues", number}, "/")
+	resp, err := get(url)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	var issue Issue
+	if err := json.NewDecoder(resp.Body).Decode(&issue); err != nil {
+		return nil, err
+	}
+	return &issue, nil
+}
