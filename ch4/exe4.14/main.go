@@ -32,3 +32,8 @@ var issueTemplates = template.Must(template.New("issue").Parse(`
 </dl>
 <p>{{.Body}}</p>
 `))
+
+type IssueCache struct {
+	Issues         []Issue
+	IssuesByNumber map[int]Issue
+}
