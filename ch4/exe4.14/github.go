@@ -1,6 +1,9 @@
 package main
 
-import "time"
+import (
+	"fmt"
+	"time"
+)
 
 const IssuesURL = "https://api.github.com/search/issues"
 const APIURL = "https://api.github.com"
@@ -23,4 +26,8 @@ type Issue struct {
 type User struct {
 	Login   string
 	HTMLURL string `json:"html_url"`
+}
+
+func (i Issue) CacheURL() string {
+	return fmt.Sprintf("/issues/%d", i.Number)
 }
