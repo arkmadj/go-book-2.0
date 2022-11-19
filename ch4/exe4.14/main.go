@@ -37,3 +37,16 @@ type IssueCache struct {
 	Issues         []Issue
 	IssuesByNumber map[int]Issue
 }
+
+func NewIssueCache(owner, repo string) (ic IssueCache, err error) {
+	issues, err := GetIssues(owner, repo)
+	if err != nil {
+		return
+	}
+	ic.Issues = issues
+	ic.IssuesByNumber = make(map[int]Issue, len(issues))
+	for _, issue := range issues {
+		ic.IssuesByNumber[issue.Number] = issue
+	}
+	return
+}
