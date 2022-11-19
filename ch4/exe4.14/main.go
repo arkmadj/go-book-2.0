@@ -3,6 +3,8 @@ package main
 import (
 	"html/template"
 	"log"
+	"net/http"
+	"strings"
 )
 
 var issueListTemplate = template.Must(template.New("issueList").Parse(`
@@ -58,4 +60,8 @@ func logNonNil(v interface{}) {
 	if v != nil {
 		log.Print(v)
 	}
+}
+
+func (ic IssueCache) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	pathParts := strings.SplitN(r.URL)
 }
