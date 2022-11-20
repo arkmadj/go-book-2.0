@@ -6,3 +6,5 @@ type Node struct {
 	Attr                    []Attribute
 	FirstChild, NextSibling *Node
 }
+
+type NodeType int32
