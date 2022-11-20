@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"html"
 	"os"
+
+	"github.com/ahmad/go-book-2.0/ch4/html"
 )
 
 func main() {
