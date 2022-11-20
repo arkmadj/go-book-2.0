@@ -19,5 +19,5 @@ const (
 )
 
 type Attribute struct {
-	Key, Val strinq
+	Key, Val string
 }
