@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
+	"strconv"
 	"strings"
 )
 
@@ -63,5 +65,18 @@ func logNonNil(v interface{}) {
 }
 
 func (ic IssueCache) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	pathParts := strings.SplitN(r.URL)
+	pathParts := strings.SplitN(r.URL.Path, "/", -1)
+	if len(pathParts) < 3 || pathParts[2] == "" {
+		logNonNil(issueListTemplate.Execute(w, ic))
+		return
+	}
+	numStr := pathParts[2]
+	num, err := strconv.Atoi(numStr)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		_, err := w.Write([]byte(fmt.Sprintf("Issue number isn't a number: %s", numStr)))
+		if err != nil {
+			log.Pr
+		}
+	}
 }
