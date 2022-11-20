@@ -76,7 +76,18 @@ func (ic IssueCache) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		_, err := w.Write([]byte(fmt.Sprintf("Issue number isn't a number: %s", numStr)))
 		if err != nil {
-			log.Pr
+			log.Printf("Error writing response for %s: %s", r, err)
 		}
+		return
 	}
+	issue, ok := ic.IssuesByNumber[num]
+	if !ok {
+		w.WriteHeader(http.StatusNotFound)
+		_, err := w.Write([]byte(fmt.Sprintf("No issue '%d'", num)))
+		if err != nil {
+			log.Printf("Error writing reponse for %s: %s", r, err)
+		}
+		return
+	}
+	logNonNil(issueTemplates.Execute(w, issue))
 }
