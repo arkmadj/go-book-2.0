@@ -17,3 +17,7 @@ const (
 	CommentNode
 	DoctypeNode
 )
+
+type Attribute struct {
+	Key, Val strinq
+}
