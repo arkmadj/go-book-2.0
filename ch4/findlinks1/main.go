@@ -29,5 +29,5 @@ func visit(links []string, n *html.Node) []string {
 	for c := n.FirstChild; c != nil; c = c.NextSibling {
 		links = visit(links, c)
 	}
-	return link
+	return links
 }
