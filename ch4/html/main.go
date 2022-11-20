@@ -1,5 +1,7 @@
 package main
 
+import "io"
+
 type Node struct {
 	Type                    NodeType
 	Data                    string
@@ -21,3 +23,5 @@ const (
 type Attribute struct {
 	Key, Val string
 }
+
+func Parse(r io.Reader) (*Node, error)
