@@ -1,7 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"io"
+	"log"
 	"os"
 
 	"github.com/ahmad/go-book-2.0/ch4/html"
@@ -25,4 +27,14 @@ func tagFreq(r io.Reader) (map[string]int, error) {
 		return freq, err
 	}
 	return freq, nil
+}
+
+func main() {
+	freq, err := tagFreq(os.Stdin)
+	if err != nil {
+		log.Fatal(err)
+	}
+	for tag, count := range freq {
+		fmt.Printf("%4d %s\n", count, tag)
+	}
 }
