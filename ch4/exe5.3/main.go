@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"html"
 	"io"
+	"log"
 	"os"
 	"strings"
 )
@@ -42,4 +43,11 @@ Tokenize:
 		return err
 	}
 	return nil
+}
+
+func main() {
+	err := printTagText(os.Stdin, os.Stdout)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
