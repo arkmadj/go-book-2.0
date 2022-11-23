@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/ahmad/go-book-2.0/ch4/html"
 )
@@ -22,4 +23,15 @@ func visit(links []string, n *html.Node) []string {
 		links = visit(links, n.NextSibling)
 	}
 	return links
+}
+
+func main() {
+	doc, err := html.Parse(os.Stdin)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Findlinks: %v\n", err)
+		os.Exit(1)
+	}
+	for _, link := range visit(nil, doc) {
+		fmt.Println(link)
+	}
 }
