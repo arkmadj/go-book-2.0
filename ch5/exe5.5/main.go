@@ -3,7 +3,9 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"net/http"
+	"os"
 	"strings"
 
 	"github.com/ahmad/go-book-2.0/ch4/html"
@@ -53,4 +55,16 @@ func wordCount(s string) int {
 		n++
 	}
 	return n
+}
+
+func main() {
+	if len(os.Args) != 2 {
+		fmt.Fprintln(os.Stderr, "Usage: PROG URL")
+	}
+	url := os.Args[1]
+	words, images, err := CountWordsAndImages(url)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("Words: %d\nImages: %d\n", words, images)
 }
