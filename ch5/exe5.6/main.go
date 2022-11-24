@@ -12,3 +12,8 @@ const (
 )
 
 var sin30, cos30 = math.Sin(angle), math.Cos(angle)
+
+func f(x, y float64) float64 {
+	r := math.Hypot(x, y)
+	return math.Sin(r) / r
+}
