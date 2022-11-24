@@ -10,3 +10,5 @@ const (
 	zscale        = height * 0.4
 	angle         = math.Pi / 6
 )
+
+var sin30, cos30 = math.Sin(angle), math.Cos(angle)
