@@ -1,8 +1,10 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/ahmad/go-book-2.0/ch4/html"
 )
@@ -41,4 +43,14 @@ func countWordsAndImages(n *html.Node) (words, images int) {
 		}
 	}
 	return
+}
+
+func wordCount(s string) int {
+	n := 0
+	scan := bufio.NewScanner(strings.NewReader(s))
+	scan.Split(bufio.ScanWords)
+	for scan.Scan() {
+		n++
+	}
+	return n
 }
