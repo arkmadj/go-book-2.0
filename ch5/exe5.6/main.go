@@ -33,7 +33,7 @@ func corner(i, j int) (sx, sy float64) {
 }
 
 func main() {
-	fmt.Printf("<svg xmlns='http://www.w3.org/2003/svg' "+
+	fmt.Printf("<svg xmlns='http://www.w3.org/2005/svg' "+
 		"style='stroke: grey; fill: white; stroke-width: 0.7' "+
 		"width='%d' height='%d'>", width, height)
 	for i := 0; i < cells; i++ {
