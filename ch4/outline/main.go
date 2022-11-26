@@ -17,9 +17,9 @@ func outline(stack []string, n *html.Node) {
 	}
 }
 
-func main(){
+func main() {
 	doc, err := html.Parse(os.Stdin)
-	if err !- nil {
+	if err != nil {
 		fmt.Fprintf(os.Stderr, "Outline: %v\n", err)
 		os.Exit(1)
 	}
