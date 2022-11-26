@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
 	"time"
 )
 
@@ -25,6 +24,6 @@ func WaitForServer(url string) error {
 func main() {
 	var url string = "http://www.proberker.com/"
 	if err := WaitForServer(url); err != nil {
-		fmt.Fprintf(os.Stderr, "Site is down: %v\n", err)
+		log.Fatalf("Site is down: %v\n", err)
 	}
 }
