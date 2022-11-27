@@ -28,4 +28,20 @@ func (pp PrettyPrinter) Err() error {
 	return pp.err
 }
 
-func (pp PrettyPrinter) for
+func (pp PrettyPrinter) forEachNode(n *html.Node, pre, post func(n *html.Node)) {
+	if pre != nil {
+		pre(n)
+	}
+	if pp.Err() != nil {
+		return
+	}
+	for c := n.FirstChild; c != nil; c = c.NextSibling {
+		pp.forEachNode(c, pre, post)
+	}
+	if post != nil {
+		post(n)
+	}
+	if pp.Err() != nil {
+		return
+	}
+}
