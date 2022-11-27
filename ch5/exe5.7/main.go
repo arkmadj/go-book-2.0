@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"io"
+	"log"
+	"os"
 	"strings"
 
 	"golang.org/x/net/html"
@@ -113,11 +115,11 @@ func (pp PrettyPrinter) end(n *html.Node) {
 	}
 }
 
-// func main() {
-// 	doc, err := html.Parse(os.Stdin)
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
-// 	pp := NewPrettyPrinter()
-// 	pp.Pretty(os.Stdout, doc)
-// }
+func main() {
+	doc, err := html.Parse(os.Stdin)
+	if err != nil {
+		log.Fatal(err)
+	}
+	pp := NewPrettyPrinter()
+	pp.Pretty(os.Stdout, doc)
+}
