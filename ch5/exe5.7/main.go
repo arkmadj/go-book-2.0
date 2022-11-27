@@ -80,7 +80,7 @@ func (pp PrettyPrinter) endElement(n *html.Node) {
 	if n.FirstChild == nil {
 		return
 	}
-	pp.printf("%*s</%s>\n", depth*2, "", n.Data)
+	pp.printf("%*s</%s>\ns", depth*2, "", n.Data)
 }
 
 func (pp PrettyPrinter) startText(n *html.Node) {
