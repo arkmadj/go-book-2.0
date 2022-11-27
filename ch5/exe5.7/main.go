@@ -74,3 +74,11 @@ func (pp PrettyPrinter) startElement(n *html.Node) {
 	pp.printf("%*s<%s%s%s\n", depth*2, "", name, attrStr, end)
 	depth++
 }
+
+func (pp PrettyPrinter) endElement(n *html.Node) {
+	depth--
+	if n.FirstChild == nil {
+		return
+	}
+	pp.printf("%*s</%s>\n", depth*2, "", n.Data)
+}
