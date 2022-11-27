@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 
 	"github.com/ahmad/go-book-2.0/ch4/html"
@@ -44,4 +45,9 @@ func (pp PrettyPrinter) forEachNode(n *html.Node, pre, post func(n *html.Node)) 
 	if pp.Err() != nil {
 		return
 	}
+}
+
+func (pp PrettyPrinter) printf(format string, args ...interface{}) {
+	_, err := fmt.Fprintf(pp.w, format, args...)
+	pp.err = err
 }
