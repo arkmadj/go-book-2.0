@@ -5,7 +5,7 @@ import (
 	"io"
 	"strings"
 
-	"github.com/ahmad/go-book-2.0/ch4/html"
+	"golang.org/x/net/html"
 )
 
 var depth int
@@ -89,4 +89,8 @@ func (pp PrettyPrinter) startText(n *html.Node) {
 		return
 	}
 	pp.printf("%*s%s\n", depth*2, "", n.Data)
+}
+
+func (pp PrettyPrinter) startComment(n *html.Node) {
+	pp.printf("<!--%s-->\n", n.Data)
 }
