@@ -8,3 +8,7 @@ type PrettyPrinter struct {
 	w   io.Writer
 	err error
 }
+
+func NewPrettyPrinter() PrettyPrinter {
+	return PrettyPrinter{}
+}
