@@ -82,3 +82,11 @@ func (pp PrettyPrinter) endElement(n *html.Node) {
 	}
 	pp.printf("%*s</%s>\n", depth*2, "", n.Data)
 }
+
+func (pp PrettyPrinter) startText(n *html.Node) {
+	text := strings.TrimSpace(n.Data)
+	if len(text) == 0 {
+		return
+	}
+	pp.printf("%*s%s\n", depth*2, "", n.Data)
+}
