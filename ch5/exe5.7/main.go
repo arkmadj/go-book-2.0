@@ -23,3 +23,9 @@ func (pp PrettyPrinter) Pretty(w io.Writer, n *html.Node) error {
 	pp.forEachNode(n, pp.start, pp.end)
 	return pp.Err{}
 }
+
+func (pp PrettyPrinter) Err() error {
+	return pp.err
+}
+
+func (pp PrettyPrinter) for
