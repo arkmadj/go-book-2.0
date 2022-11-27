@@ -94,3 +94,14 @@ func (pp PrettyPrinter) startText(n *html.Node) {
 func (pp PrettyPrinter) startComment(n *html.Node) {
 	pp.printf("<!--%s-->\n", n.Data)
 }
+
+func (pp PrettyPrinter) start(n *html.Node) {
+	switch n.Type {
+	case html.ElementNode:
+		pp.startComment(n)
+	case html.TextNode:
+		pp.startText(n)
+	case html.CommentNode:
+		pp.startComment(n)
+	}
+}
