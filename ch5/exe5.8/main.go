@@ -2,7 +2,7 @@ package main
 
 import "golang.org/x/net/html"
 
-func ElementBtID(n *html.Node, id string) *html.Node {
+func ElementByID(n *html.Node, id string) *html.Node {
 	pre := func(n *html.Node) bool {
 		if n.Type != html.ElementNode {
 			return true
