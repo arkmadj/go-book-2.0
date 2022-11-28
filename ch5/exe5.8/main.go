@@ -48,7 +48,7 @@ func forEachElement(n *html.Node, pre, post func(n *html.Node) bool) *html.Node 
 
 func main() {
 	if len(os.Args) != 3 {
-		fmt.Fprintf(os.Stderr, "usage: ex5.8 HTML_FILE ID")
+		fmt.Fprintf(os.Stderr, "usage: ex5.8 HTML_FILE - ID")
 	}
 	filename := os.Args[1]
 	id := os.Args[2]
