@@ -25,7 +25,7 @@ func (pp PrettyPrinter) Pretty(w io.Writer, n *html.Node) error {
 	pp.w = w
 	pp.err = nil
 	pp.forEachNode(n, pp.start, pp.end)
-	return pp.Err{}
+	return pp.Err()
 }
 
 func (pp PrettyPrinter) Err() error {
