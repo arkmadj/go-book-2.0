@@ -1,6 +1,12 @@
 package main
 
-import "golang.org/x/net/html"
+import (
+	"fmt"
+	"log"
+	"os"
+
+	"golang.org/x/net/html"
+)
 
 func ElementByID(n *html.Node, id string) *html.Node {
 	pre := func(n *html.Node) bool {
@@ -38,4 +44,21 @@ func forEachElement(n *html.Node, pre, post func(n *html.Node) bool) *html.Node 
 		}
 	}
 	return nil
+}
+
+func main() {
+	if len(os.Args) != 3 {
+		fmt.Fprintf(os.Stderr, "usage: ex5.8 HTML_FILE ID")
+	}
+	filename := os.Args[1]
+	id := os.Args[2]
+	file, err := os.Open(filename)
+	if err != nil {
+		log.Fatal(err)
+	}
+	doc, err := html.Parse(file)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%+v\n", ElementByID(doc, id))
 }
