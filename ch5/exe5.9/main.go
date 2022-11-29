@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"log"
 	"os"
@@ -50,4 +51,24 @@ func main() {
 		used[s] = true
 		return v
 	}
+
+	b := &bytes.Buffer{}
+	b.ReadFrom(os.Stdin)
+	fmt.Print(expand(b.String(), f))
+
+	unused := make([]string, 0)
+	for k, _ := range subs {
+		if !used[k] {
+			unused = append(unused, k)
+		}
+	}
+
+	if len(unused) > 0 {
+		log.Printf("unused bindings: %s", strings.Join(unused, " "))
+	}
+
+	if len(missing) > 0 {
+		log.Printf("missing bindings: %s", strings.Join(missing, " "))
+	}
+
 }
