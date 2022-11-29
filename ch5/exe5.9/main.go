@@ -54,6 +54,7 @@ func main() {
 
 	b := &bytes.Buffer{}
 	b.ReadFrom(os.Stdin)
+	fmt.Println(b.String())
 	fmt.Print(expand(b.String(), f))
 
 	unused := make([]string, 0)
