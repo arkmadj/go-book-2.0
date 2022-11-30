@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 var prereqs = map[string][]string{
 	"algorithms": {"data structures"},
 	"calculus":   {"linear algebra"},
@@ -37,4 +39,10 @@ func topoSort(m map[string][]string) []string {
 		visitAll([]string{k})
 	}
 	return order
+}
+
+func main() {
+	for i, course := range topoSort(prereqs) {
+		fmt.Printf("%d:\t%s\n", i+1, course)
+	}
 }
