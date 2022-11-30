@@ -18,3 +18,23 @@ var prereqs = map[string][]string{
 	"operating systems":     {"data structures", "computer organization"},
 	"programming languages": {"data structures", "computer organization"},
 }
+
+func topoSort(m map[string][]string) []string {
+	var order []string
+	seen := make(map[string]bool)
+	var visitAll func([]string)
+
+	visitAll = func(items []string) {
+		for _, v := range items {
+			if !seen[v] {
+				seen[v] = true
+				visitAll(m[v])
+				order = append(order, v)
+			}
+		}
+	}
+	for k := range m {
+		visitAll([]string{k})
+	}
+	return order
+}
