@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/ahmad/go-book-2.0/ch5/links"
 )
@@ -28,4 +29,8 @@ func crawl(url string) []string {
 		log.Print(err)
 	}
 	return list
+}
+
+func main() {
+	breadthFirst(crawl, os.Args[1:])
 }
