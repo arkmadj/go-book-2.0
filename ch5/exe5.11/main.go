@@ -37,3 +37,12 @@ func main() {
 		fmt.Printf("%d:\t%s\n", i+1, course)
 	}
 }
+
+func index(s string, slice []string) (int, error) {
+	for i, v := range slice {
+		if s == v {
+			return i, nil
+		}
+	}
+	return 0, fmt.Errorf("not found")
+}
