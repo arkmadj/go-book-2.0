@@ -1,5 +1,10 @@
 package main
 
+import (
+	"fmt"
+	"os"
+)
+
 var prereqs = map[string][]string{
 	"algorithms":     {"data structures"},
 	"calculus":       {"linear algebra"},
@@ -20,4 +25,15 @@ var prereqs = map[string][]string{
 	"networks":              {"operating systems"},
 	"operating systems":     {"data structures", "computer organization"},
 	"programming languages": {"data structures", "computer organization"},
+}
+
+func main() {
+	order, err := topoSort(prereqs)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+	for i, course := range order {
+		fmt.Printf("%d:\t%s\n", i+1, course)
+	}
 }
