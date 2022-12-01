@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
 
 	"golang.org/x/net/html"
 )
@@ -52,4 +53,10 @@ func outline(url string) error {
 
 	forEachNode(doc, startElement, endElement)
 	return nil
+}
+
+func main() {
+	for _, url := range os.Args[1:] {
+		outline(url)
+	}
 }
