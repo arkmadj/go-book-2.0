@@ -11,7 +11,7 @@ var prereqs = map[string][]string{
 	"calculus":       {"linear algebra"},
 	"linear algebra": {"calculus"},
 	// uncomment line below to introduce a dependency cycle.
-	// "intro to programming": {"data structures"},
+	"intro to programming": {"data structures"},
 
 	"compilers": {
 		"data structures",
