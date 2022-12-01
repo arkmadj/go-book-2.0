@@ -1,6 +1,11 @@
 package main
 
-import "golang.org/x/net/html"
+import (
+	"fmt"
+	"net/http"
+
+	"golang.org/x/net/html"
+)
 
 func forEachNode(n *html.Node, pre, post func(n *html.Node)) {
 	if pre != nil {
@@ -14,4 +19,37 @@ func forEachNode(n *html.Node, pre, post func(n *html.Node)) {
 	if post != nil {
 		post(n)
 	}
+}
+
+func outline(url string) error {
+	resp, err := http.Get(url)
+	if err != nil {
+		return err
+	}
+
+	defer resp.Body.Close()
+
+	doc, err := html.Parse(resp.Body)
+	if err != nil {
+		return err
+	}
+
+	var depth int
+
+	startElement := func(n *html.Node) {
+		if n.Type == html.ElementNode {
+			fmt.Printf("%*s<%s>\n", depth*2, "", n.Data)
+			depth++
+		}
+	}
+
+	endElement := func(n *html.Node) {
+		if n.Type == html.ElementNode {
+			depth--
+			fmt.Printf("%*s</%s>\n", depth*2, "", n.Data)
+		}
+	}
+
+	forEachNode(doc, startElement, endElement)
+	return nil
 }
