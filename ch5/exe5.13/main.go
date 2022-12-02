@@ -13,3 +13,5 @@ func breadthFirst(f func(item string) []string, worklist []string) {
 		}
 	}
 }
+
+var origHost string
