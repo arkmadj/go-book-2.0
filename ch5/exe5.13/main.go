@@ -3,10 +3,13 @@ package maain
 import (
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"net/url"
 	"os"
 	"path/filepath"
+
+	"github.com/ahmad/go-book-2.0/ch5/links"
 )
 
 func breadthFirst(f func(item string) []string, worklist []string) {
@@ -67,4 +70,17 @@ func save(rawurl string) error {
 		return err
 	}
 	return nil
+}
+
+func crawl(url string) []string {
+	fmt.Println(url)
+	err := save(url)
+	if err != nil {
+		log.Printf(`can't cache "%s": %s`, url, err)
+	}
+	list, err := links.Extract(url)
+	if err != nil {
+		log.Printf(`can't extract links from "%s": %s`, url, err)
+	}
+	return list
 }
