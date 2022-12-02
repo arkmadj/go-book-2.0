@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 var prereqs = map[string][]string{
 	"algorithms": {"data structures"},
 	"calculus":   {"linear algebra"},
@@ -31,4 +33,9 @@ func breadthFirst(f func(item string) []string, worklist []string) {
 			}
 		}
 	}
+}
+
+func deps(course string) []string {
+	fmt.Println(course)
+	return prereqs[course]
 }
