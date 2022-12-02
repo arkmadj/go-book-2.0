@@ -39,3 +39,11 @@ func deps(course string) []string {
 	fmt.Println(course)
 	return prereqs[course]
 }
+
+func main() {
+	var course string
+	for course = range prereqs {
+		break
+	}
+	breadthFirst(deps, []string{course})
+}
