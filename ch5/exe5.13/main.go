@@ -1,4 +1,4 @@
-package maain
+package main
 
 import (
 	"fmt"
@@ -83,4 +83,8 @@ func crawl(url string) []string {
 		log.Printf(`can't extract links from "%s": %s`, url, err)
 	}
 	return list
+}
+
+func main() {
+	breadthFirst(crawl, os.Args[1:])
 }
