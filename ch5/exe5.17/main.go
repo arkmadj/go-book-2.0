@@ -1,6 +1,12 @@
 package main
 
-import "golang.org/x/net/html"
+import (
+	"fmt"
+	"log"
+	"os"
+
+	"golang.org/x/net/html"
+)
 
 func ElementsByTag(n *html.Node, tags ...string) []*html.Node {
 	nodes := make([]*html.Node, 0)
@@ -44,4 +50,24 @@ func forEachElementNode(n *html.Node, pre, post func(n *html.Node) bool) *html.N
 		}
 	}
 	return nil
+}
+
+func main() {
+	if len(os.Args) < 3 {
+		fmt.Fprintln(os.Stderr, "usage: exe5.17 HTML_FILE TAG ...")
+	}
+
+	filename := os.Args[1]
+	tags := os.Args[2:]
+	file, err := os.Open(filename)
+	if err != nil {
+		log.Fatal(err)
+	}
+	doc, err := html.Parse(file)
+	if err != nil {
+		log.Fatal(err)
+	}
+	for _, n := range ElementsByTag(doc, tags...) {
+		fmt.Printf("%+v\n", n)
+	}
 }
