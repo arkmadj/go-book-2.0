@@ -17,4 +17,10 @@ func main() {
 
 	values := []int{1, 2, 3, 4}
 	fmt.Println(sum(values...))
+
+	fmt.Printf("%T\n", f)
+	fmt.Printf("%T\n", g)
 }
+
+func f(...int) {}
+func g([]int)  {}
