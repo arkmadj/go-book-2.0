@@ -14,4 +14,7 @@ func main() {
 	fmt.Println(sum())
 	fmt.Println(sum(3))
 	fmt.Println(sum(1, 2, 3, 4))
+
+	values := []int{1, 2, 3, 4}
+	fmt.Println(sum(values...))
 }
