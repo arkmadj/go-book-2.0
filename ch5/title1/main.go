@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
 	"strings"
 
 	"golang.org/x/net/html"
@@ -47,4 +48,9 @@ func forEachNode(n *html.Node, pre, post func(n *html.Node)) {
 	if post != nil {
 		post(n)
 	}
+}
+
+func main() {
+	url := os.Args[1]
+	fmt.Println(title(url))
 }
