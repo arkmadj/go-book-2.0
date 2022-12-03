@@ -1,6 +1,9 @@
 package main
 
-import "bytes"
+import (
+	"bytes"
+	"fmt"
+)
 
 func join(sep string, strs ...string) string {
 	if len(strs) == 0 {
@@ -13,4 +16,9 @@ func join(sep string, strs ...string) string {
 	}
 	b.WriteString(strs[len(strs)-1])
 	return b.String()
+}
+
+func main() {
+	fmt.Println(join(", ", "Hello", "Ahmad"))
+	fmt.Println(join("/"))
 }
