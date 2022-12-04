@@ -24,7 +24,7 @@ func title(url string) error {
 	doc, err := html.Parse(resp.Body)
 	resp.Body.Close()
 	if err != nil {
-		fmt.Errorf("parsing %s as HTML: %v", url, err)
+		return fmt.Errorf("parsing %s as HTML: %v", url, err)
 	}
 
 	visitNode := func(n *html.Node) {
