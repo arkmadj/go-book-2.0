@@ -28,3 +28,7 @@ func fetch(url string) (filename string, n int64, err error) {
 	}
 	return local, n, err
 }
+
+func main() {
+	fetch(os.Args[1])
+}
