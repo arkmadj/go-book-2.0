@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"net/http"
 	"os"
@@ -16,7 +17,7 @@ func fetch(url string) (filename string, n int64, err error) {
 
 	local := path.Base(resp.Request.URL.Path)
 	if local == "/" {
-		return "", 0, err
+		local = "index.html"
 	}
 	f, err := os.Create(local)
 	if err != nil {
@@ -30,4 +31,8 @@ func fetch(url string) (filename string, n int64, err error) {
 
 	n, err = io.Copy(f, resp.Body)
 	return local, n, err
+}
+
+func main() {
+	fmt.Println(fetch(os.Args[1]))
 }
