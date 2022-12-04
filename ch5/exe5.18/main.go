@@ -1,26 +1,33 @@
 package main
 
-// func fetch(url string) (filename string, n int64, err error) {
-// 	resp, err := http.Get(url)
-// 	if err != nil {
-// 		return "", 0, err
-// 	}
-// 	defer resp.Body.Close()
+import (
+	"io"
+	"net/http"
+	"os"
+	"path"
+)
 
-// 	local := path.Base(resp.Request.URL.Path)
-// 	if local == "/" {
-// 		return "", 0, err
-// 	}
-// 	f, err := os.Create(local)
-// 	if err != nil {
-// 		return "", 0, err
-// 	}
-// 	defer func() {
-// 		if closeErr := f.Close(); err == nil {
-// 			err = closeErr
-// 		}
-// 	}()
+func fetch(url string) (filename string, n int64, err error) {
+	resp, err := http.Get(url)
+	if err != nil {
+		return "", 0, err
+	}
+	defer resp.Body.Close()
 
-// 	n, err = io.Copy(f, resp.Body)
-// 	return local, n, err
-// }
+	local := path.Base(resp.Request.URL.Path)
+	if local == "/" {
+		return "", 0, err
+	}
+	f, err := os.Create(local)
+	if err != nil {
+		return "", 0, err
+	}
+	defer func() {
+		if closeErr := f.Close(); err == nil {
+			err = closeErr
+		}
+	}()
+
+	n, err = io.Copy(f, resp.Body)
+	return local, n, err
+}
