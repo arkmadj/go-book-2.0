@@ -7,3 +7,7 @@ func f(x int) {
 	defer fmt.Printf("defer %d\n", x)
 	f(x - 1)
 }
+
+func main() {
+	f(3)
+}
