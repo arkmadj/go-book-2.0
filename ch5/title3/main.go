@@ -19,7 +19,7 @@ func soleTitle(doc *html.Node) (title string, err error) {
 		}
 	}()
 
-	forEachNode(dox, func(n *html.Node) {
+	forEachNode(doc, func(n *html.Node) {
 		if n.Type == html.ElementNode && n.Data == "title" && n.FirstChild != nil {
 			if n.FirstChild != nil {
 				if title != "" {
