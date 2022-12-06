@@ -51,6 +51,7 @@ func forEachNode(n *html.Node, pre, post func(n *html.Node)) {
 }
 
 func main() {
-	filename := os.Args[1]
+	var filename *html.Node
+	filename = os.Args[1]
 	fmt.Println(soleTitle(filename))
 }
