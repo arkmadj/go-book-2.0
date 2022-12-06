@@ -1,11 +1,15 @@
 package main
 
-func weird()(ret string{
-	defer func(){
+import "fmt"
+
+func weird() (ret string) {
+	defer func() {
 		recover()
 		ret = "hi"
 	}()
 	panic("omg")
 }
 
-func main
+func main() {
+	fmt.Println(weird())
+}
