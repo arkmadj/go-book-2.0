@@ -18,5 +18,19 @@ func soleTitle(doc *html.Node) (title string, err error) {
 			panic(p)
 		}
 	}()
+
+	forEachNode(dox, func(n *html.Node) {
+		if n.Type == html.ElementNode && n.Data == "title" && n.FirstChild != nil {
+			if n.FirstChild != nil {
+				if title != "" {
+					panic(bailout{})
+				}
+			}
+			title = n.FirstChild.Data
+		}
+	}, nil)
+	if title == "" {
+		return "", fmt.Errorf("no title element")
+	}
 	return title, nil
 }
