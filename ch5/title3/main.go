@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"golang.org/x/net/html"
 )
@@ -47,4 +48,9 @@ func forEachNode(n *html.Node, pre, post func(n *html.Node)) {
 	if post != nil {
 		post(n)
 	}
+}
+
+func main() {
+	filename := os.Args[1]
+	fmt.Println(soleTitle(filename))
 }
