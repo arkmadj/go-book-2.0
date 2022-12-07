@@ -7,7 +7,7 @@ func weird() (ret string) {
 		recover()
 		ret = "hi there!!"
 	}()
-	panic("omg!!")
+	panic("omg!!!")
 }
 
 func main() {
