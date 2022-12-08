@@ -55,4 +55,9 @@ func main() {
 	pptr := &pap
 	pptr.ScaleBy(2)
 	fmt.Println(pap)
+
+	pop := Point{4, 5}
+	(&pop).ScaleBy(2)
+	fmt.Println(pop)
+
 }
