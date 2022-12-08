@@ -46,4 +46,8 @@ func main() {
 	}
 
 	fmt.Println(perim.Distance())
+
+	r := &Point{1, 2}
+	r.ScaleBy(2)
+	fmt.Println(*r)
 }
