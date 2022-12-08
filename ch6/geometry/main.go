@@ -50,4 +50,9 @@ func main() {
 	r := &Point{1, 2}
 	r.ScaleBy(2)
 	fmt.Println(*r)
+
+	pap := Point{2, 4}
+	pptr := &pap
+	pptr.ScaleBy(2)
+	fmt.Println(pap)
 }
