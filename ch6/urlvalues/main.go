@@ -9,6 +9,6 @@ func (v Values) Get(key string) string {
 	return ""
 }
 
-// func (v Values) Add(key, value string) {
-// 	v[key] = append(v[key], value)
-// }
+func (v Values) Add(key, value string) {
+	v[key] = append(v[key], value)
+}
