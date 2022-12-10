@@ -35,6 +35,9 @@ func (p *Point) ScaleBy(factor float64) {
 func main() {
 	p := Point{1, 2}
 	q := Point{4, 6}
+
+	distanceFromP := p.Distance
+	fmt.Println(distanceFromP(q))
 	fmt.Println(Distance(p, q))
 	fmt.Println(p.Distance(q))
 
