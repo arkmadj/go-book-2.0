@@ -29,10 +29,6 @@ func main() {
 	cp.Point.Y = 2
 	fmt.Println(cp.Y)
 
-	m = nil
-	fmt.Println(m.Get("item"))
-	m.Add("item", "3")
-
 	red := color.RGBA{255, 0, 0, 255}
 	blue := color.RGBA{255, 0, 0, 255}
 	var p = ColoredPoint{Point{1, 1}, red}
