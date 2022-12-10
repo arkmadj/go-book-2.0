@@ -52,6 +52,12 @@ func main() {
 
 	fmt.Println(perim.Distance())
 
+	scaleP := p.ScaleBy
+
+	scaleP(2)
+	scaleP(3)
+	scaleP(10)
+
 	r := &Point{1, 2}
 	r.ScaleBy(2)
 	fmt.Println(*r)
