@@ -12,6 +12,11 @@ type ColoredPoint struct {
 	Color color.RGBA
 }
 
+func (p *Point) ScaleBy(factor float64) {
+	p.X *= factor
+	p.Y *= factor
+}
+
 func main() {
 	var cp ColoredPoint
 	cp.X = 1
