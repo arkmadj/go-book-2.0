@@ -32,6 +32,15 @@ func (p *Point) ScaleBy(factor float64) {
 	p.Y *= factor
 }
 
+func (p Point) Add(q Point) Point { return Point{p.X + q.X, p.Y + q.y} }
+
+// func (path Path) TranslateBy(offset Point, add bool){
+// 	var op func(p, q Point)Point
+// 	if add {
+// 		op = Point.
+// 	}
+// }
+
 func main() {
 	p := Point{1, 2}
 	q := Point{4, 6}
