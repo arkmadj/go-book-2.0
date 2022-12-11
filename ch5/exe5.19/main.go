@@ -5,7 +5,7 @@ import "fmt"
 func weird() (ret string) {
 	defer func() {
 		recover()
-		ret = "hi there!!"
+		ret = "hi therem!!"
 	}()
 	panic("omg!!!")
 }
