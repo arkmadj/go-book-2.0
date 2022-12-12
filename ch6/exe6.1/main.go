@@ -35,3 +35,8 @@ func popcount(x uint64) int {
 	}
 	return count
 }
+
+func (s *IntSet) Remove(x int) {
+	word, bit := x/64, uint(x%64)
+	s.words[word] &^= 1 << bit
+}
