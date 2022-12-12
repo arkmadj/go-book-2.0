@@ -97,4 +97,13 @@ func main() {
 	y.Add(9)
 	y.Add(42)
 	fmt.Println(y.String())
+
+	z := x.Copy()
+	fmt.Println(z.String())
+	fmt.Println(x.Len())
+	x.Remove(9)
+	fmt.Println(x.String())
+	fmt.Println(x.Len())
+	z.Clear()
+	fmt.Println(z.String())
 }
