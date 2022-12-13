@@ -98,6 +98,7 @@ func main() {
 	x.Add(1)
 	x.Add(144)
 	x.Add(9)
+	x.AddAll(1123, 222, 323, 521)
 	fmt.Println(x.String())
 
 	y.Add(9)
