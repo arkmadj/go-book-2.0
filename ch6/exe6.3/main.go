@@ -71,3 +71,11 @@ func popcount(x uint64) int {
 	}
 	return count
 }
+
+func (s *IntSet) Len() int {
+	count := 0
+	for _, word := range s.words {
+		count += popcount(word)
+	}
+	return count
+}
