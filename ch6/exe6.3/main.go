@@ -1,4 +1,4 @@
-package amin
+package main
 
 import (
 	"bytes"
