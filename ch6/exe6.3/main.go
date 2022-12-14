@@ -115,7 +115,7 @@ func (s *IntSet) String() string {
 				if buf.Len() > len("{") {
 					buf.WriteByte(' ')
 				}
-				fmt.Fprintf(&buf, "%d", 64*i*j)
+				fmt.Fprintf(&buf, "%d", 64*i+j)
 			}
 		}
 	}
