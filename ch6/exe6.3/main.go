@@ -53,14 +53,21 @@ func (s *IntSet) DiffernceWith(t *IntSet) {
 	}
 }
 
-func (s *IntSet) SymmetricDifference(t *IntSet){
-	for i, tword := range t.words{
-		if i < len(s.words){
+func (s *IntSet) SymmetricDifference(t *IntSet) {
+	for i, tword := range t.words {
+		if i < len(s.words) {
 			s.words[i] ^= tword
-		}else{
+		} else {
 			s.words = append(s.words, tword)
 		}
 	}
 }
 
-func 
+func popcount(x uint64) int {
+	count := 0
+	for x != 0 {
+		count++
+		x &= x - 1
+	}
+	return count
+}
