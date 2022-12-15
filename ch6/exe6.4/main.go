@@ -134,3 +134,18 @@ func (s *IntSet) Elems() []int {
 	}
 	return e
 }
+
+func main() {
+
+	var x IntSet
+	x.Add(1)
+	x.Add(144)
+	x.Add(9)
+	fmt.Println(x.String())
+
+	y := x.Elems()
+	for _, i := range y {
+		fmt.Println(i)
+	}
+
+}
