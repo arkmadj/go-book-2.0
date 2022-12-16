@@ -10,3 +10,11 @@ func (s *IntSet) Has(x int) bool {
 	word, bit := x/wordSize, uint(x%wordSize)
 	return word < len(s.words) && s.words[word]&(1<<bit) != 0
 }
+
+func (s *IntSet) Add(x int) {
+	word, bit := x/wordSize, uint(x%wordSize)
+	for word >= len(s.words) {
+		s.words = append(s.words, 0)
+	}
+	s.words[word] |= 1 << bit
+}
