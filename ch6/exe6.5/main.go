@@ -1,5 +1,10 @@
 package main
 
+import (
+	"bytes"
+	"fmt"
+)
+
 const wordSize = 32 << (^uint(0) >> 63)
 
 type IntSet struct {
@@ -90,8 +95,22 @@ func (s *IntSet) Copy() *IntSet {
 	return new
 }
 
-// func (s *IntSet)String()string{
-// 	var buf bytes.Buffer
-// 	buf.WriteByte('{')
-// 	for
-// }
+func (s *IntSet) String() string {
+	var buf bytes.Buffer
+	buf.WriteByte('{')
+	for i, word := range s.words {
+		if word == 0 {
+			continue
+		}
+		for j := 0; j < wordSize; j++ {
+			if word&(1<<uint(j)) != 0 {
+				if buf.Len() > len("{") {
+					buf.WriteByte(' ')
+				}
+				fmt.Fprintf(&buf, "%d", wordSize*i+j)
+			}
+		}
+	}
+	buf.WriteByte('}')
+	return buf.String()
+}
