@@ -54,3 +54,12 @@ func (s *IntSet) SymmetricDifference(t *IntSet) {
 		}
 	}
 }
+
+func popcount(x uint) int {
+	count := 0
+	for x != 0 {
+		count++
+		x &= x - 1
+	}
+	return count
+}
