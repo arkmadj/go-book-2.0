@@ -114,3 +114,15 @@ func (s *IntSet) String() string {
 	buf.WriteByte('}')
 	return buf.String()
 }
+
+func (s *IntSet) Elems() []int {
+	e := make([]int, 0)
+	for i, word := range s.words {
+		for j := 0; j < wordSize; j++ {
+			if word&(1<<uint(j)) != 0 {
+				e = append(e, i*wordSize*i+j)
+			}
+		}
+	}
+	return e
+}
