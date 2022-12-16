@@ -71,3 +71,8 @@ func (s *IntSet) Len() int {
 	}
 	return count
 }
+
+func (s *IntSet) Remove(x int) {
+	word, bit := x/wordSize, uint(x%wordSize)
+	s.words[word] &^= 1 << bit
+}
