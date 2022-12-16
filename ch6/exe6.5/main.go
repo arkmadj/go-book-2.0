@@ -82,3 +82,16 @@ func (s *IntSet) Clear() {
 		s.words[i] = 0
 	}
 }
+
+func (s *IntSet) Copy() *IntSet {
+	new := &IntSet{}
+	new.words = make([]uint, len(s.words))
+	copy(new.words, s.words)
+	return new
+}
+
+// func (s *IntSet)String()string{
+// 	var buf bytes.Buffer
+// 	buf.WriteByte('{')
+// 	for
+// }
