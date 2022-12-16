@@ -18,3 +18,9 @@ func (s *IntSet) Add(x int) {
 	}
 	s.words[word] |= 1 << bit
 }
+
+func (s *IntSet) AddAll(nums ...int) {
+	for _, n := range nums {
+		s.Add(n)
+	}
+}
