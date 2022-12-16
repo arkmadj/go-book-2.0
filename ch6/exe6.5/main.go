@@ -120,7 +120,7 @@ func (s *IntSet) Elems() []int {
 	for i, word := range s.words {
 		for j := 0; j < wordSize; j++ {
 			if word&(1<<uint(j)) != 0 {
-				e = append(e, i*wordSize*i+j)
+				e = append(e, i*wordSize+j)
 			}
 		}
 	}
