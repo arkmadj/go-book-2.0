@@ -44,3 +44,13 @@ func (s *IntSet) DiffernceWith(t *IntSet) {
 		}
 	}
 }
+
+func (s *IntSet) SymmetricDifference(t *IntSet) {
+	for i, tword := range t.words {
+		if i < len(s.words) {
+			s.words[i] ^= tword
+		} else {
+			s.words = append(s.words, tword)
+		}
+	}
+}
