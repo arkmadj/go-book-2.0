@@ -76,3 +76,9 @@ func (s *IntSet) Remove(x int) {
 	word, bit := x/wordSize, uint(x%wordSize)
 	s.words[word] &^= 1 << bit
 }
+
+func (s *IntSet) Clear() {
+	for i := range s.words {
+		s.words[i] = 0
+	}
+}
