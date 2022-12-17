@@ -86,3 +86,7 @@ func (c *WordCounter) Write(p []byte) (n int, err error) {
 func (c *WordCounter) N() int {
 	return c.words
 }
+
+func (c *WordCounter) String() string {
+	return fmt.Sprintf("%d", c.words)
+}
