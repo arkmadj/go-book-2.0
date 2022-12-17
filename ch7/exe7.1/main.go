@@ -82,3 +82,7 @@ func (c *WordCounter) Write(p []byte) (n int, err error) {
 		}
 	}
 }
+
+func (c *WordCounter) N() int {
+	return c.words
+}
