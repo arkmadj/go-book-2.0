@@ -45,3 +45,17 @@ func leadingSpaces(p []byte) int {
 	}
 	return count
 }
+
+func leadingNonSpaces(p []byte) int {
+	count := 0
+	cur := 0
+	for cur < len(p) {
+		r, size := utf8.DecodeRune(p[cur:])
+		if unicode.IsSpace(r) {
+			return count
+		}
+		cur += size
+		count++
+	}
+	return count
+}
