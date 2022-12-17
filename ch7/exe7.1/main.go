@@ -22,3 +22,8 @@ func (c *LineCounter) N() int {
 func (c *LineCounter) String() string {
 	return fmt.Sprintf("%d", c.lines)
 }
+
+type WordCounter struct {
+	words  int
+	inWord bool
+}
