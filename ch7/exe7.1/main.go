@@ -59,3 +59,26 @@ func leadingNonSpaces(p []byte) int {
 	}
 	return count
 }
+
+func (c *WordCounter) Write(p []byte) (n int, err error) {
+	cur := 0
+	n = len(p)
+	for {
+		spaces := leadingSpaces(p[cur:])
+		cur += spaces
+		if spaces > 0 {
+			c.inWord = false
+		}
+		if cur == len(p) {
+			return
+		}
+		if !c.inWord {
+			c.words++
+		}
+		c.inWord = true
+		cur += leadingNonSpaces(p[cur:])
+		if cur == len(p) {
+			return
+		}
+	}
+}
