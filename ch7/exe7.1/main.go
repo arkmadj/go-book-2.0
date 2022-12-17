@@ -12,3 +12,7 @@ func (c *LineCounter) Write(p []byte) (n int, err error) {
 	}
 	return len(p), nil
 }
+
+func (c *LineCounter) N() int {
+	return c.lines
+}
