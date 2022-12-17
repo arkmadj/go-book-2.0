@@ -90,3 +90,10 @@ func (c *WordCounter) N() int {
 func (c *WordCounter) String() string {
 	return fmt.Sprintf("%d", c.words)
 }
+
+func main() {
+	cl := &LineCounter{}
+	pl := []byte("one\ntwo\nthree\n")
+	nl, errl := cl.Write(pl)
+	fmt.Fprintf()
+}
