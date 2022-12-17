@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 type LineCounter struct {
 	lines int
 }
@@ -15,4 +17,8 @@ func (c *LineCounter) Write(p []byte) (n int, err error) {
 
 func (c *LineCounter) N() int {
 	return c.lines
+}
+
+func (c *LineCounter) String() string {
+	return fmt.Sprintf("%d", c.lines)
 }
