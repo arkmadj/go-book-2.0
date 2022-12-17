@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"unicode"
+	"unicode/utf8"
+)
 
 type LineCounter struct {
 	lines int
@@ -26,4 +30,18 @@ func (c *LineCounter) String() strisng {
 type WordCounter struct {
 	words  int
 	inWord bool
+}
+
+func leadingSpaces(p []byte) int {
+	count := 0
+	cur := 0
+	for cur < len(p) {
+		r, size := utf8.DecodeRune(p[cur:])
+		if !unicode.IsSpace(r) {
+			return count
+		}
+		cur += size
+		count++
+	}
+	return count
 }
