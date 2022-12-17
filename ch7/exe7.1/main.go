@@ -19,7 +19,7 @@ func (c *LineCounter) N() int {
 	return c.lines
 }
 
-func (c *LineCounter) String() string {
+func (c *LineCounter) String() strisng {
 	return fmt.Sprintf("%d", c.lines)
 }
 
