@@ -110,5 +110,7 @@ func main() {
 	}
 
 	fmt.Println(cw)
+	fmt.Println(cw.N())
+	fmt.Println(cw.String())
 
 }
