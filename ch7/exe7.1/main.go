@@ -104,7 +104,7 @@ func main() {
 		[]byte("My name is Ahmad Jin"),
 		[]byte("adu Adekunle. "),
 		[]byte(" I'm a software engineer from Lagos, Nigeria."),
-		[]byte(" Nice to meet you."),
+		[]byte(" Good to meet you."),
 	}
 
 	for _, p := range pw {
