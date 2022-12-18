@@ -13,7 +13,7 @@ func (c *byteCounter) Write(p []byte) (n int, err error) {
 	return
 }
 
-// func CountingWriter(w io.Writer) (io.Writer, *int64) {
-// 	c := &byteCounter{w, 0}
-// 	return c, &c.written
-// }
+func CountingWriter(w io.Writer) (io.Writer, *int64) {
+	c := &byteCounter{w, 0}
+	return c, &c.written
+}
