@@ -96,6 +96,8 @@ func main() {
 	pl := []byte("one\ntwo\nthree\n")
 	cl.Write(pl)
 	fmt.Println(cl)
+	fmt.Println(cl.N())
+	fmt.Println(cl.String())
 
 	cw := &WordCounter{}
 	pw := [][]byte{
