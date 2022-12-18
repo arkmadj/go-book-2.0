@@ -1,6 +1,10 @@
 package main
 
-import "io"
+import (
+	"bytes"
+	"fmt"
+	"io"
+)
 
 type byteCounter struct {
 	w       io.Writer
@@ -16,4 +20,12 @@ func (c *byteCounter) Write(p []byte) (n int, err error) {
 func CountingWriter(w io.Writer) (io.Writer, *int64) {
 	c := &byteCounter{w, 0}
 	return c, &c.written
+}
+
+func main() {
+	b := &bytes.Buffer{}
+	c, n := CountingWriter(b)
+	data := []byte("Hi there")
+	c.Write(data)
+	fmt.Println(n)
 }
