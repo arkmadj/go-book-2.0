@@ -27,5 +27,6 @@ func main() {
 	c, n := CountingWriter(b)
 	data := []byte("Hi there")
 	c.Write(data)
-	fmt.Println(n)
+	fmt.Printf("%d", n)
+	fmt.Println(len(data))
 }
