@@ -15,7 +15,7 @@ func main() {
 	fmt.Println(c)
 
 	c = 0
-	var name = "Dolly"
+	var name = "Dollie"
 	fmt.Fprintf(&c, "hellp, %s", name)
 	fmt.Println(c)
 }
