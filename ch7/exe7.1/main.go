@@ -103,7 +103,7 @@ func main() {
 	pw := [][]byte{
 		[]byte("My name is Ahmad Jin"),
 		[]byte("adu Adekunle. "),
-		[]byte(" I am a software engineer from Lagos, Nigeria."),
+		[]byte(" I'm a software engineer from Lagos, Nigeria."),
 		[]byte(" Nice to meet you."),
 	}
 
