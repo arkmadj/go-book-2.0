@@ -56,3 +56,10 @@ func (t *tree) String() string {
 	fmt.Fprintf(b, "]")
 	return b.String()
 }
+
+func main() {
+	root := &tree{value: 3}
+	root = add(root, 2)
+	root = add(root, 4)
+	fmt.Println(root.String())
+}
