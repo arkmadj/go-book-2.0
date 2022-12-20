@@ -64,5 +64,6 @@ func main() {
 	root = add(root, 5)
 	root = add(root, 8)
 	root = add(root, 11)
+	root = add(root, 14)
 	fmt.Println(root.String())
 }
