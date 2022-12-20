@@ -61,5 +61,6 @@ func main() {
 	root := &tree{value: 3}
 	root = add(root, 2)
 	root = add(root, 4)
+	root = add(root, 5)
 	fmt.Println(root.String())
 }
