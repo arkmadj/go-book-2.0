@@ -19,4 +19,5 @@ func appendValues(values []int, t *tree) []int {
 		values = append(values, t.value)
 		values = appendValues(values, t.right)
 	}
+	return values
 }
