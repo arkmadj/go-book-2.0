@@ -27,7 +27,7 @@ func NewReader(s string) io.Reader {
 }
 
 func main() {
-	s := "hi tshsssseres"
+	s := "hi tshssseres"
 	b := &bytes.Buffer{}
 	n, err := b.ReadFrom(NewReader(s))
 	if err != nil {
