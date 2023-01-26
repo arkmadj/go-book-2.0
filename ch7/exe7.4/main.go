@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"io"
 	"os"
+
+	"golang.org/x/net/html"
 )
 
 type stringReaader struct {
@@ -32,4 +34,11 @@ func main() {
 		fmt.Fprintf(os.Stderr, "%v", err)
 	}
 	fmt.Println(n)
+
+	h := "<html><body><p>hi</p></body></html>"
+	g, gerr := html.Parse(NewReader(h))
+	if gerr != nil {
+		fmt.Fprintf(os.Stderr, "%v", gerr)
+	}
+	fmt.Println(g)
 }
