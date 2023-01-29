@@ -19,3 +19,7 @@ func (r *limitReader) Read(p []byte) (n int, err error) {
 func LimiReader(r io.Reader, limit int) io.Reader {
 	return &limitReader{r: r, limit: limit}
 }
+
+func main() {
+
+}
