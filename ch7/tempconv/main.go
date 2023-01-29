@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"flag"
+	"fmt"
+)
 
 type Celsius float64
 type Fahrenheit float64
@@ -15,6 +18,14 @@ func CToF(c Celsius) Fahrenheit {
 
 func FToC(f Fahrenheit) Celsius {
 	return Celsius((f - 32) * 5 / 9)
+}
+
+func (c Celsius) String() string {
+	return fmt.Sprintf("%g°C", c)
+}
+
+func (f Fahrenheit) String() string {
+	return fmt.Sprintf("%g°F", f)
 }
 
 func (f *celsiusFlag) Set(s string) error {
@@ -33,4 +44,10 @@ func (f *celsiusFlag) Set(s string) error {
 
 	}
 	return fmt.Errorf("invalid temperature %q", s)
+}
+
+func CelsiusFlag(name string, value Celsius, usage string) *Celsius {
+	f := celsiusFlag{value}
+	flag.CommandLine.Var(&f, name, usage)
+	return &f.Celsius
 }
