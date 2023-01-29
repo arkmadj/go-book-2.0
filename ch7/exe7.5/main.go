@@ -29,5 +29,6 @@ func main() {
 	b := &bytes.Buffer{}
 	r := LimitReader(strings.NewReader(s), 4)
 	n, _ := b.ReadFrom(r)
+	println(b.String())
 	println(n)
 }
