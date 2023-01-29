@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"io"
+	"strings"
 )
 
 type limitReader struct {
@@ -24,7 +25,9 @@ func LimitReader(r io.Reader, limit int) io.Reader {
 }
 
 func main() {
-	S := "hi there"
+	s := "hi there"
 	b := &bytes.Buffer{}
-	r := LimitReader(s)
+	r := LimitReader(strings.NewReader(s), 4)
+	n, _ := b.ReadFrom(r)
+	println(n)
 }
