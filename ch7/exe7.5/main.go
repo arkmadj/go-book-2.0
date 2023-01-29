@@ -1,6 +1,9 @@
 package main
 
-import "io"
+import (
+	"bytes"
+	"io"
+)
 
 type limitReader struct {
 	r        io.Reader
@@ -21,5 +24,6 @@ func LimiReader(r io.Reader, limit int) io.Reader {
 }
 
 func main() {
-
+	S := "hi there"
+	b := &bytes.Buffer{}
 }
