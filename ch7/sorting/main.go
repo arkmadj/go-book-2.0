@@ -50,3 +50,7 @@ func (x byArtist) Len() int {
 func (x byArtist) Less(i, j int) bool {
 	return x[i].Artist < x[j].Artist
 }
+
+func (x byArtist) Swap(i, j int) {
+	x[i], x[j] = x[j], x[i]
+}
