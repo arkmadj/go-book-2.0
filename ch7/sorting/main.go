@@ -72,10 +72,13 @@ func (x byYear) Swap(i, j int) {
 
 func main() {
 	printTracks(tracks)
-	sort.Sort(byArtist(tracks))
-	println()
-	printTracks(tracks)
-	sort.Sort(sort.Reverse(byArtist(tracks)))
+	// sort.Sort(byArtist(tracks))
+	// println()
+	// printTracks(tracks)
+	// sort.Sort(sort.Reverse(byArtist(tracks)))
+	// println()
+	// printTracks(tracks)
+	sort.Sort(byYear(tracks))
 	println()
 	printTracks(tracks)
 }
