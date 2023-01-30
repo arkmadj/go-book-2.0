@@ -54,3 +54,7 @@ func (x byArtist) Less(i, j int) bool {
 func (x byArtist) Swap(i, j int) {
 	x[i], x[j] = x[j], x[i]
 }
+
+func main() {
+	printTracks(tracks)
+}
