@@ -46,3 +46,7 @@ type byArtist []*Track
 func (x byArtist) Len() int {
 	return len(x)
 }
+
+func (x byArtist) Less(i, j int) bool {
+	return x[i].Artist < x[j].Artist
+}
