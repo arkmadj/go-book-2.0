@@ -10,4 +10,7 @@ func main() {
 	fmt.Println(sort.IntsAreSorted((values)))
 	sort.Ints(values)
 	fmt.Println(values)
+	fmt.Println(sort.IntsAreSorted((values)))
+	sort.Sort(sort.Reverse(sort.IntSlice(values)))
+	fmt.Println(values)
 }
