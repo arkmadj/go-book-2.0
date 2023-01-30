@@ -70,6 +70,15 @@ func (x byYear) Swap(i, j int) {
 	x[i], x[j] = x[j], x[i]
 }
 
+type customSort struct {
+	t    []*Track
+	less func(x, y *Track) bool
+}
+
+func (x customSort) Len() int {
+	return len(x.t)
+}
+
 func main() {
 	printTracks(tracks)
 	// sort.Sort(byArtist(tracks))
