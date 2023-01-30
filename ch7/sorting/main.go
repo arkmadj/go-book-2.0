@@ -79,6 +79,10 @@ func (x customSort) Len() int {
 	return len(x.t)
 }
 
+func (x customSort) Less(i, j int) bool {
+	return x.less(x.t[i], x.t[j])
+}
+
 func main() {
 	printTracks(tracks)
 	// sort.Sort(byArtist(tracks))
