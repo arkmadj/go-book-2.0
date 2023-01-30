@@ -56,6 +56,8 @@ func (x byArtist) Swap(i, j int) {
 	x[i], x[j] = x[j], x[i]
 }
 
+type byYear []*Track
+
 func main() {
 	printTracks(tracks)
 	sort.Sort(byArtist(tracks))
