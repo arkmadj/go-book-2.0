@@ -40,3 +40,9 @@ func printTracks(tracks []*Track) {
 	}
 	tw.Flush()
 }
+
+type byArtist []*Track
+
+func (x byArtist) Len() int {
+	return len(x)
+}
