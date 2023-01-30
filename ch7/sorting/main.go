@@ -58,6 +58,18 @@ func (x byArtist) Swap(i, j int) {
 
 type byYear []*Track
 
+func (x byYear) Len() int {
+	return len(x)
+}
+
+func (x byYear) Less(i, j int) bool {
+	return x[i].Year < x[j].Year
+}
+
+func (x byYear) Swap(i, j int) {
+	x[i], x[j] = x[j], x[i]
+}
+
 func main() {
 	printTracks(tracks)
 	sort.Sort(byArtist(tracks))
