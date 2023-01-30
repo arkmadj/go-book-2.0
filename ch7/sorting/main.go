@@ -83,6 +83,10 @@ func (x customSort) Less(i, j int) bool {
 	return x.less(x.t[i], x.t[j])
 }
 
+func (x customSort) Swap(i, j int) {
+	x.t[i], x.t[j] = x.t[j], x.t[i]
+}
+
 func main() {
 	printTracks(tracks)
 	// sort.Sort(byArtist(tracks))
