@@ -31,7 +31,7 @@ func length(s string) time.Duration {
 }
 
 func printTracks(tracks []*Track) {
-	const format = "%v\t%t\t%v\t%v\t%v\t\n"
+	const format = "%v\t%v\t%v\t%v\t%v\t\n"
 	tw := new(tabwriter.Writer).Init(os.Stdout, 0, 8, 2, ' ', 0)
 	fmt.Fprintf(tw, format, "Title", "Artist", "Album", "Year", "Length")
 	fmt.Fprintf(tw, format, "-----", "------", "-----", "----", "------")
