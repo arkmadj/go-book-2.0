@@ -61,4 +61,7 @@ func main() {
 	sort.Sort(byArtist(tracks))
 	println()
 	printTracks(tracks)
+	sort.Sort(sort.Reverse(byArtist(tracks)))
+	println()
+	printTracks(tracks)
 }
