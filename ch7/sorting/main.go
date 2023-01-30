@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"sort"
 	"text/tabwriter"
 	"time"
 )
@@ -56,5 +57,7 @@ func (x byArtist) Swap(i, j int) {
 }
 
 func main() {
+	printTracks(tracks)
+	sort.Sort(byArtist(tracks))
 	printTracks(tracks)
 }
