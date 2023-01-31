@@ -12,3 +12,9 @@ func (p Person) String() string {
 }
 
 type columnCmp func(a, b *Person) comparison
+
+type ByColumns struct {
+	p          []Person
+	columns    []columnCmp
+	maxColumns int
+}
