@@ -43,7 +43,16 @@ func (c *ByColumns) LessName(a, b *Person) comparison {
 }
 
 func (c *ByColumns) LessSumOfAgeDigits(a, b *Person) comparison {
-	aSum := sum
+	aSum := sumOfDigits(a.Age)
+	bSum := sumOfDigits(b.Age)
+	switch {
+	case aSum == bSum:
+		return eq
+	case aSum < bSum:
+		return lt
+	default:
+		return gt
+	}
 }
 
 func sumOfDigits(n int) int {
