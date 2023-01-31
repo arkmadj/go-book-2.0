@@ -1,6 +1,8 @@
 package column
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Person struct {
 	Name string
@@ -80,4 +82,19 @@ func (c *ByColumns) Len() int {
 
 func (c *ByColumns) Swap(i, j int) {
 	c.p[i], c.p[j] = c.p[j], c.p[i]
+}
+
+func (c *ByColumns) Less(i, j int) bool {
+	for _, f := range c.columns {
+		cmp := f(&c.p[i], &c.p[j])
+		switch cmp {
+		case eq:
+			continue
+		case lt:
+			return true
+		case gt:
+			return false
+		}
+	}
+	return false
 }
