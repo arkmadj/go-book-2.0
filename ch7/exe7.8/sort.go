@@ -77,3 +77,7 @@ func (c *Person) LessAge(a, b *Person) comparison {
 func (c *ByColumns) Len() int {
 	return len(c.p)
 }
+
+func (c *ByColumns) Swap(i, j int) {
+	c.p[i], c.p[j] = c.p[j], c.p[i]
+}
