@@ -73,3 +73,7 @@ func (c *Person) LessAge(a, b *Person) comparison {
 		return gt
 	}
 }
+
+func (c *ByColumns) Len() int {
+	return len(c.p)
+}
