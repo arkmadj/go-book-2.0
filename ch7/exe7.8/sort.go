@@ -30,3 +30,16 @@ const (
 	eq
 	gt
 )
+
+func (c *ByColumns) LessName(a, b *Person) comparison {
+	switch {
+	case a.Name == b.Name:
+		return eq
+	case a.Name < b.Name:
+		return lt
+	default:
+		return gt
+	}
+}
+
+func (c *ByColumns) LessSumOfAgeDigits(a, b *Person)
