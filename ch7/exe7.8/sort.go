@@ -98,3 +98,11 @@ func (c *ByColumns) Less(i, j int) bool {
 	}
 	return false
 }
+
+func (c *ByColumns) Select(cmp columnCmp) {
+	c.columns = append([]columnCmp{cmp}, c.columns...)
+
+	if len(c.columns) > c.maxColumns {
+		c.columns = c.columns[:c.maxColumns]
+	}
+}
