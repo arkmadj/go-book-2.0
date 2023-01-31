@@ -22,3 +22,5 @@ type ByColumns struct {
 func NewByColumns(p []Person, maxColumns int) *ByColumns {
 	return &ByColumns{p, nil, maxColumns}
 }
+
+type comparison int
