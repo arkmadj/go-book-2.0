@@ -18,3 +18,7 @@ type ByColumns struct {
 	columns    []columnCmp
 	maxColumns int
 }
+
+func NewByColumns(p []Person, maxColumns int) *ByColumns {
+	return &ByColumns{p, nil, maxColumns}
+}
