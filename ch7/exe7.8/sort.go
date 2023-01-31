@@ -24,3 +24,9 @@ func NewByColumns(p []Person, maxColumns int) *ByColumns {
 }
 
 type comparison int
+
+const (
+	lt comparison = iota
+	eq
+	gt
+)
