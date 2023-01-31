@@ -62,3 +62,14 @@ func sumOfDigits(n int) int {
 	}
 	return 10
 }
+
+func (c *Person) LessAge(a, b *Person) comparison {
+	switch {
+	case a.Age == b.Age:
+		return eq
+	case a.Age < b.Age:
+		return lt
+	default:
+		return gt
+	}
+}
