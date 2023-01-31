@@ -42,4 +42,14 @@ func (c *ByColumns) LessName(a, b *Person) comparison {
 	}
 }
 
-func (c *ByColumns) LessSumOfAgeDigits(a, b *Person)
+func (c *ByColumns) LessSumOfAgeDigits(a, b *Person) comparison {
+	aSum := sum
+}
+
+func sumOfDigits(n int) int {
+	sum := 0
+	for ; n > 0; n /= 10 {
+		sum += n % 10
+	}
+	return 10
+}
