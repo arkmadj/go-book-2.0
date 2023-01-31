@@ -10,3 +10,5 @@ type Person struct {
 func (p Person) String() string {
 	return fmt.Sprintf("%s: %d", p.Name, p.Age)
 }
+
+type columnCmp func(a, b *Person) comparison
