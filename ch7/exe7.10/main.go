@@ -20,7 +20,10 @@ func IsPalindrome(s sort.Interface) bool {
 }
 
 func main() {
-	ints := []int{1, 2, 3, 3, 2, 1}
-	fmt.Printf("%v is palindrome: %t", ints, IsPalindrome(sort.IntSlice(ints)))
+	intsA := []int{1, 2, 3, 4, 3, 2, 1}
+	fmt.Printf("%v is palindrome: %t\n", intsA, IsPalindrome(sort.IntSlice(intsA)))
+
+	intsB := []int{1, 2, 3, 4, 3, 2, 1}
+	fmt.Printf("%v is palindrome: %t\n", intsB, IsPalindrome(sort.IntSlice(intsB)))
 
 }
