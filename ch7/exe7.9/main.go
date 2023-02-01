@@ -22,7 +22,7 @@ var html = template.Must(template.New("people").Parse(`
 	<body>
 		<table>
 			<tr>
-				<th href="?sort=name">name</th>
+				<th><a href="?sort=name">name</a></th>
 				<th><a href="?sort=age">age</a></th>
 			</tr>
 			{{range .}}
