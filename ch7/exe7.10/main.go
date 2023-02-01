@@ -1,6 +1,9 @@
 package main
 
-import "sort"
+import (
+	"fmt"
+	"sort"
+)
 
 func equal(i, j int, s sort.Interface) bool {
 	return !s.Less(i, j) && !s.Less(j, i)
@@ -17,5 +20,7 @@ func IsPalindrome(s sort.Interface) bool {
 }
 
 func main() {
+	ints := []int{1, 2, 3, 4, 3, 2, 1}
+	fmt.Printf("%v is palindrome: %t", ints, IsPalindrome(sort.IntSlice(ints)))
 
 }
