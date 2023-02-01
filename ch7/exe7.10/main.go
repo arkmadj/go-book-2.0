@@ -15,3 +15,7 @@ func IsPalindrome(s sort.Interface) bool {
 	}
 	return true
 }
+
+func main() {
+
+}
