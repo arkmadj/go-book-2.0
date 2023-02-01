@@ -1,4 +1,4 @@
-package column
+package main
 
 import (
 	"fmt"
