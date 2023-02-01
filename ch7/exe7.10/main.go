@@ -23,7 +23,7 @@ func main() {
 	intsA := []int{1, 2, 3, 4, 3, 2, 1}
 	fmt.Printf("%v is palindrome: %t\n", intsA, IsPalindrome(sort.IntSlice(intsA)))
 
-	intsB := []int{1, 2, 3, 4, 3, 2, 1}
+	intsB := []int{1, 2, 3, 4, 1, 3, 2, 1}
 	fmt.Printf("%v is palindrome: %t\n", intsB, IsPalindrome(sort.IntSlice(intsB)))
 
 }
