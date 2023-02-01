@@ -12,7 +12,7 @@ func equal(i, j int, s sort.Interface) bool {
 func IsPalindrome(s sort.Interface) bool {
 	max := s.Len() - 1
 	for i := 0; i < s.Len()/2; i++ {
-		if !equal(i, max-1, s) {
+		if !equal(i, max-i, s) {
 			return false
 		}
 	}
@@ -20,7 +20,7 @@ func IsPalindrome(s sort.Interface) bool {
 }
 
 func main() {
-	ints := []int{1, 2, 3, 4, 3, 2, 1}
+	ints := []int{1, 2, 3, 3, 2, 1}
 	fmt.Printf("%v is palindrome: %t", ints, IsPalindrome(sort.IntSlice(ints)))
 
 }
