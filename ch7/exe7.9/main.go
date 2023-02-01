@@ -2,6 +2,7 @@ package main
 
 import (
 	"html/template"
+	"net/http"
 
 	column "github.com/ahmad/go-book-2.0/ch7/exe7.8"
 )
@@ -31,5 +32,16 @@ var html = template.Must(template.New("people").Parse(`
 		</table>
 	</body>
 </html>
-
 `))
+
+func main() {
+	c := column.NewByColumns(people, 2)
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		switch r.FormValue("sort") {
+		case "age":
+			c.Select(c.LessAge)
+		case "name":
+			c.Select(c.LessName)
+		}
+	})
+}
