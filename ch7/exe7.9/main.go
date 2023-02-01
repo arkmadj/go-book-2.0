@@ -2,7 +2,9 @@ package main
 
 import (
 	"html/template"
+	"log"
 	"net/http"
+	"sort"
 
 	column "github.com/ahmad/go-book-2.0/ch7/exe7.8"
 )
@@ -42,6 +44,11 @@ func main() {
 			c.Select(c.LessAge)
 		case "name":
 			c.Select(c.LessName)
+		}
+		sort.Sort(c)
+		err := html.Execute(w, people)
+		if err != nil {
+			log.Printf("template error: %s", err)
 		}
 	})
 }
