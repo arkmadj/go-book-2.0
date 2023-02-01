@@ -51,4 +51,5 @@ func main() {
 			log.Printf("template error: %s", err)
 		}
 	})
+	log.Fatal(http.ListenAndServe(":8084", nil))
 }
