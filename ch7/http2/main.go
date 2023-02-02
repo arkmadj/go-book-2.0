@@ -1,3 +1,3 @@
 package main
 
-type dollars 
+type dollars float32
