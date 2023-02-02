@@ -19,6 +19,17 @@ func (db database) list(w http.ResponseWriter, req *http.Request) {
 	}
 }
 
+func (db database) price(w http.ResponseWriter, req *http.Request) {
+	item := req.URL.Query().Get("item")
+	price, ok := db[item]
+	if !ok {
+		w.WriteHeader(http.StatusNotFound)
+		fmt.Fprintf(w, "no such item: %q\n", item)
+		return
+	}
+	fmt.Fprintf(w, "%s\n", price)
+}
+
 func main() {
 	db := database{"shoes"}
 }
