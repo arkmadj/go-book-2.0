@@ -14,7 +14,13 @@ func (d dollars) String() string {
 
 type database map[string]dollars
 
-func (db database) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (db database) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+	switch req.URL.Path {
+	case "/list":
+		for item, price := range db {
+			fmt.Fprintf(w, "%s: %s\n", item, price)
+		}
+	}
 }
 
 func main() {
