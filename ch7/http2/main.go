@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 )
 
@@ -14,4 +15,9 @@ func (d dollars) String() string {
 type database map[string]dollars
 
 func (db database) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+}
+
+func main() {
+	db := database{"shoes": 50, "socks": 5}
+	log.Fatal(http.ListenAndServe("localhost:8080", db))
 }
