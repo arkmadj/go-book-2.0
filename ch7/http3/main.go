@@ -35,6 +35,6 @@ func main() {
 	db := database{"shoes": 50, "socks": 5}
 	mux := http.NewServeMux()
 	mux.Handle("/list", http.HandlerFunc(db.list))
-	mux.Handle("/list", http.HandlerFunc(db.price))
+	mux.Handle("/price", http.HandlerFunc(db.price))
 	log.Fatal(http.ListenAndServe("localhost:8085", mux))
 }
