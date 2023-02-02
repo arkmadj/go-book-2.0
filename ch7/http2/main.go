@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"net/http"
+)
 
 type dollars float32
 
@@ -9,3 +12,6 @@ func (d dollars) String() string {
 }
 
 type database map[string]dollars
+
+func (db database) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+}
