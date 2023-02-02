@@ -9,3 +9,7 @@ func (d dollars) String() string {
 }
 
 type database map[string]dollars
+
+func main() {
+	db := database{"shoes"}
+}
