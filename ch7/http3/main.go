@@ -34,7 +34,7 @@ func (db database) price(w http.ResponseWriter, req *http.Request) {
 func main() {
 	db := database{"shoes": 50, "socks": 5}
 	mux := http.NewServeMux()
-	mux.Handle("/list", http.HandlerFunc(db.list))
-	mux.Handle("/price", http.HandlerFunc(db.price))
+	mux.HandleFunc("/list", db.list)
+	mux.HandleFunc("/price", db.price)
 	log.Fatal(http.ListenAndServe("localhost:8085", mux))
 }
