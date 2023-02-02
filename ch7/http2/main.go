@@ -29,10 +29,13 @@ func (db database) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 			return
 		}
 		fmt.Fprintf(w, "%s\n", price)
+	default:
+		w.WriteHeader(http.StatusNotFound)
+		fmt.Fprintf(w, "no such page: %s\n", req.URL)
 	}
 }
 
 func main() {
 	db := database{"shoes": 50, "socks": 5}
-	log.Fatal(http.ListenAndServe("localhost:8080", db))
+	log.Fatal(http.ListenAndServe("localhost:8085", db))
 }
