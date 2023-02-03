@@ -19,8 +19,6 @@ type call struct {
 	args []Expr
 }
 
-type Env map[Var]float64
-
 type Expr interface {
 	Eval(env Env) float64
 }
