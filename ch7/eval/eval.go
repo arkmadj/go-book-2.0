@@ -13,3 +13,8 @@ type binary struct {
 	op   rune
 	x, y Expr
 }
+
+type call struct {
+	fn   string
+	args []Expr
+}
