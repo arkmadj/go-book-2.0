@@ -59,3 +59,7 @@ func Parse(input string) (_ Expr, err error) {
 	lex.next()
 	e := parseExpr(lex)
 }
+
+func parseExpr(lex *lexer) Expr {
+	return parse
+}
