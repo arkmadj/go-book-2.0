@@ -31,12 +31,12 @@ func (lex *lexer) describe() string {
 	return fmt.Sprintf("%q", rune(lex.token))
 }
 
-// func precedence(op rune) int {
-// 	switch op {
-// 	case '*', '/':
-// 		return 2
-// 	case '+', '-':
-// 		return 1
-// 	}
-// 	return
-// }
+func precedence(op rune) int {
+	switch op {
+	case '*', '/':
+		return 2
+	case '+', '-':
+		return 1
+	}
+	return 0
+}
