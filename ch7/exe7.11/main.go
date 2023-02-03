@@ -2,11 +2,31 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"log"
 	"net/http"
 	"strconv"
 	"sync"
 )
+
+var listHTML = template.Must(template.New("list").Parse(`
+	<html>
+		<body>
+			<table>
+				<tr>
+					<th>Item</th>
+					<th>Price</th>
+				</tr>
+				{{range $k, $v := .}}
+				<tr>
+					<td>{{$k}}</td>
+					<td>{{$v}}</td>
+				</tr>
+				{{end}}
+			</table>
+		</body>
+	</html>
+`))
 
 type PriceDB struct {
 	sync.Mutex
