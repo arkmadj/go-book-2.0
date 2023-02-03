@@ -65,6 +65,15 @@ func parseExpr(lex *lexer) Expr {
 	return parse
 }
 
+func parseUnary(lex *lexer) Expr {
+	if lex.token == '+' || lex.token == '-' {
+		op := lex.token
+		lex.next()
+		return unary{op, parseUnary(lex)}
+	}
+	return parsePrimary(lex)
+}
+
 func parsePrimary(lex *lexer) Expr {
 	switch lex.token {
 	case scanner.Ident:
