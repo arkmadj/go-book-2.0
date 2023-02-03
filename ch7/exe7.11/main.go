@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 	"sync"
@@ -8,7 +9,7 @@ import (
 
 type PriceDB struct {
 	sync.Mutex
-	d map[string]int
+	db map[string]int
 }
 
 func (p *PriceDB) Create(w http.ResponseWriter, r *http.Request) {
@@ -26,6 +27,14 @@ func (p *PriceDB) Create(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if _, ok := p.db[item]; ok {
-
+		http.Error(w, fmt.Sprintf("%s already exists", item), http.StatusBadRequest)
+		return
 	}
+
+	p.Lock()
+	if p.db == nil {
+		p.db = make(map[string]int, 0)
+	}
+	p.db[item] = price
+	p.Unlock()
 }
