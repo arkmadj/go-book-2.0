@@ -65,6 +65,19 @@ func parseExpr(lex *lexer) Expr {
 	return parse
 }
 
+func parseBinary(lex *lexer, prec1 int) Expr {
+	lhs := parseUnary(lex)
+	for prec := precedence(lex.token); prec >= prec1; prec-- {
+		for precedence(lex.token) == prec {
+			op := lex.token
+			lex.next()
+			rhs := parseBinary(lex, prec+1)
+			lhs = binary{op, lhs, rhs}
+		}
+	}
+	return lhs
+}
+
 func parseUnary(lex *lexer) Expr {
 	if lex.token == '+' || lex.token == '-' {
 		op := lex.token
