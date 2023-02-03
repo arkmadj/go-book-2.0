@@ -2,6 +2,7 @@ package eval
 
 import (
 	"fmt"
+	"strings"
 	"text/scanner"
 )
 
@@ -39,4 +40,22 @@ func precedence(op rune) int {
 		return 1
 	}
 	return 0
+}
+
+func Parse(input string) (_ Expr, err error) {
+	defer func() {
+		switch x := recover().(type) {
+		case nil:
+		case lexPanic:
+			err = fmt.Errorf("%s", x)
+		default:
+			panic(x)
+		}
+	}()
+
+	lex := new(lexer)
+	lex.scan.Init(strings.NewReader(input))
+	lex.scan.Mode = scanner.ScanIdents | scanner.ScanInts | scanner.ScanFloats
+	lex.next()
+	e := parseExpr(lex)
 }
