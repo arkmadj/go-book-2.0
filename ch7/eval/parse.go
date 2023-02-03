@@ -2,6 +2,7 @@ package eval
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 	"text/scanner"
 )
@@ -62,4 +63,50 @@ func Parse(input string) (_ Expr, err error) {
 
 func parseExpr(lex *lexer) Expr {
 	return parse
+}
+
+func parsePrimary(lex *lexer) Expr {
+	switch lex.token {
+	case scanner.Ident:
+		id := lex.text()
+		lex.next()
+		if lex.token != '(' {
+			return Var(id)
+		}
+		lex.next()
+		var args []Expr
+		if lex.token != ')' {
+			for {
+				args = append(args, parseExpr(lex))
+				if lex.token != ',' {
+					break
+				}
+				lex.next()
+			}
+			if lex.token != ')' {
+				msg := fmt.Sprintf("got %s, want ')", lex.describe())
+				panic(lexPanic(msg))
+			}
+		}
+		lex.next()
+		return call{id, args}
+	case scanner.Int, scanner.Float:
+		f, err := strconv.ParseFloat(lex.text(), 64)
+		if err != nil {
+			panic(lexPanic(err.Error()))
+		}
+		lex.next()
+		return literal(f)
+	case '(':
+		lex.next()
+		e := parseExpr(lex)
+		if lex.token != ')' {
+			msg := fmt.Sprintf("got %s, want ')", lex.describe())
+			panic(lexPanic(msg))
+		}
+		lex.next()
+		return e
+	}
+	msg := fmt.Sprintf("unnexpected %s", lex.describe())
+	panic(lexPanic(msg))
 }
