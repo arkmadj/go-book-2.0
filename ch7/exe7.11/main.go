@@ -62,3 +62,7 @@ func (p *PriceDB) Update(w http.ResponseWriter, r *http.Request) {
 	p.db[item] = price
 	p.Unlock()
 }
+
+func main() {
+	db := &PriceDB{}
+}
