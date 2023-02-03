@@ -62,7 +62,7 @@ func Parse(input string) (_ Expr, err error) {
 }
 
 func parseExpr(lex *lexer) Expr {
-	return parse
+	return parseBinary(lex, 1)
 }
 
 func parseBinary(lex *lexer, prec1 int) Expr {
