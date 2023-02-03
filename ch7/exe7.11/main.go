@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"strconv"
 	"sync"
@@ -99,4 +100,11 @@ func (p *PriceDB) Read(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	db := &PriceDB{}
+	db.db = make(map[string]int, 0)
+	db.db["shoe"] = 100
+	http.HandleFunc("/create", db.Create)
+	http.HandleFunc("/read", db.Read)
+	http.HandleFunc("/update", db.Update)
+	http.HandleFunc("/delete", db.Delete)
+	log.Fatal(http.ListenAndServe(":8085", nil))
 }
