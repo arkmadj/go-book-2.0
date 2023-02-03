@@ -9,4 +9,9 @@ type lexer struct {
 	token rune
 }
 
-func (lex *lexer) next()
+func (lex *lexer) next() {
+	lex.token = lex.scan.Scan()
+}
+func (lex *lexer) text() string {
+
+}
