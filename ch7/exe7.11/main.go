@@ -120,6 +120,8 @@ func (p *PriceDB) Read(w http.ResponseWriter, r *http.Request) {
 
 func (p *PriceDB) List(w http.ResponseWriter, r *http.Request) {
 	p.Lock()
+	listHTML.Execute(w, p.db)
+	p.Unlock()
 }
 
 func main() {
