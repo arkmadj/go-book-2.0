@@ -2,4 +2,4 @@ package eval
 
 type Var string
 
-ty
+type literal float64
