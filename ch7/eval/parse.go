@@ -15,3 +15,5 @@ func (lex *lexer) next() {
 func (lex *lexer) text() string {
 	return lex.scan.TokenText()
 }
+
+type lexPanic string
