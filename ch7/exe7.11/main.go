@@ -38,3 +38,27 @@ func (p *PriceDB) Create(w http.ResponseWriter, r *http.Request) {
 	p.db[item] = price
 	p.Unlock()
 }
+
+func (p *PriceDB) Update(w http.ResponseWriter, r *http.Request) {
+	item := r.FormValue("item")
+	if item == "" {
+		http.Error(w, "No item given", http.StatusBadRequest)
+		return
+	}
+
+	priceStr := r.FormValue("price")
+	price, err := strconv.Atoi(priceStr)
+	if err != nil {
+		http.Error(w, "No integer price given", http.StatusBadRequest)
+		return
+	}
+
+	if _, ok := p.db[item]; !ok {
+		http.Error(w, fmt.Sprintf("%s doesn't exist", item), http.StatusNotFound)
+		return
+	}
+
+	p.Lock()
+	p.db[item] = price
+	p.Unlock()
+}
