@@ -132,5 +132,6 @@ func main() {
 	http.HandleFunc("/read", db.Read)
 	http.HandleFunc("/update", db.Update)
 	http.HandleFunc("/delete", db.Delete)
+	http.HandleFunc("/list", db.List)
 	log.Fatal(http.ListenAndServe(":8085", nil))
 }
