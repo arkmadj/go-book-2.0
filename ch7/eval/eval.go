@@ -8,3 +8,8 @@ type unary struct {
 	op rune
 	x  Expr
 }
+
+type binary struct {
+	op   rune
+	x, y Expr
+}
