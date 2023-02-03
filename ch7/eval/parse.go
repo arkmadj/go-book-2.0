@@ -59,6 +59,10 @@ func Parse(input string) (_ Expr, err error) {
 	lex.scan.Mode = scanner.ScanIdents | scanner.ScanInts | scanner.ScanFloats
 	lex.next()
 	e := parseExpr(lex)
+	if lex.token != scanner.EOF {
+		return nil, fmt.Errorf("unexpected %s", lex.describe())
+	}
+	return e, nil
 }
 
 func parseExpr(lex *lexer) Expr {
