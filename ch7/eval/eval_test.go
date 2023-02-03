@@ -26,5 +26,6 @@ func TestEval(t *testing.T) {
 			fmt.Printf("\n%s\n", test.expr)
 			prevExpr = test.expr
 		}
+		expr, err := Parse(test.expr)
 	}
 }
