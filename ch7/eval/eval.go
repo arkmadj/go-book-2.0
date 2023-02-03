@@ -18,3 +18,5 @@ type call struct {
 	fn   string
 	args []Expr
 }
+
+type Env map[Var]float64
