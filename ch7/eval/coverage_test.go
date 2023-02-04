@@ -1,6 +1,7 @@
 package eval
 
 import (
+	"fmt"
 	"math"
 	"testing"
 )
@@ -20,5 +21,21 @@ func TestCoverage(t *testing.T) {
 		{"5 / 9 * (F - 32)", Env{"F": -40}, "-40"},
 	}
 
-	for _, test := range tests
+	for _, test := range tests {
+		expr, err := Parse(test.input)
+		if err == nil {
+			err = expr.Check(map[Var]bool{})
+		}
+		if err != nil {
+			if err.Error() != test.want {
+				t.Errorf("%s: got %q, want %q", test.input, err, test.want)
+			}
+			continue
+		}
+
+		got := fmt.Sprintf("%.6g", expr.Eval(test.env))
+		if got != test.want {
+			t.Errorf("%s: %v => %s, want %s", test.input, test.env, got, test.want)
+		}
+	}
 }
