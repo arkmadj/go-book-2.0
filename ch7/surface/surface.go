@@ -20,7 +20,7 @@ const (
 
 var sin30, cos30 = 0.5, math.Sqrt(3.0 / 4.0)
 
-func corner(f func(x, y) float64, i, j int) (float64, float64) {
+func corner(f func(x, y float64) float64, i, j int) (float64, float64) {
 	x := xyrange * (float64(i)/cells - 0.5)
 	y := xyrange * (float64(j)/cells - 0.5)
 
