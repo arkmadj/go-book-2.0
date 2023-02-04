@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io"
+	"log"
 	"math"
 	"net/http"
 
@@ -78,4 +79,9 @@ func plot(w http.ResponseWriter, r *http.Request) {
 		r := math.Hypot(x, y)
 		return expr.Eval(eval.Env{"x": x, "y": y, "r": r})
 	})
+}
+
+func main() {
+	http.HandleFunc("/plot", plot)
+	log.Fatal(http.ListenAndServe("localhost:8080", nil))
 }
