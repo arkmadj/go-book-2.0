@@ -30,3 +30,13 @@ func (b binary) Check(vars map[Var]bool) error {
 	}
 	return b.y.Check(vars)
 }
+
+func (c call) Check(vars map[Var]bool) error {
+	arity, ok := numParams[c.fn]
+	if !ok {
+		return fmt.Errorf("unknown function %q", c.fn)
+	}
+
+}
+
+var numParams = map[string]int{"pow": 2, "sin": 1, "sqrt": 1}
