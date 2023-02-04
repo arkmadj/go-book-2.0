@@ -6,7 +6,7 @@ import (
 )
 
 func TestCoverage(t *testing.T) {
-	var test = []struct {
+	var tests = []struct {
 		input string
 		env   Env
 		want  string
@@ -19,4 +19,6 @@ func TestCoverage(t *testing.T) {
 		{"pow(x, 3) + pow(y, 3)", Env{"x": 9, "y": 10}, "1729"},
 		{"5 / 9 * (F - 32)", Env{"F": -40}, "-40"},
 	}
+
+	for _, test := range tests
 }
