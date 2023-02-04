@@ -36,7 +36,15 @@ func (c call) Check(vars map[Var]bool) error {
 	if !ok {
 		return fmt.Errorf("unknown function %q", c.fn)
 	}
-
+	if len(c.args) != arity {
+		return fmt.Errorf("call to %s has %d args, want %d", c.fn, len(c.args), arity)
+	}
+	for _, arg := range c.args {
+		if err := arg.Check(vars); err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 var numParams = map[string]int{"pow": 2, "sin": 1, "sqrt": 1}
