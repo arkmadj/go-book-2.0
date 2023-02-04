@@ -133,6 +133,6 @@ func parsePrimary(lex *lexer) Expr {
 		lex.next()
 		return e
 	}
-	msg := fmt.Sprintf("unnexpected %s", lex.describe())
+	msg := fmt.Sprintf("unexpected %s", lex.describe())
 	panic(lexPanic(msg))
 }
