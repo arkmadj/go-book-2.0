@@ -39,6 +39,31 @@ func TestEval(t *testing.T) {
 	}
 }
 
+func TestString(t *testing.T) {
+	tests := []string{
+		"-1 + -x",
+		"-1 - x",
+		"5 / 9 * (F - 32)",
+		"pow(x, 3) + pow(y, 3)",
+		"sqrt(A / pi)",
+	}
+
+	for _, test := range tests {
+		expr, err := Parse(test)
+		if err != nil {
+			t.Error(err)
+			continue
+		}
+		expr2, err := Parse(expr.String())
+		if err != nil {
+			t.Error(err)
+		}
+		if expr.String() != expr2.String() {
+			t.Errorf("%s != %s", expr2.String(), expr.String())
+		}
+	}
+}
+
 func TestErrors(t *testing.T) {
 	for _, test := range []struct{ expr, wantErr string }{
 		{"x % 2", "unexpected '%'"},
