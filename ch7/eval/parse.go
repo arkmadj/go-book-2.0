@@ -88,7 +88,12 @@ func parseUnary(lex *lexer) Expr {
 		lex.next()
 		return unary{op, parseUnary(lex)}
 	}
-	return parsePrimary(lex)
+	primary := parsePrimary(lex)
+	if lex.token == '!' {
+		lex.next()
+		return postUnary{'!', primary}
+	}
+	return primary
 }
 
 func parsePrimary(lex *lexer) Expr {
