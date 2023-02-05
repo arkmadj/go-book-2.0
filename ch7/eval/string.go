@@ -9,3 +9,7 @@ func (v Var) String() string {
 func (l literal) String() string {
 	return fmt.Sprintf("%g", l)
 }
+
+func (u unary) String() string {
+	return string(u.op) + u.x.String()
+}
