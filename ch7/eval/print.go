@@ -29,7 +29,7 @@ func write(buf *bytes.Buffer, e Expr) {
 		buf.WriteByte(')')
 	case call:
 		fmt.Fprintf(buf, "%s(", e.fn)
-		for I, arg := range e.args {
+		for i, arg := range e.args {
 			if i > 0 {
 				buf.WriteString(", ")
 			}
