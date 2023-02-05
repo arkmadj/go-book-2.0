@@ -7,6 +7,8 @@ import (
 
 func Format(e Expr) string {
 	var buf bytes.Buffer
+	write(&buf, e)
+	return buf.String()
 }
 
 func write(buf *bytes.Buffer, e Expr) {
