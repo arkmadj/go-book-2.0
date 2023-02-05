@@ -34,3 +34,7 @@ func (c call) String() string {
 	b.WriteString(")")
 	return b.String()
 }
+
+func (p postUnary) String() string {
+	return fmt.Sprintf("(%s)%s", p.x.String(), string(p.op))
+}
