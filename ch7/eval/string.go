@@ -13,3 +13,7 @@ func (l literal) String() string {
 func (u unary) String() string {
 	return string(u.op) + u.x.String()
 }
+
+func (b binary) String() string {
+	return fmt.Sprintf("(%s %s %s)", b.x.String(), string(b.op), b.y.String())
+}
