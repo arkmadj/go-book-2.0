@@ -23,7 +23,7 @@ func main() {
 	envStr := stdin.Text()
 	if stdin.Err() != nil {
 		fmt.Fprintln(os.Stderr, stdin.Err())
-		os.Exit()
+		os.Exit(1)
 	}
 
 	env := eval.Env{}
