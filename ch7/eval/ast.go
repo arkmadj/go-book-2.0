@@ -24,3 +24,8 @@ type Expr interface {
 	Check(vars map[Var]bool) error
 	String() string
 }
+
+type postUnary struct {
+	op rune
+	x  Expr
+}
