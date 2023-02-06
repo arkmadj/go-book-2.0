@@ -10,7 +10,11 @@ var ErrNotExist = errors.New("file does not exist")
 type PathError struct {
 	Op   string
 	Path string
-	Err  string
+	Err  error
+}
+
+func (e *PathError) Error() string {
+	return e.Op + " " + e.Path + ": " + e.Err.Error()
 }
 
 func IsNotExist(err error) bool {
