@@ -2,6 +2,8 @@ package main
 
 import (
 	"errors"
+	"fmt"
+	"os"
 	"syscall"
 )
 
@@ -22,4 +24,9 @@ func IsNotExist(err error) bool {
 		err = pe.Err
 	}
 	return err == syscall.ENOENT || err == ErrNotExist
+}
+
+func main() {
+	_, err := os.Open("/no/such/file")
+	fmt.Println(os.IsNotExist(err))
 }
