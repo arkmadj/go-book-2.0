@@ -2018,7 +2018,7 @@
   used to label the entity.</p></div><div class="div2"> <h3><a name="sec-guessing-with-ext-info" id="sec-guessing-with-ext-info"/>E.2 Priorities in the Presence of External Encoding Information</h3><p>The second possible case occurs when the XML entity is accompanied by encoding
   information, as in some file systems and some network protocols. When multiple
   sources of information are available, their relative priority and the preferred
-  method of handling conflict should be sspecified as part of the higher-level
+  method of handling conflict should be specified as part of the higher-level
   protocol used to deliver XML. In particular, please refer
   to <a href="#rfc2376">[IETF RFC 3023]</a> or its successor, which defines the <code>text/xml</code>
   and <code>application/xml</code> MIME types and provides some useful guidance.
