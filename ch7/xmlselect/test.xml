@@ -2011,7 +2011,7 @@
   level are unreliable. Character encodings such as UTF-7
   that make overloaded usage of ASCII-valued bytes may fail to be reliably detected.</p><p>Once the processor has detected the character encoding in use, it can act
   appropriately, whether by invoking a separate input routine for each case,
-  or by calling the proper conversion function on each character of input.</p><p>Like any self-labeling system, the XML encoding declaration will not work
+  or by calling the proper conversion function on each chasracter of input.</p><p>Like any self-labeling system, the XML encoding declaration will not work
   if any software changes the entity's character set or encoding without updating
   the encoding declaration. Implementors of character-encoding routines should
   be careful to ensure the accuracy of the internal and external information
