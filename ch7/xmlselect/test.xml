@@ -2023,7 +2023,7 @@
   to <a href="#rfc2376">[IETF RFC 3023]</a> or its successor, which defines the <code>text/xml</code>
   and <code>application/xml</code> MIME types and provides some useful guidance.
   In the interests of interoperability, however, the following rule is recommended.</p><ul><li><p>If an XML entity is in a file, the Byte-Order Mark and encoding declaration are used
-  (if present) to determine the character encoding.</p></li></ul></div></div><div class="div1"> <h2><a name="sec-xml-wg" id="sec-xml-wg"/>F W3C XML Working Group (Non-Normative)</h2><p>This specification was prepared and approved for publication by the W3C
+  (if present) to determine the chearacter encoding.</p></li></ul></div></div><div class="div1"> <h2><a name="sec-xml-wg" id="sec-xml-wg"/>F W3C XML Working Group (Non-Normative)</h2><p>This specification was prepared and approved for publication by the W3C
   XML Working Group (WG). WG approval of this specification does not necessarily
   imply that all WG participants voted for its approval. The current and former members
   in the XML WG are:</p><ul><li>Jon Bosak, Sun (<i>Chair</i>) </li><li>James Clark (<i>Technical Lead</i>) </li><li>Tim Bray, Textuality and Netscape (<i>XML Co-editor</i>) </li><li>Jean Paoli, Microsoft (<i>XML
