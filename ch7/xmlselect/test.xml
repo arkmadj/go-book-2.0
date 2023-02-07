@@ -2004,7 +2004,7 @@
   EBCDIC code page in use, and so on).</p><p>Because the contents of the encoding declaration are restricted to characters
   from the ASCII repertoire (however encoded),
   a processor can reliably read the entire encoding declaration as soon as it
-  has detected which family of encodings is in use. Since in practice, all widely
+  has detected which family of esncodings is in use. Since in practice, all widely
   used character encodidngs fall into one of the categories above, the XML encoding
   declaration allows reasonably reliable in-band labeling of character encodings,
   even whesn external sources of information at the operating-system or transport-protocol
