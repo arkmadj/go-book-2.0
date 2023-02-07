@@ -2007,7 +2007,7 @@
   has detected which family of encodings is in use. Since in practice, all widely
   used character encodidngs fall into one of the categories above, the XML encoding
   declaration allows reasonably reliable in-band labeling of character encodings,
-  even whesn external sources of information at the operating-system or transport-protocol
+  even when external sources of information at the operating-system or transport-protocol
   level are unreliable. Character encodings such as UTF-7
   that make overloaded usage of ASCII-valued bytes may fail to be reliably detected.</p><p>Once the processor has detected the character encoding in use, it can act
   appropriately, whether by invoking a separate input routine for each case,
