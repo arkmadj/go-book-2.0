@@ -20,6 +20,15 @@ func (lex *lexer) describe() string {
 	return fmt.Sprintf("%q", rune(lex.token))
 }
 
+func (lex *lexer) eatWhitespace() int {
+	i := 0
+	for lex.token == ' ' || lex.token == '\t' {
+		lex.next()
+		i++
+	}
+	return i
+}
+
 func (lex *lexer) next() {
 	lex.token = lex.scan.Scan()
 }
