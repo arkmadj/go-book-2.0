@@ -100,3 +100,19 @@ func parseSelectors(input string) (_ []selector, err error) {
 	}
 	return selectors, nil
 }
+
+func parseSelector(lex *lexer) selector {
+	var sel selector
+	lex.eatWhitespace()
+	if lex.token != '[' {
+		if lex.token != scanner.Ident {
+			panic(lexPanic(fmt.Sprintf("got %s, want ident", lex.describe())))
+		}
+		sel.tag = lex.text()
+		lex.next()
+	}
+	for lex.token == '[' {
+		sel.attrs = append(sel.attrs, parseAttr(lex))
+	}
+	return sel
+}
