@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/xml"
 	"fmt"
+	"strings"
 	"text/scanner"
 )
 
@@ -86,4 +87,16 @@ func parseSelectors(input string) (_ []selector, err error) {
 			panic(x)
 		}
 	}()
+
+	lex := new(lexer)
+	lex.scan.Init(strings.NewReader(input))
+	lex.scan.Mode = scanner.ScanIdents | scanner.ScanStrings
+	lex.scan.Whitespace = 0
+	lex.next()
+
+	selectors := make([]selector, 0)
+	for lex.token != scanner.EOF {
+		selectors = append(selectors, parseSelector(lex))
+	}
+	return selectors, nil
 }
