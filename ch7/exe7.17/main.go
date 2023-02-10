@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/xml"
 	"fmt"
+	"io"
 	"os"
 	"strings"
 	"text/scanner"
@@ -116,6 +117,30 @@ func parseSelector(lex *lexer) selector {
 		sel.attrs = append(sel.attrs, parseAttr(lex))
 	}
 	return sel
+}
+
+func xmlselect(w io.Writer, r io.Reader, sels []selector) {
+	dec := xml.NewDecoder(r)
+	var stack []xml.StartElement
+	for {
+		tok, err := dec.Token()
+		if err == io.EOF {
+			break
+		} else if err != nil {
+			fmt.Fprintf(os.Stderr, "xmlselect %v\n", err)
+			os.Exit(1)
+		}
+		switch tok := tok.(type) {
+		case xml.StartElement:
+			stack = append(stack, tok)
+		case xml.EndElement:
+			stack = stack[:len(stack)-1]
+		case xml.CharData:
+			if isSelected(stack, sels) {
+				fmt.Fprintf(w, "%s\n", tok)
+			}
+		}
+	}
 }
 
 func main() {
