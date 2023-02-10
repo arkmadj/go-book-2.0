@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"encoding/xml"
 	"fmt"
 	"text/scanner"
 )
@@ -60,4 +61,17 @@ func (s selector) String() string {
 
 type attribute struct {
 	Name, Value string
+}
+
+func attrMatch(selAttrs []attribute, xmlAttrs []xml.Attr) bool {
+SelectorAttribute:
+	for _, sa := range selAttrs {
+		for _, xa := range xmlAttrs {
+			if sa.Name == xa.Name.Local && sa.Value == xa.Value || sa.Value == "" {
+				continue SelectorAttribute
+			}
+		}
+		return false
+	}
+	return true
 }
