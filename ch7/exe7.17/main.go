@@ -20,7 +20,9 @@ func (lex *lexer) describe() string {
 	return fmt.Sprintf("%q", rune(lex.token))
 }
 
-func (lex *lexer) next()
+func (lex *lexer) next() {
+	lex.token = lex.scan.Scan()
+}
 func (lex *lexer) text() string {
 	return lex.scan.TokenText()
 }
