@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/xml"
 	"fmt"
+	"os"
 	"strings"
 	"text/scanner"
 )
@@ -115,4 +116,16 @@ func parseSelector(lex *lexer) selector {
 		sel.attrs = append(sel.attrs, parseAttr(lex))
 	}
 	return sel
+}
+
+func main() {
+	if len(os.Args) < 2 {
+		os.Exit(0)
+	}
+	sels, err := parseSelectors(strings.Join(os.Args[2:], " "))
+	if err != nil {
+		fmt.Fprintf(os.Stderr, err.Error())
+		os.Exit(1)
+	}
+	xmlselect(os.Stdout, os.Stdin, sels)
 }
