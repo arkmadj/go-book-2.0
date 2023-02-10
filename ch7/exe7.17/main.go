@@ -75,3 +75,15 @@ SelectorAttribute:
 	}
 	return true
 }
+
+func parseSelectors(input string) (_ []selector, err error) {
+	defer func() {
+		switch x := recover().(type) {
+		case nil:
+		case lexPanic:
+			err = fmt.Errorf("%s", x)
+		default:
+			panic(x)
+		}
+	}()
+}
