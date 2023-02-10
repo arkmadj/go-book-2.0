@@ -19,3 +19,5 @@ func (lex *lexer) describe() string {
 	}
 	return fmt.Sprintf("%q", rune(lex.token))
 }
+
+func (lex *lexer) next()
