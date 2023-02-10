@@ -42,3 +42,7 @@ type selector struct {
 	tag   string
 	attrs []attribute
 }
+
+type attribute struct {
+	Name, Value string
+}
