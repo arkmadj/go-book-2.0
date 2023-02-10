@@ -37,3 +37,8 @@ func (lex *lexer) text() string {
 }
 
 type lexPanic string
+
+type selector struct {
+	tag   string
+	attrs []attribute
+}
