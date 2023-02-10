@@ -119,6 +119,38 @@ func parseSelector(lex *lexer) selector {
 	return sel
 }
 
+func parseAttr(lex *lexer) attribute {
+	var attr attribute
+	lex.next()
+	if lex.token != scanner.Ident {
+		panic(lexPanic(fmt.Sprintf("got %s, want ident", lex.describe())))
+	}
+	attr.Name = lex.text()
+	lex.next()
+	if lex.token != '=' {
+		if lex.token != ']' {
+			panic(lexPanic(fmt.Sprintf("got %s, want ']'", lex.describe())))
+		}
+		lex.next()
+		return attr
+	}
+	lex.next()
+	switch lex.token {
+	case scanner.Ident:
+		attr.Value = lex.text()
+	case scanner.String:
+		attr.Value = strings.Trim(lex.text(), `"`)
+	default:
+		panic(lexPanic(fmt.Sprintf("got %s, want ident or string", lex.describe())))
+	}
+	lex.next()
+	if lex.token != ']' {
+		panic(lexPanic(fmt.Sprintf("got %s, want ']'", lex.describe())))
+	}
+	lex.next()
+	return attr
+}
+
 func isSelected(stack []xml.StartElement, sels []selector) bool {
 	if len(stack) < len(sels) {
 		return false
