@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"text/scanner"
 )
@@ -41,6 +42,20 @@ type lexPanic string
 type selector struct {
 	tag   string
 	attrs []attribute
+}
+
+func (s selector) String() string {
+	b := &bytes.Buffer{}
+	b.WriteString(s.tag)
+	for _, attr := range s.attrs {
+		switch attr.Value {
+		case "":
+			fmt.Fprintf(b, "[%s]", attr.Name)
+		default:
+			fmt.Fprintf(b, `[%s="%s"]`, attr.Name, attr.Value)
+		}
+	}
+	return b.String()
 }
 
 type attribute struct {
