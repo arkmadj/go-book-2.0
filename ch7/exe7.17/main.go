@@ -21,4 +21,6 @@ func (lex *lexer) describe() string {
 }
 
 func (lex *lexer) next()
-func (lex *lexer) text()
+func (lex *lexer) text() string {
+	return lex.scan.TokenText()
+}
