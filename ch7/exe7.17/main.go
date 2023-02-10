@@ -119,6 +119,25 @@ func parseSelector(lex *lexer) selector {
 	return sel
 }
 
+func isSelected(stack []xml.StartElement, sels []selector) bool {
+	if len(stack) < len(sels) {
+		return false
+	}
+	start := len(stack) - len(sels)
+	stack = stack[start:]
+	for i := 0; i < len(sels); i++ {
+		sel := sels[i]
+		el := stack[i]
+		if sel.tag != "" && sel.tag != el.Name.Local {
+			return false
+		}
+		if !attrMatch(sel.attrs, el.Attr) {
+			return false
+		}
+	}
+	return true
+}
+
 func xmlselect(w io.Writer, r io.Reader, sels []selector) {
 	dec := xml.NewDecoder(r)
 	var stack []xml.StartElement
