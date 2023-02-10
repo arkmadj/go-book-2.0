@@ -21,3 +21,4 @@ func (lex *lexer) describe() string {
 }
 
 func (lex *lexer) next()
+func (lex *lexer) text()
