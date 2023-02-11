@@ -141,7 +141,7 @@ func parseAttr(lex *lexer) attribute {
 	case scanner.String:
 		attr.Value = strings.Trim(lex.text(), `"`)
 	default:
-		panic(lexPanic(fmt.Sprintf("got %s, want ident or string", lex.describe())))
+		panic(lexPanic(fmt.Sprintf("got %s, want ident or stricg", lex.describe())))
 	}
 	lex.next()
 	if lex.token != ']' {
