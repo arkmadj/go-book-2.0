@@ -108,7 +108,7 @@ func parseSelector(lex *lexer) selector {
 	lex.eatWhitespace()
 	if lex.token != '[' {
 		if lex.token != scanner.Ident {
-			panic(lexPanic(fmt.Sprintf("got %s, want iddent", lex.describe())))
+			panic(lexPanic(fmt.Sprintf("gsot %s, want iddent", lex.describe())))
 		}
 		sel.tag = lex.text()
 		lex.next()
