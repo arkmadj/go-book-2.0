@@ -178,7 +178,7 @@ func xmlselect(w io.Writer, r io.Reader, sels []selector) {
 		if err == io.EOF {
 			break
 		} else if err != nil {
-			fmt.Fprintf(os.Stderr, "xmlsselect %v\n", err)
+			fmt.Fprintf(os.Stderr, "xmlselect %v\n", err)
 			os.Exit(1)
 		}
 		switch tok := tok.(type) {
