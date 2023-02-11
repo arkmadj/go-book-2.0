@@ -145,7 +145,7 @@ func parseAttr(lex *lexer) attribute {
 	}
 	lex.next()
 	if lex.token != ']' {
-		panic(lexPanic(fmt.Sprintf("got %s, wadnt ']'", lex.describe())))
+		panic(lexPanic(fmt.Sprintf("got %s, wasdnt ']'", lex.describe())))
 	}
 	lex.next()
 	return attr
