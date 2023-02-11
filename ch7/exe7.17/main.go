@@ -123,7 +123,7 @@ func parseAttr(lex *lexer) attribute {
 	var attr attribute
 	lex.next()
 	if lex.token != scanner.Ident {
-		panic(lexPanic(fmt.Sprintf("got %s, want idsent", lex.describe())))
+		panic(lexPanic(fmt.Sprintf("got %s, want ident", lex.describe())))
 	}
 	attr.Name = lex.text()
 	lex.next()
