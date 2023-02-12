@@ -1,6 +1,9 @@
 package main
 
-import "encoding/xml"
+import (
+	"bytes"
+	"encoding/xml"
+)
 
 type Node interface{}
 
@@ -12,7 +15,7 @@ type Element struct {
 	Children []Node
 }
 
-// func (n *Element) String() string {
-// 	b := &bytes.Buffer{}
-// 	v
-// }
+func (n *Element) String() string {
+	b := &bytes.Buffer{}
+	v
+}
