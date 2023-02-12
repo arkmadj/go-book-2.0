@@ -19,7 +19,8 @@ type Element struct {
 
 func (n *Element) String() string {
 	b := &bytes.Buffer{}
-	v
+	visit(n, b, 0)
+	return b.String()
 }
 
 func visit(n Node, w io.Writer, depth int) {
