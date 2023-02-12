@@ -348,7 +348,8 @@
     control characters. The distinction between XML 1.0 and XML 1.1 documents is indicated by the
     version number information in the XML declaration at the start of each document. </p></div></div><div
         class="div1">
-        <h2><a name="sec-documents" id="sec-documents" />2 Documents</h2><p> [<a name="dt-xml-doc"
+        <h2 class="text"><a name="sec-documents" id="sec-documents" />2 Documents</h2><p> [<a
+            name="dt-xml-doc"
             id="dt-xml-doc" title="XML Document">Definition</a>: A data object is an <b>XML document</b>
     if it is <a title="Well-Formed" href="#dt-wellformed">well-formed</a>, as defined in this
     specification. <span>In addition, the XML document is</span>
@@ -391,8 +392,7 @@
                 <span>
 
                       </span>
-                <a href="#NT-Char">Char</a>*<span>
-    )</span>
+                <a href="#NT-Char">Char</a>*<span> )</span>
                   </code></td>
               </tr>
             </tbody>
@@ -748,8 +748,7 @@
     sections</b> <span>may</span> occur anywhere character data may occur; they are used to escape
     blocks of text containing characters which would otherwise be recognized as markup. CDATA
     sections begin with the string "<code>&lt;![CDATA[</code>" and end with the string "<code>]]&gt;</code>
-    ":]
-          </p> <h5><a name="IDA2HES" id="IDA2HES" />CDATA Sections</h5><table class="scrap"
+    ":] </p> <h5><a name="IDA2HES" id="IDA2HES" />CDATA Sections</h5><table class="scrap"
             summary="Scrap">
             <tbody>
               <tr valign="baseline">
@@ -2356,8 +2355,7 @@
                 href="#dt-match">match</a> that in an <a href="#sec-entity-decl"><cite>entity
     declaration</cite></a> that does not occur within the external subset or a parameter entity,
     except that well-formed documents need not declare any of the following entities: <code>amp</code>
-    ,
-  <code>lt</code>, <code>gt</code>, <code>apos</code>, <code>quot</code>. The declaration of a
+    , <code>lt</code>, <code>gt</code>, <code>apos</code>, <code>quot</code>. The declaration of a
     general entity <em class="rfc2119" title="Keyword in RFC 2119 context">MUST</em> precede any
     reference to it which appears in a default value in an attribute-list declaration.</p><p>Note
     that non-validating processors are <a href="#include-if-valid"><cite>not obligated to</cite></a>
@@ -2372,11 +2370,10 @@
                 title="match" href="#dt-match">match</a> that in an <a href="#sec-entity-decl"><cite>entity
     declaration</cite></a>. For interoperability, valid documents <em class="rfc2119"
                 title="Keyword in RFC 2119 context">SHOULD</em> declare the entities <code>amp</code>
-    ,
-  <code>lt</code>, <code>gt</code>, <code>apos</code>, <code>quot</code>, in the form
-    specified in <a href="#sec-predefined-ent"><b>4.6 Predefined Entities</b></a>. The declaration
-    of a parameter entity <em class="rfc2119" title="Keyword in RFC 2119 context">MUST</em> precede
-    any reference to it. Similarly, the declaration of a general entity <em class="rfc2119"
+    , <code>lt</code>, <code>gt</code>, <code>apos</code>, <code>quot</code>, in the form specified
+    in <a href="#sec-predefined-ent"><b>4.6 Predefined Entities</b></a>. The declaration of a
+    parameter entity <em class="rfc2119" title="Keyword in RFC 2119 context">MUST</em> precede any
+    reference to it. Similarly, the declaration of a general entity <em class="rfc2119"
                 title="Keyword in RFC 2119 context">MUST</em> precede any attribute-list declaration
     containing a default value with a direct or indirect reference to that general entity.</p></div><div
             class="constraint"><p class="prefix"><a name="textent" id="textent" /><b>Well-formedness
@@ -3360,10 +3357,9 @@
             name="dt-Uni-encform" id="dt-Uni-encform" title="Unicode encoding form">Definition</a>:
     Text is said to be in a <b>Unicode encoding form</b> if it is encoded in UTF-8, UTF-16 or
     UTF-32.] </p><p> [<a name="dt-legacyenc" id="dt-legacyenc" title="legacy encoding">Definition</a>
-    : 
-            <b>Legacy encoding</b> is taken to mean any character encoding not based on
-    Unicode.] </p><p> [<a name="dt-normtransc" id="dt-normtransc" title="normalizing transcoder">
-    Definition</a>: A <b>normalizing transcoder</b> is a transcoder that converts from a <a
+    : <b>Legacy encoding</b> is taken to mean any character encoding not based on Unicode.] </p><p>
+    [<a name="dt-normtransc" id="dt-normtransc" title="normalizing transcoder"> Definition</a>: A <b>normalizing
+    transcoder</b> is a transcoder that converts from a <a
             title="legacy encoding" href="#dt-legacyenc">legacy encoding</a> to a <a
             title="Unicode encoding form" href="#dt-Uni-encform">Unicode encoding form</a> and
     ensures that the result is in Unicode Normalization Form C (see UAX #15 <a href="#Unicode">
