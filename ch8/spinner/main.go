@@ -20,3 +20,10 @@ func fib(x int) int {
 	}
 	return fib(x-1) + fib(x-2)
 }
+
+func main() {
+	go spinner(100 * time.Millisecond)
+	const n = 45
+	fibN := fib(n)
+	fmt.Printf("\rFibonacci(%d) = %d\n", n, fibN)
+}
