@@ -33,6 +33,6 @@ func visit(n Node, w io.Writer, depth int) {
 	case CharData:
 		fmt.Fprintf(w, "%*s%q\n", depth*2, "", n)
 	default:
-		panic(fmt.Sprint("got %T", n))
+		panic(fmt.Sprintf("got %T", n))
 	}
 }
