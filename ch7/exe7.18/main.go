@@ -5,6 +5,7 @@ import (
 	"encoding/xml"
 	"fmt"
 	"io"
+	"os"
 )
 
 type Node interface{}
@@ -66,4 +67,13 @@ func parse(r io.Reader) (Node, error) {
 		}
 	}
 	return root, nil
+}
+
+func main() {
+	node, err := parse(os.Stdin)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "%s\n", err)
+		os.Exit(1)
+	}
+	fmt.Println(node)
 }
