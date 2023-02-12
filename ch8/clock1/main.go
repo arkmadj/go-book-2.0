@@ -1,11 +1,14 @@
 package main
 
 import (
+	"flag"
 	"io"
 	"log"
 	"net"
 	"time"
 )
+
+var port = flag.Int("port", 8080, "listen")
 
 func handleConn(c net.Conn) {
 	defer c.Close()
