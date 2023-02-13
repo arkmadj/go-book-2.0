@@ -91,12 +91,12 @@ func (c *conn) list(args []string) {
 	}
 }
 
-func (c *conn) writeln(s ...interface{}){
+func (c *conn) writeln(s ...interface{}) {
 	if c.cmdErr != nil {
 		return
 	}
 	s = append(s, "\r\n")
-	_, c.c
+	_, c.cmdErr = fmt.Fprint(c.rw, s...)
 }
 
 func (c *conn) CmdErr() error {
