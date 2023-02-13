@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"io"
 	"log"
 	"net"
 	"strconv"
@@ -58,4 +59,22 @@ func (c *conn) log(pairs logPairs) {
 		fmt.Fprintf(b, " %s=%s", k, v)
 	}
 	log.Print(b.String())
+}
+
+func (c *conn) dataConn() (conn io.ReadWriteCloser, err error) {
+	switch c.prevCmd {
+	case "PORT":
+		conn, err = net.Dial("tcp", c.dataHostPort)
+		if err != nil {
+			return nil, err
+		}
+	case "PASV":
+		conn, err = c.pasvListener.Accept()
+		if err != nil {
+			return nil, err
+		}
+	default:
+		return nil, fmt.Errorf("previous command not PASV or PORY")
+	}
+	return conn, nil
 }
