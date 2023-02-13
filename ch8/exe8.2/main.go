@@ -10,3 +10,7 @@ type conn struct {
 	cmdErr       error
 	binary       bool
 }
+
+func NewConn(cmdConn net.Conn) *conn {
+	return &conn{rw: cmdConn}
+}
