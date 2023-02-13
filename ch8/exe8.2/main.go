@@ -6,6 +6,7 @@ import (
 	"io"
 	"log"
 	"net"
+	"os"
 	"strconv"
 )
 
@@ -87,8 +88,49 @@ func (c *conn) list(args []string) {
 	case 1:
 		filename = args[0]
 	default:
-		c.write()
+		c.writeln("501 Too many arguments.")
+		return
 	}
+	file, err := os.Open(filename)
+	if err != nil {
+		c.writeln("550 File not found.")
+		return
+	}
+	c.writeln("150 Here comes the directory listing.")
+	w, err := c.dataConn()
+	if err != nil {
+		c.writeln("435 Can't open data connection.")
+		return
+	}
+	defer w.Close()
+	stat, err := file.Stat()
+	if err != nil {
+		c.log(logPairs{"cmd": "LIST", "err": err})
+		c.writeln("450 Requested file action not taken. File unavailable.")
+	}
+	if stat.IsDir() {
+		filenames, err := file.Readdirnames(0)
+		if err != nil {
+			c.writeln("550 Can't read directory.")
+			return
+		}
+		for _, f := range filenames {
+			_, err := fmt.Fprintf(w, f, c.lineEnding())
+			if err != nil {
+				c.log(logPairs{"cmd": "LIST", "err": err})
+				c.writeln("426 Connection closed: transfer aborted.")
+				return
+			}
+		}
+	} else {
+		_, err = fmt.Fprintf(w, filename, c.lineEnding())
+		if err != nil {
+			c.log(logPairs{"cmd": "LIST", "err": err})
+			c.writeln("426 Connection closed: transfer aborted.")
+			return
+		}
+	}
+	c.writeln("226 Closing data connection. List successful.")
 }
 
 func (c *conn) writeln(s ...interface{}) {
