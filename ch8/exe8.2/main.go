@@ -8,6 +8,7 @@ import (
 	"net"
 	"os"
 	"strconv"
+	"strings"
 )
 
 type conn struct {
@@ -204,4 +205,21 @@ func (c *conn) port(args []string) {
 		return
 	}
 	c.writeln("200 PORT command successful.")
+}
+
+func (c *conn) type_(args []string) {
+	if len(args) < 1 || len(args) > 2 {
+		c.writeln("501 Usage: TYPE takes 1 or 2 arguments.")
+		return
+	}
+	switch strings.ToUpper(strings.Join(args, " ")) {
+	case "A", "A N":
+		c.binary = false
+	case "I", "L 8":
+		c.binary = true
+	default:
+		c.writeln("504 Unsupported type. Supported types: A, A N, I, L *.")
+		return
+	}
+	c.writeln("200 TYPE set")
 }
