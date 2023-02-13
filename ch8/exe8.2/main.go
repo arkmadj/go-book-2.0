@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"bytes"
+	"flag"
 	"fmt"
 	"io"
 	"log"
@@ -368,5 +369,22 @@ func (c *conn) run() {
 	}
 	if s.Err() != nil {
 		c.log(logPairs{"err": fmt.Errorf("scanning commands: %s", s.Err())})
+	}
+}
+
+func main() {
+	var port int
+	flag.IntVar(&port, "port", 8000, "listen port")
+
+	ln, err := net.Listen("tcp4", fmt.Sprintf(":%d", port))
+	if err != nil {
+		log.Fatal("Opening main listener:", err)
+	}
+	for {
+		c, err := ln.Accept()
+		if err != nil {
+			log.Print("Accepting new connection:", err)
+		}
+		go NewConn(c).run()
 	}
 }
