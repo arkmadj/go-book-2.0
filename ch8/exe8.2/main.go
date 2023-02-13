@@ -78,3 +78,15 @@ func (c *conn) dataConn() (conn io.ReadWriteCloser, err error) {
 	}
 	return conn, nil
 }
+
+func (c *conn) list(args []string) {
+	var filename string
+	switch len(args) {
+	case 0:
+		filename = "."
+	case 1:
+		filename = args[0]
+	default:
+		c.write()
+	}
+}
