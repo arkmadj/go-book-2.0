@@ -156,7 +156,9 @@ func (c *conn) CmdErr() error {
 func (c *conn) Close() error {
 	err := c.rw.Close()
 	if err != nil {
-		c.log(logPairs{"err": fmt.Errorf("closing command connection: %s", err))
+		c.log(logPairs{"err": fmt.Errorf("closing command connection: %s", err)})
 	}
 	return err
 }
+
+func (c *conn) pasv(args []string)
