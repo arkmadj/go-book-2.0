@@ -99,6 +99,14 @@ func (c *conn) writeln(s ...interface{}) {
 	_, c.cmdErr = fmt.Fprint(c.rw, s...)
 }
 
+func (c *conn) lineEnding() string {
+	if c.binary {
+		return "\n"
+	} else {
+		return "\r\n"
+	}
+}
+
 func (c *conn) CmdErr() error {
 	return c.cmdErr
 }
