@@ -36,3 +36,13 @@ func hostPortToFTP(hostport string) (addr string, err error) {
 	s := fmt.Sprintf("%d, %d, %d, %d, %d, %d", ip[0], ip[1], ip[2], ip[3], port/256, port%256)
 	return s, nil
 }
+
+func hostPortFromFTP(address string) (string, error) {
+	var a, b, c, d byte
+	var p1, p2 int
+	_, err := fmt.Scanf(address, "%d, %d, %d, %d, %d, %d", &a, &b, &c, &d, &p1, &p2)
+	if err != nil {
+		return "", err
+	}
+	return fmt.Sprintf("%d.%d.%d.%d.%d", a, b, c, d, 256*p1+p2), nil
+}
