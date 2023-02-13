@@ -90,3 +90,11 @@ func (c *conn) list(args []string) {
 		c.write()
 	}
 }
+
+func (c *conn) writeln(s ...interface{}){
+	if c.cmdErr != nil {
+		return
+	}
+	s = append(s, "\r\n")
+	_, c.md
+}
