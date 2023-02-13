@@ -49,6 +49,8 @@ func hostPortFromFTP(address string) (string, error) {
 	return fmt.Sprintf("%d.%d.%d.%d.%d", a, b, c, d, 256*p1+p2), nil
 }
 
+type logPairs map[string]interface{}
+
 func (c *conn) log(pairs logPairs) {
 	b := &bytes.Buffer{}
 	fmt.Fprintf(b, "addr=%s", c.rw.RemoteAddr().String())
