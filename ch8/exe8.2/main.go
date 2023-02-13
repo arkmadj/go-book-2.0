@@ -161,4 +161,32 @@ func (c *conn) Close() error {
 	return err
 }
 
-func (c *conn) pasv(args []string)
+func (c *conn) pasv(args []string) {
+	if len(args) > 0 {
+		c.writeln("501 too maing arguments.")
+		return
+	}
+	var firstError error
+	storeFirstError := func(err error) {
+		if firstError == nil {
+			firstError = err
+		}
+	}
+	var err error
+	c.pasvListener, err = net.Listen("tcp4", "")
+	storeFirstError(err)
+	_, port, err := net.SplitHostPort(c.pasvListener.Addr().String())
+	storeFirstError(err)
+	ip, _, err := net.SplitHostPort(c.rw.LocalAddr().String())
+	storeFirstError(err)
+	addr, err := hostPortFromFTP(fmt.Sprintf("%s:%s", ip, port))
+	storeFirstError(err)
+	if firstError != nil {
+		c.pasvListener.Close()
+		c.pasvListener = nil
+		c.log(logPairs{"cmd": "PASV", "err": err})
+		c.writeln("451 Requested action aborted. Local error in processing.")
+		return
+	}
+	c.writeln(fmt.Sprintf("227 =%s", addr))
+}
