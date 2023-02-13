@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
+	"log"
 	"net"
 	"strconv"
 )
@@ -45,4 +47,13 @@ func hostPortFromFTP(address string) (string, error) {
 		return "", err
 	}
 	return fmt.Sprintf("%d.%d.%d.%d.%d", a, b, c, d, 256*p1+p2), nil
+}
+
+func (c *conn) log(pairs logPairs) {
+	b := &bytes.Buffer{}
+	fmt.Fprintf(b, "addr=%s", c.rw.RemoteAddr().String())
+	for k, v := range pairs {
+		fmt.Fprintf(b, " %s=%s", k, v)
+	}
+	log.Print(b.String())
 }
