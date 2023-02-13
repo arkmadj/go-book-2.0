@@ -152,3 +152,11 @@ func (c *conn) lineEnding() string {
 func (c *conn) CmdErr() error {
 	return c.cmdErr
 }
+
+func (c *conn) Close() error {
+	err := c.rw.Close()
+	if err != nil {
+		c.log(logPairs{"err": fmt.Errorf("closing command connection: %s", err))
+	}
+	return err
+}
