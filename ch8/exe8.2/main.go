@@ -96,5 +96,9 @@ func (c *conn) writeln(s ...interface{}){
 		return
 	}
 	s = append(s, "\r\n")
-	_, c.md
+	_, c.c
+}
+
+func (c *conn) CmdErr() error {
+	return c.cmdErr
 }
