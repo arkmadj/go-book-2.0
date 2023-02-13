@@ -285,3 +285,31 @@ func (c *conn) retr(args []string) {
 	}
 	c.writeln("226 Transfer complete.")
 }
+
+func (c *conn) stor(args []string) {
+	if len(args) != 1 {
+		c.writeln("501 Usage: STOR filename")
+		return
+	}
+	filename := args[0]
+	file, err := os.Open(filename)
+	if err != nil {
+		c.log(logPairs{"cmd": "STOR", "err": err})
+		c.writeln("550 file can't be created.")
+		return
+	}
+	c.writeln("150 Ok to send data.")
+	conn, err := c.dataConn()
+	if err != nil {
+		c.writeln("425 Can't open data connection")
+		return
+	}
+	defer conn.Close()
+	_, err = io.Copy(file, conn)
+	if err != nil {
+		c.log(logPairs{"cmd": "RETR", "err": err})
+		c.writeln("450 File unavailable.")
+		return
+	}
+	c.writeln("226 Transfer complete.")
+}
