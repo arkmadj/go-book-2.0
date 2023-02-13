@@ -313,3 +313,60 @@ func (c *conn) stor(args []string) {
 	}
 	c.writeln("226 Transfer complete.")
 }
+
+func (c *conn) run() {
+	c.writeln("220 Ready.")
+	s := bufio.NewScanner(c.rw)
+	var cmd string
+	var args []string
+	for s.Scan() {
+		if c.CmdErr() != nil {
+			c.log(logPairs{"err": fmt.Errorf("command connection: %s", c.CmdErr())})
+			return
+		}
+		fields := strings.Fields(s.Text())
+		if len(fields) == 0 {
+			continue
+		}
+		cmd = strings.ToUpper(fields[0])
+		args = nil
+		if len(fields) > 1 {
+			args = fields[1:]
+		}
+		switch cmd {
+		case "LIST":
+			c.list(args)
+		case "NOOP":
+			c.writeln("200 Ready.")
+		case "PASV":
+			c.pasv(args)
+		case "PORT":
+			c.port(args)
+		case "QUIT":
+			c.writeln("221 Goodbye.")
+			return
+		case "RETR":
+			c.retr(args)
+		case "STOR":
+			c.stor(args)
+		case "STRU":
+			c.stru(args)
+		case "SYST":
+			c.writeln("215 UNIX Type: L8")
+		case "TYPE":
+			c.type_(args)
+		case "USER":
+			c.writeln("230 login successful.")
+		default:
+			c.writeln(fmt.Sprintf("502 Command %q not implemented.", cmd))
+		}
+		if cmd != "PASV" && c.pasvListener != nil {
+			c.pasvListener.Close()
+			c.pasvListener = nil
+		}
+		c.prevCmd = cmd
+	}
+	if s.Err() != nil {
+		c.log(logPairs{"err": fmt.Errorf("scanning commands: %s", s.Err())})
+	}
+}
