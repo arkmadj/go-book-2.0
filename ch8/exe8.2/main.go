@@ -190,3 +190,18 @@ func (c *conn) pasv(args []string) {
 	}
 	c.writeln(fmt.Sprintf("227 =%s", addr))
 }
+
+func (c *conn) port(args []string) {
+	if len(args) != 1 {
+		c.writeln("501 Usafe: PORT a, b, c, d, p1, p2")
+		return
+	}
+	var err error
+	c.dataHostPort, err = hostPortFromFTP(args[0])
+	if err != nil {
+		c.log(logPairs{"cmd": "PORT", "err": err})
+		c.writeln("501 Can't parse address.")
+		return
+	}
+	c.writeln("200 PORT command successful.")
+}
