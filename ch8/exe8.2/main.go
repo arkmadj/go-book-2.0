@@ -223,3 +223,15 @@ func (c *conn) type_(args []string) {
 	}
 	c.writeln("200 TYPE set")
 }
+
+func (c *conn) stru(args []string) {
+	if len(args) != 1 {
+		c.writeln("501 Usage: STRU F")
+		return
+	}
+	if args[0] != "F" {
+		c.writeln("504 Only file structure is supported")
+		return
+	}
+	c.writeln("200 STRU set")
+}
