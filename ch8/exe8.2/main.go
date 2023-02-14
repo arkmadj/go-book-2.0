@@ -265,7 +265,7 @@ func (c *conn) retr(args []string) {
 			return
 		}
 	} else {
-		r := bufio.NewReadWriter(file)
+		r := bufio.NewReader(file)
 		w := bufio.NewWriter(conn)
 		for {
 			line, isPrefix, err := r.ReadLine()
