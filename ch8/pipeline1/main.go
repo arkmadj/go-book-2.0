@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func main() {
 	naturals := make(chan int)
 	squares := make(chan int)
@@ -16,4 +18,8 @@ func main() {
 			squares <- x * x
 		}
 	}()
+
+	for {
+		fmt.Println(<-squares)
+	}
 }
