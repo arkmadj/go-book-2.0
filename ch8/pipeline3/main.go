@@ -6,3 +6,10 @@ func counter(out chan<- int) {
 	}
 	close(out)
 }
+
+func squarer(out chan<- int, in <-chan int) {
+	for v := range in {
+		out <- v * v
+	}
+	close(out)
+}
