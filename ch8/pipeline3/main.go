@@ -21,3 +21,12 @@ func printer(in <-chan int) {
 		fmt.Println(v)
 	}
 }
+
+func main() {
+	naturals := make(chan int)
+	squares := make(chan int)
+
+	go counter(naturals)
+	go squarer(squares, naturals)
+	printer(squares)
+}
