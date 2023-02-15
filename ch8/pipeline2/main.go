@@ -10,4 +10,11 @@ func main() {
 		}
 		close(naturals)
 	}()
+
+	go func() {
+		for x := range naturals {
+			squares <- x * x
+		}
+		close(squares)
+	}()
 }
