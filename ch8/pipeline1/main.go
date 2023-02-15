@@ -10,13 +10,18 @@ func main() {
 		for x := 0; ; x++ {
 			naturals <- x
 		}
+		close(naturals)
 	}()
 
 	go func() {
 		for {
-			x := <-naturals
+			x, ok := <-naturals
+			if !ok {
+				break
+			}
 			squares <- x * x
 		}
+		close(squares)
 	}()
 
 	for {
