@@ -17,7 +17,7 @@ func squarer(out chan<- int, in <-chan int) {
 }
 
 func printer(in <-chan int) {
-	for v := range int {
+	for v := range in {
 		fmt.Println(v)
 	}
 }
