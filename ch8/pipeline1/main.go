@@ -9,4 +9,11 @@ func main() {
 			naturals <- x
 		}
 	}()
+
+	go func() {
+		for {
+			x := <-naturals
+			squares <- x * x
+		}
+	}()
 }
