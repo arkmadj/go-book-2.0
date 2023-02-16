@@ -1,6 +1,10 @@
 package thumbnail
 
-import "image"
+import (
+	"image"
+	"image/jpeg"
+	"io"
+)
 
 func Image(src image.Image) image.Image {
 	xs := src.Bounds().Size().X
@@ -24,4 +28,13 @@ func Image(src image.Image) image.Image {
 		}
 	}
 	return dst
+}
+
+func ImageStream(w io.Writer, r io.Reader) error {
+	src, _, err := image.Decode(r)
+	if err != nil {
+		return err
+	}
+	dst := Image(src)
+	return jpeg.Encode(w, dst, nil)
 }
