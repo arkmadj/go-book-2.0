@@ -1,9 +1,11 @@
 package thumbnail
 
 import (
+	"fmt"
 	"image"
 	"image/jpeg"
 	"io"
+	"os"
 )
 
 func Image(src image.Image) image.Image {
@@ -37,4 +39,23 @@ func ImageStream(w io.Writer, r io.Reader) error {
 	}
 	dst := Image(src)
 	return jpeg.Encode(w, dst, nil)
+}
+
+func ImageFile2(outfile, infile string) (err error) {
+	in, err := os.Open(infile)
+	if err != nil {
+		return err
+	}
+	defer in.Close()
+
+	out, err := os.Create(outfile)
+	if err != nil {
+		return err
+	}
+
+	if err := ImageStream(out, in); err != nil {
+		out.Close()
+		return fmt.Errorf("scaling %s to %s: %s", infile, outfile, err)
+	}
+	return out.Close()
 }
