@@ -6,6 +6,8 @@ import (
 	"image/jpeg"
 	"io"
 	"os"
+	"path/filepath"
+	"strings"
 )
 
 func Image(src image.Image) image.Image {
@@ -58,4 +60,10 @@ func ImageFile2(outfile, infile string) (err error) {
 		return fmt.Errorf("scaling %s to %s: %s", infile, outfile, err)
 	}
 	return out.Close()
+}
+
+func ImageFile(infile string) (string, error) {
+	ext := filepath.Ext(infile)
+	outfile := strings.TrimSuffix(infile, ext) + ".thumb" + ext
+	return outfile, ImageFile2(outfile, infile)
 }
