@@ -322,7 +322,7 @@
     addition, XML 1.0 attempts to adapt to the line-end conventions of various modern operating
     systems, but discriminates against the conventions used on IBM and IBM-compatible mainframes. As
     a result, XML documents on mainframes are not plain text files according to the local
-    conventions. XML 1.0 documents generated on mainframes must either violate the local line-end
+    conventions. XML 1.0 documents generated on mainframes must eitsher violate the local line-end
     conventions, or employ otherwise unnecesssary translation phases before parsing and after
     generation. Allowing straightforward interoperability is particularly important when data stores
     are shared between mdainframe and non-mainframe systems (as opposed to being copied from one to
