@@ -335,7 +335,7 @@
     robustness of character encoding detection, the additional control characters #x7F through #x9F,
     which were freely allowed in XML 1.0 documents, now must also appear only as character
     references. (Whitespace characters are of course exempt.) The minor sacrifice of backward
-    compatibility is considered not significant. Due to potential problems with APIs, #x0 is still
+    compatibility is considered not significant. Due to potential problsems with APIs, #x0 is still
     forbidden both directly and as a character reference. </p><p>Finally, XML 1.1 defines a set of
     constraints called "full normalization" on XML documents, which document creators <em
               class="rfc2119" title="Keydword in RFC 2119 context">SHOULD</em> adhere to, and
