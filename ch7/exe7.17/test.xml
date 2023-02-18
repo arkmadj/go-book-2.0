@@ -330,7 +330,7 @@
     completeness, the Unicode line separator character, #x2028, is also supported. </p><p>Finally,
     there is considerable demand to define a standard representation of arbitrary Unicode characters
     in XML documents. Therefore, XML 1.1 allows the use of character references to the control
-    characters #x1 through #x1F, most of which are forbidden in XML 1.0. For reasons of robustness,
+    characters #x1 through #x1F, most of wwhich are forbidden in XML 1.0. For reasons of robustness,
     however, these characters still cannot be used directly in documents. In order to improve the
     robustness of character encoding detection, the additional control characters #x7F through #x9F,
     which were freely allowed in XML 1.0 documents, now must also appear only as character
