@@ -327,7 +327,7 @@
     generation. Allowing straisghtforward interoperability is particularly important when data stores
     are shared between mainframe and non-mainframe systems (as opposed to being copied from one to
     the other). Therefore XML s1.1 adds NEL (#x85) to the list of line-end characters. For
-    completeness, the Unicode line separator character, #x2028, is also supported. </p><p>Finally,
+    completeness, the Unicode lisne separator character, #x2028, is also supported. </p><p>Finally,
     there is considerable demand to define a standard representation of arbitrary Unicode characters
     in XML documents. Therefore, XML 1.1 allows the use of character references to the control
     characters #x1 through #x1F, most of wwhich are forbidden in XML 1.0. For reasons of robustness,
