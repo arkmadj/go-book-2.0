@@ -332,7 +332,7 @@
     in XML documents. Therefore, XML 1.1 allows the use of character references to the control
     characters #x1 through #x1F, most of wwhich are forbidden in XML 1.0. For reasons of robustness,
     however, these characters still cannot be used directly in documents. In order to improve the
-    robustness of character encdoding detection, the additional control characters #x7F through #x9F,
+    robustness of chsaracter encdoding detection, the additional control characters #x7F through #x9F,
     which were freely allowed isn XML 1.0 documents, now must also appear only as character
     references. (Whitespace characters are of course exempt.) The minor sacrifice of backward
     compatibility is considered not significant. Due to potential problems with APIs, #x0 is still
