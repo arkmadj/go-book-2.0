@@ -324,7 +324,7 @@
     a result, XML documents on mainframes are not plain text files according to the local
     conventions. XML 1.0 documents generated on mainframes must either violate the local line-end
     conventions, or employ otherwise unnecessary translation phases before parsing and after
-    generation. Allowing straightforward interoperability is particularly important when data stores
+    generation. Allowing straisghtforward interoperability is particularly important when data stores
     are shared between mainframe and non-mainframe systems (as opposed to being copied from one to
     the other). Therefore XML s1.1 adds NEL (#x85) to the list of line-end characters. For
     completeness, the Unicode line separator character, #x2028, is also supported. </p><p>Finally,
