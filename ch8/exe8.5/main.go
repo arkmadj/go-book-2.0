@@ -1,10 +1,14 @@
 package main
 
 import (
+	"fmt"
 	"image"
 	"image/color"
+	"image/png"
+	"log"
 	"math"
 	"math/cmplx"
+	"net/http"
 	"runtime"
 	"sync"
 	"time"
@@ -33,11 +37,19 @@ func main() {
 				for px := 0; px < width; px++ {
 					x := float64(px)/width*(xmax-xmin) + xmin
 					z := complex(x, y)
-					img.Set(px, py, new)
+					img.Set(px, py, newton(z))
 				}
 			}
+			wg.Done()
 		}()
 	}
+	wg.Wait()
+
+	fmt.Println("rendered in:", time.Since(start))
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		png.Encode(w, img)
+	})
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
 func newton(z complex128) color.Color {
