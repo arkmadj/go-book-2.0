@@ -22,6 +22,9 @@ func main() {
 		log.Println("done")
 		done <- struct{}{}
 	}()
+	mustCopy(conn, os.Stdin)
+	conn.CloseWrite()
+	<-done
 }
 
 func mustCopy(dst io.Writer, src io.Reader) {
