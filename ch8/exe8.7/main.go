@@ -45,6 +45,7 @@ func linkNodes(n *html.Node) []*html.Node {
 		}
 	}
 	forEachNode(n, visitNode, nil)
+	return links
 }
 
 func visit(rawurl string) (urls []string, err error) {
