@@ -78,5 +78,6 @@ func visit(rawurl string) (urls []string, err error) {
 			return nil, fmt.Errorf("parsing %s as HTML: %v", u, err)
 		}
 		nodes := linkNodes(doc)
+		url := linkURLs(nodes, u)
 	}
 }
