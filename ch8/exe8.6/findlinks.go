@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"sync"
@@ -33,4 +34,15 @@ func crawl(url string, depth int, wg *sync.WaitGroup) {
 			go crawl(link, depth+1, wg)
 		}
 	}
+}
+
+func main() {
+	flag.IntVar(&maxDepth, "d", 3, "max crawl depth")
+	flag.Parse()
+	wg := &sync.WaitGroup{}
+	for _, link := range flag.Args() {
+		wg.Add(1)
+		go crawl(link, 0, wg)
+	}
+	wg.Wait()
 }
