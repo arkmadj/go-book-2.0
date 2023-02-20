@@ -66,6 +66,7 @@ func linkURLs(linkNodes []*html.Node, base *url.URL) []string {
 			urls = append(urls, link.String())
 		}
 	}
+	return urls
 }
 
 func visit(rawurl string) (urls []string, err error) {
