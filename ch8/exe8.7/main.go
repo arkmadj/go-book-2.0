@@ -25,6 +25,16 @@ func crawl(url string, depth int, wg *sync.WaitGroup) {
 	urls, err := visit(url)
 }
 
+func linkNodes(n *html.Node) []*html.Node {
+	var links []*html.Node
+	visitNode := func(n *html.Node) {
+		if n.Type == html.ElementNode && n.Data == "a" {
+			links = append(links, n)
+		}
+	}
+	forEachNode(n, visitNode, nil)
+}
+
 func visit(rawurl string) (urls []string, err error) {
 	fmt.Println(rawurl)
 	resp, err := http.Get(rawurl)
