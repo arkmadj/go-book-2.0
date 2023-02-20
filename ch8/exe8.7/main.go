@@ -152,6 +152,9 @@ func save(resp *http.Response, body io.Reader) error {
 	}
 	if body != nil {
 		_, err := io.Copy(file, body)
+		if err != nil {
+			log.Printf("save: ", err)
+		}
 	} else {
 		_, err = io.Copy(file, resp.Body)
 	}
@@ -167,5 +170,21 @@ func save(resp *http.Response, body io.Reader) error {
 }
 
 func main() {
-	flag.IntVar()
+	flag.IntVar(&maxDepth, "d", 3, "max crawl depth")
+	flag.Parse()
+	wg := &sync.WaitGroup{}
+	if len(flag.Args()) == 0 {
+		fmt.Fprintln(os.Stderr, "usage: mirror URL ...")
+		os.Exit(1)
+	}
+	u, err := url.Parse(flag.Arg(0))
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "invalid url: %s\n", err)
+	}
+	base = u
+	for _, link := range flag.Args() {
+		wg.Add(1)
+		go crawl(link, 1, wg)
+	}
+	wg.Wait()
 }
