@@ -100,5 +100,6 @@ func visit(rawurl string) (urls []string, err error) {
 		}
 		nodes := linkNodes(doc)
 		url := linkURLs(nodes, u)
+		rewriteLocalLinks(nodes, u)
 	}
 }
