@@ -48,6 +48,26 @@ func linkNodes(n *html.Node) []*html.Node {
 	return links
 }
 
+func linkURLs(linkNodes []*html.Node, base *url.URL) []string {
+	var urls []string
+	for _, n := range linkNodes {
+		for _, a := range n.Attr {
+			if a.Key != "href" {
+				continue
+			}
+			link, err := base.Parse(a.Val)
+			if err != nil {
+				log.Printf("skipping %q: %s", a.Val, err)
+				continue
+			}
+			if link.Host != base.Host {
+				continue
+			}
+			urls = append(urls, link.String())
+		}
+	}
+}
+
 func visit(rawurl string) (urls []string, err error) {
 	fmt.Println(rawurl)
 	resp, err := http.Get(rawurl)
