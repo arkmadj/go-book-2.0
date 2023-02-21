@@ -38,12 +38,12 @@ func handleConn(c net.Conn) {
 	}()
 	lines := make(chan string)
 	go scan(c, lines)
-	timeount := 2 * time.Second
+	timeout := 2 * time.Second
 	timer := time.NewTimer(2 * time.Second)
 	for {
 		select {
 		case line := <-lines:
-			timer.Reset(timeount)
+			timer.Reset(timeout)
 			wg.Add(1)
 			go echo(c, line, 1*time.Second, wg)
 		case <-timer.C:
