@@ -122,7 +122,7 @@ func visit(rawurl string) (urls []string, err error) {
 			return nil, fmt.Errorf("parsing %s as HTML: %v", u, err)
 		}
 		nodes := linkNodes(doc)
-		url := linkURLs(nodes, u)
+		urls = linkURLs(nodes, u)
 		rewriteLocalLinks(nodes, u)
 		b := &bytes.Buffer{}
 		err = html.Render(b, doc)
