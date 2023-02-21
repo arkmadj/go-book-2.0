@@ -27,6 +27,25 @@ func crawl(url string, depth int, wg *sync.WaitGroup) {
 
 	tokens <- struct{}{}
 	urls, err := visit(url)
+	<-tokens
+	if err != nil {
+		log.Printf("visit %s: %s", url, err)
+	}
+
+	if depth >= maxDepth {
+		return
+	}
+	for _, link := range urls {
+		seenLock.Lock()
+		if seen[link] {
+			seenLock.Unlock()
+			continue
+		}
+		seen[link] = true
+		seenLock.Unlock()
+		wg.Add(1)
+		go crawl(link, depth+1, wg)
+	}
 }
 
 func forEachNode(n *html.Node, pre, post func(n *html.Node)) {
@@ -153,18 +172,18 @@ func save(resp *http.Response, body io.Reader) error {
 	if body != nil {
 		_, err := io.Copy(file, body)
 		if err != nil {
-			log.Printf("save: ", err)
+			log.Print("save: ", err)
 		}
 	} else {
 		_, err = io.Copy(file, resp.Body)
 	}
 	if err != nil {
-		log.Printf("save: ", err)
+		log.Print("save: ", err)
 	}
 
 	err = file.Close()
 	if err != nil {
-		log.Printf("save: ", err)
+		log.Print("save: ", err)
 	}
 	return nil
 }
