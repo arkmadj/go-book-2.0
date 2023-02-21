@@ -51,3 +51,18 @@ func handleConn(c net.Conn) {
 		}
 	}
 }
+
+func main() {
+	l, err := net.Listen("tcp", "localhost:8080")
+	if err != nil {
+		log.Fatal(err)
+	}
+	for {
+		conn, err := l.Accept()
+		if err != nil {
+			log.Print(err)
+			continue
+		}
+		go handleConn(conn)
+	}
+}
