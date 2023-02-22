@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 )
 
 func dirents(dir string) []os.FileInfo {
@@ -13,4 +14,15 @@ func dirents(dir string) []os.FileInfo {
 		return nil
 	}
 	return entries
+}
+
+func walkDir(dir string, fileSizes chan<- int64) {
+	for _, entry := range dirents(dir) {
+		if entry.IsDir() {
+			subdir := filepath.Join(dir, entry.Name())
+			walkDir(subdir, fileSizes)
+		} else {
+			fileSizes <- entry.Size()
+		}
+	}
 }
