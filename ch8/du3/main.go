@@ -57,4 +57,8 @@ func main() {
 		n.Add(1)
 		go walkDir(root, &n, fileSizes)
 	}
+	go func() {
+		n.Wait()
+		close(fileSizes)
+	}()
 }
