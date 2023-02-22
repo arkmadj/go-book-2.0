@@ -2,6 +2,7 @@ package main
 
 import "os"
 
+var done = make(chan struct{})
 
 var sema = make(chan struct{}, 20)
 
