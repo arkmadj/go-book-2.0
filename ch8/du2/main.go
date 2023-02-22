@@ -33,3 +33,19 @@ func printDiskUsage(nfiles, nbytes int64) {
 }
 
 var verbose = flag.Bool("v", false, "show verbose progress messages")
+
+func main() {
+	flag.Parse()
+	roots := flag.Args()
+	if len(roots) == 0 {
+		roots = []string{"."}
+	}
+
+	fileSizes := make(chan int64)
+	go func() {
+		for _, root := range roots {
+			walkDir(root, fileSizes)
+		}
+		close(fileSizes)
+	}()
+}
