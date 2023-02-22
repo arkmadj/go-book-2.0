@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 	"sync"
 )
 
@@ -28,4 +29,15 @@ func dirents(dir string) []os.FileInfo {
 	return entries
 }
 
-func walkDir(dir string, n *sync.WaitGroup, root int, sizeResponses chan<- SizeResponse)
+func walkDir(dir string, n *sync.WaitGroup, root int, sizeResponses chan<- SizeResponse) {
+	defer n.Done()
+	for _, entry := range dirents(dir) {
+		if entry.IsDir() {
+			n.Add(1)
+			subdir := filepath.Join(dir, entry.Name())
+			go walkDir(subdir, n, root, sizeResponses)
+		} else {
+			sizeResponses <- SizeResponse{root, entry.Size()}
+		}
+	}
+}
