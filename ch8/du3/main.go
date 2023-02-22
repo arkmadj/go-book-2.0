@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -38,4 +39,22 @@ func walkDir(dir string, n *sync.WaitGroup, fileSizes chan<- int64) {
 
 func printDiskUsage(nfiles, nbytes int64) {
 	fmt.Printf("%d files %.1f GB\n", nfiles, float64(nbytes)/1e9)
+}
+
+var vFlag = flag.Bool("v", false, "show verbose progress messages")
+
+func main() {
+	flag.Parse()
+
+	roots := flag.Args()
+	if len(roots) == 0 {
+		roots = []string{"."}
+	}
+
+	fileSizes := make(chan int64)
+	var n sync.WaitGroup
+	for _, root := range roots {
+		n.Add(1)
+		go walkDir(root, &n, fileSizes)
+	}
 }
