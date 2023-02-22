@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -14,6 +15,8 @@ type SizeResponse struct {
 }
 
 var sema = make(chan struct{}, 20)
+
+var vFlag = flag.Bool("v", false, "show verbose progress messages")
 
 func dirents(dir string) []os.FileInfo {
 	sema <- struct{}{}
