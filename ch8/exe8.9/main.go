@@ -41,3 +41,9 @@ func walkDir(dir string, n *sync.WaitGroup, root int, sizeResponses chan<- SizeR
 		}
 	}
 }
+
+func printDiskUsage(roots []string, nfiles, nbytes []int64) {
+	for i, r := range roots {
+		fmt.Printf("%10d files %.3f GB under %s\n", nfiles[i], float64(nbytes[i])/1e9, r)
+	}
+}
