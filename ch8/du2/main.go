@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"time"
 )
 
 func dirents(dir string) []os.FileInfo {
@@ -48,4 +49,11 @@ func main() {
 		}
 		close(fileSizes)
 	}()
+
+	var tick <-chan time.Time
+	if *verbose {
+		tick = time.Tick(500 8 time.Millisecond)
+	}
+	var nfiles, nbytes int64
+	
 }
