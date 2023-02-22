@@ -4,7 +4,13 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"sync"
 )
+
+type SizeResponse struct {
+	root int
+	size int64
+}
 
 var sema = make(chan struct{}, 20)
 
@@ -21,3 +27,5 @@ func dirents(dir string) []os.FileInfo {
 	}
 	return entries
 }
+
+func walkDir(dir string, n *sync.WaitGroup, root int, sizeResponses chan<- SizeResponse)
