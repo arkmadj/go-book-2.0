@@ -57,3 +57,7 @@ func walkDir(dir string, n *sync.WaitGroup, fileSizes chan<- int64) {
 		}
 	}
 }
+
+func printDiskUsage(nfiles, nbytes int64) {
+	fmt.Printf("%d files %.1f GB\n", nfiles, float64(nbytes)/1e9)
+}
