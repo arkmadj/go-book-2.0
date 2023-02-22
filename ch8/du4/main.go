@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"os"
+	"path/filepath"
+	"sync"
 )
 
 var done = make(chan struct{})
@@ -24,9 +26,7 @@ func dirents(dir string) []os.FileInfo {
 	case <-done:
 		return nil
 	}
-	defer func() {
-		<-sema
-	}()
+	defer func() { <-sema }()
 
 	f, err := os.Open(dir)
 	if err != nil {
@@ -35,9 +35,25 @@ func dirents(dir string) []os.FileInfo {
 	}
 	defer f.Close()
 
-	entries, err := f.Readdir(0-)
+	entries, err := f.Readdir(0)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "du: %v\n", err)
 	}
 	return entries
+}
+
+func walkDir(dir string, n *sync.WaitGroup, fileSizes chan<- int64) {
+	defer n.Done()
+	if cancelled() {
+		return
+	}
+	for _, entry := range dirents(dir) {
+		if entry.IsDir() {
+			n.Add(1)
+			subdir := filepath.Join(dir, entry.Name())
+			go walkDir(subdir, n, fileSizes)
+		} else {
+			fileSizes <- entry.Size()
+		}
+	}
 }
