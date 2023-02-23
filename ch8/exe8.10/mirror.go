@@ -70,6 +70,25 @@ func linkURLs(linkNodes []*html.Node, base *url.URL) []string {
 	return urls
 }
 
+func rewriteLocalLinks(linkNodes []*html.Node, base *url.URL) {
+	for _, n := range linkNodes {
+		for i, a := range n.Attr {
+			if a.Key != "href" {
+				continue
+			}
+			link, err := base.Parse(a.Val)
+			if err != nil || link.Host != base.Host {
+				continue
+			}
+			link.Scheme = ""
+			link.Host = ""
+			link.User = nil
+			a.Val = link.String()
+			n.Attr[i] = a
+		}
+	}
+}
+
 func visit(rawurl string) (urls []string, err error) {
 	fmt.Println(rawurl)
 	req, err := http.NewRequest("GET", rawurl, nil)
