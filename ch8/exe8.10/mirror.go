@@ -1,8 +1,15 @@
 package main
 
 import (
+	"fmt"
+	"io"
+	"log"
+	"net/http"
 	"net/url"
+	"strings"
 	"sync"
+
+	"golang.org/x/net/html"
 )
 
 var tokens = make(chan struct{}, 20)
@@ -17,4 +24,39 @@ func crawl(url string, depth int, wg *sync.WaitGroup) {
 
 	tokens <- struct{}{}
 	urls, err := visit(url)
+}
+
+func visit(rawurl string) (urls []string, err error) {
+	fmt.Println(rawurl)
+	req, err := http.NewRequest("GET", rawurl, nil)
+	req.Cancel = cancel
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		resp.Body.Close()
+		return nil, fmt.Errorf("GET %s: %s", rawurl, resp.Status)
+	}
+
+	u, err := base.Parse(rawurl)
+	if err != nil {
+		return nil, err
+	}
+	if base.Host != u.Host {
+		log.Printf("not saving %s: non-local", rawurl)
+		return nil, nil
+	}
+
+	var body io.Reader
+	contentType := resp.Header["Content-Type"]
+	if strings.Contains(strings.Join(contentType, ","), "text/html") {
+		doc, err := html.Parse(resp.Body)
+		resp.Body.Close()
+		if err != nil {
+			return nil, fmt.Errorf("parsing %s as HTML: %v", u, err)
+		}
+		nodes := linkNodes(doc)
+	}
 }
