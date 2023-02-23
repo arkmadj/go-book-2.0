@@ -2,8 +2,10 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"net/http"
+	"strings"
 	"sync"
 )
 
@@ -29,5 +31,12 @@ func main() {
 			}
 			responses <- resp
 		}(url)
+	}
+	resp := <-responses
+	defer resp.Body.Close()
+	close(cancel)
+	fmt.Println(resp.Request.URL)
+	for name, vals := range resp.Header {
+		fmt.Printf("%s: %s\n", name, strings.Join(vals, ","))
 	}
 }
