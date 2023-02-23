@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"io"
 	"log"
@@ -121,5 +122,15 @@ func visit(rawurl string) (urls []string, err error) {
 			return nil, fmt.Errorf("parsing %s as HTML: %v", u, err)
 		}
 		nodes := linkNodes(doc)
+		urls = linkURLs(nodes, u)
+		rewriteLocalLinks(nodes, u)
+		b := &bytes.Buffer{}
+		err = html.Render(b, doc)
+		if err != nil {
+			log.Printf("render %s: %s", u, err)
+		}
+		body = b
 	}
+	err = save(resp, body)
+	return urls, err
 }
