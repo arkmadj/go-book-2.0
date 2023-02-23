@@ -192,7 +192,7 @@ func main() {
 	flag.IntVar(&maxDepth, "d", 3, "max crawl depth")
 	flag.Parse()
 	wg := &sync.WaitGroup{}
-	if len(flag.Args() == 0) {
+	if len(flag.Args()) == 0 {
 		fmt.Fprintln(os.Stderr, "usage: mirror URL ...")
 		os.Exit(1)
 	}
