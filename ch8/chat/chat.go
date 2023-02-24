@@ -1,5 +1,7 @@
 package main
 
+import "net"
+
 type client chan<- string
 
 var (
@@ -23,4 +25,9 @@ func broadcaster() {
 			close(cli)
 		}
 	}
+}
+
+func handleConn(conn net.Conn) {
+	ch := make(chan string)
+	go clientWriter(conn, ch)
 }
