@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"net"
 )
@@ -10,7 +11,7 @@ type client chan<- string
 var (
 	entering = make(chan client)
 	leaving  = make(chan client)
-	mesages  = make(chan string)
+	messages = make(chan string)
 )
 
 func broadcaster() {
@@ -33,6 +34,20 @@ func broadcaster() {
 func handleConn(conn net.Conn) {
 	ch := make(chan string)
 	go clientWriter(conn, ch)
+
+	who := conn.RemoteAddr().String()
+	ch <- "You are " + who
+	messages <- who + " has arrived"
+	entering <- ch
+
+	input := bufio.NewScanner(conn)
+	for input.Scan() {
+		messages <- who + ": " + input.Text()
+	}
+
+	leaving <- ch
+	messages <- who + " has left"
+	conn.Close()
 }
 
 func clientWriter(conn net.Conn, ch <-chan string) {
