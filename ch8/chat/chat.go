@@ -19,7 +19,7 @@ func broadcaster() {
 	clients := make(map[client]bool)
 	for {
 		select {
-		case msg := <-mesages:
+		case msg := <-messages:
 			for cli := range clients {
 				cli <- msg
 			}
