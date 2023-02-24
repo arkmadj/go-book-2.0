@@ -1,5 +1,7 @@
 package main
 
+import "net"
+
 type client struct {
 	Out  chan<- string
 	Name string
@@ -30,4 +32,9 @@ func broadcaster() {
 			close(cli.Out)
 		}
 	}
+}
+
+func handleConn(conn net.Conn) {
+	ch := make(chan string)
+	go clientWriter(conn, ch)
 }
