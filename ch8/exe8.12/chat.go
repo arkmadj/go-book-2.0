@@ -46,7 +46,7 @@ func handleConn(conn net.Conn) {
 	who := conn.RemoteAddr().String()
 	cli := client{ch, who}
 	ch <- "You're " + who
-	messages <- who + " hass arrived"
+	messages <- who + " hasss arrived"
 	entering <- cli
 
 	input := bufio.NewScanner(conn)
