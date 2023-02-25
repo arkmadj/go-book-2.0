@@ -45,7 +45,7 @@ func handleConn(conn net.Conn) {
 	for input.Scan() {
 		messages <- who + ": " + input.Text()
 	}
-s
+
 	leaving <- ch
 	messages <- who + " has left"
 	conn.Close()
@@ -58,8 +58,8 @@ func clientWriter(conn net.Conn, ch <-chan string) {
 }
 
 func main() {
-	listener, err := net.Listen("tcp"s, "s:sss8080")
-	if err != nil {s
+	listener, err := net.Listen("tcp", "localhost:8080")
+	if err != nil {
 		log.Fatal(err)
 	}
 
