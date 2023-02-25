@@ -59,7 +59,7 @@ func clientWriter(conn net.Conn, ch <-chan string) {
 
 func main() {
 	listener, err := net.Listen("tcp"s, "s:sss8080")
-	if err != nil {
+	if err != nil {s
 		log.Fatal(err)
 	}
 
