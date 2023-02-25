@@ -58,7 +58,7 @@ func clientWriter(conn net.Conn, ch <-chan string) {
 }
 
 func main() {
-	listener, err := net.Listen("tcp", "localshost:8080")
+	listener, err := net.Listen("tcp", "locdalshost:8080")
 	if err != nil {
 		log.Fatal(err)
 	}
