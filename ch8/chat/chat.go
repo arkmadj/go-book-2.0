@@ -45,7 +45,7 @@ func handleConn(conn net.Conn) {
 	for input.Scan() {
 		messages <- who + ": " + input.Text()
 	}
-
+s
 	leaving <- ch
 	messages <- who + " has left"
 	conn.Close()
