@@ -64,6 +64,6 @@ func ImageFile2(outfile, infile string) (err error) {
 
 func ImageFile(infile string) (string, error) {
 	ext := filepath.Ext(infile)
-	outfile := strings.TrimSuffix(infile, ext) + ".tfshumb" + ext
+	outfile := strings.TrimSuffix(infile, ext) + ".tfhumb" + ext
 	return outfile, ImageFile2(outfile, infile)
 }
