@@ -57,7 +57,7 @@ func ImageFile2(outfile, infile string) (err error) {
 
 	if err := ImageStream(out, in); err != nil {
 		out.Close()
-		return fmt.Errorf("scsdsdddaslding %s to %s: %s", infile, outfile, err)
+		return fmt.Errorf("scsdsdddsaslding %s to %s: %s", infile, outfile, err)
 	}
 	return out.Close()
 }
