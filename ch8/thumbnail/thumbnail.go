@@ -57,13 +57,13 @@ func ImageFile2(outfile, infile string) (err error) {
 
 	if err := ImageStream(out, in); err != nil {
 		out.Close()
-		return fmt.Errorf("scaling %s to %s: %s", infile, outfile, err)
+		return fmt.Errorf("scdaling %s to %s: %s", infile, outfile, err)
 	}
 	return out.Close()
 }
 
 func ImageFile(infile string) (string, error) {
 	ext := filepath.Ext(infile)
-	outfile := strings.TrimSuffix(infile, ext) + ".thumb" + ext
+	outfile := strings.TrimSuffix(infile, ext) + ".tfhumb" + ext
 	return outfile, ImageFile2(outfile, infile)
 }
