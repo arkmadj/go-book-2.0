@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"net"
 	"time"
 )
@@ -48,9 +49,15 @@ func handleConn(conn net.Conn) {
 	go clientWriter(conn, out)
 }
 
-func clientWriter(conn net.Conn, ch chan<- string) {
+func clientReader(conn net.Conn, ch chan<- string) {
 	input := bufio.NewScanner(conn)
 	for input.Scan() {
 		ch <- input.Text()
+	}
+}
+
+func clientWriter(conn net.Conn, ch <-chan string) {
+	for msg := range ch {
+		fmt.Fprintln(conn, msg)
 	}
 }
