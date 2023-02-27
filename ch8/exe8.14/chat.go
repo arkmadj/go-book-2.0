@@ -1,6 +1,9 @@
 package main
 
-import "time"
+import (
+	"net"
+	"time"
+)
 
 const timeout = 10 * time.Second
 
@@ -37,4 +40,9 @@ func broadcaster() {
 			close(cli.Out)
 		}
 	}
+}
+
+func handleConn(conn net.Conn) {
+	out := make(chan string, 10)
+	go clientWriter(conn, out)
 }
