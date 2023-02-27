@@ -1,6 +1,10 @@
 package main
 
-import "time"
+import (
+	"bufio"
+	"net"
+	"time"
+)
 
 const timeout = 10 * time.Second
 
@@ -36,5 +40,17 @@ func broadcaster() {
 			delete(clients, cli)
 			close(cli.Out)
 		}
+	}
+}
+
+func handleConn(conn net.Conn) {
+	out := make(chan string, 10)
+	go clientWriter(conn, out)
+}
+
+func clientWriter(conn net.Conn, ch chan<- string) {
+	input := bufio.NewScanner(conn)
+	for input.Scan() {
+		ch <- input.Text()
 	}
 }
