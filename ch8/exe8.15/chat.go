@@ -65,7 +65,7 @@ func handleConn(conn net.Conn) {
 	out <- "You are " + who
 	messages <- who + " has arrived"
 	entering <- cli
-	idle := time.NewTicker(timeout)
+	idle := time.NewTimer(timeout)
 
 Loop:
 	for {
