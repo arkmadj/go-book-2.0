@@ -47,6 +47,40 @@ func broadcaster() {
 func handleConn(conn net.Conn) {
 	out := make(chan string, 10)
 	go clientWriter(conn, out)
+	in := make(chan string)
+	go clientReader(conn, in)
+
+	var who string
+	nameTimer := time.NewTimer(timeout)
+	out <- "Enter your name:"
+	select {
+	case name := <-in:
+		who = name
+	case <-nameTimer.C:
+		conn.Close()
+		return
+	}
+	cli := client{out, who}
+	out <- "You are " + who
+	messages <- who + " has arrived"
+	entering <- cli
+	idle := time.NewTicker(timeout)
+
+Loop:
+	for {
+		select {
+		case msg := <-in:
+			messages <- who + ": " + msg
+			idle.Reset(timeout)
+		case <-idle.C:
+			conn.Close()
+			break Loop
+		}
+	}
+
+	leaving <- cli
+	messages <- who + " has left"
+	conn.Close()
 }
 
 func clientReader(conn net.Conn, ch chan<- string) {
