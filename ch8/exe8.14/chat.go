@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net"
 	"time"
 )
@@ -45,4 +46,10 @@ func broadcaster() {
 func handleConn(conn net.Conn) {
 	out := make(chan string, 10)
 	go clientWriter(conn, out)
+}
+
+func clientWriter(conn net.Conn, ch <-chan string) {
+	for msg := range ch {
+		fmt.Fprintln(conn, msg)
+	}
 }
