@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"net"
 	"time"
 )
@@ -61,5 +62,22 @@ func clientReader(conn net.Conn, ch chan<- string) {
 	input := bufio.NewScanner(conn)
 	for input.Scan() {
 		ch <- input.Text()
+	}
+}
+
+func main() {
+	listener, err := net.Listen("tcp", "localhost:8080")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	go broadcaster()
+	for {
+		conn, err := listener.Accept()
+		if err != nil {
+			log.Print(err)
+			continue
+		}
+		go handleConn(conn)
 	}
 }
