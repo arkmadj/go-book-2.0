@@ -40,3 +40,7 @@ func teller() {
 		}
 	}
 }
+
+func init() {
+	go teller()
+}
