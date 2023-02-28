@@ -16,3 +16,9 @@ func Deposits(amount int) {
 func Balance() int {
 	return <-balances
 }
+
+func Withdraw(amount int) bool {
+	ch := make(chan bool)
+	withdrawals <- Withdrawal{amount, ch}
+	return <-ch
+}
