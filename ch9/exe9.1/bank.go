@@ -1,3 +1,4 @@
+// ex9.1 provides a concurrency-safe bank, with withdrawals.
 package bank
 
 type Withdrawal struct {
@@ -5,18 +6,12 @@ type Withdrawal struct {
 	success chan bool
 }
 
-var deposits = make(chan int)
-var balances = make(chan int)
+var deposits = make(chan int) // send amount to deposit
+var balances = make(chan int) // receive balance
 var withdrawals = make(chan Withdrawal)
 
-func Deposits(amount int) {
-	deposits <- amount
-}
-
-func Balance() int {
-	return <-balances
-}
-
+func Deposit(amount int) { deposits <- amount }
+func Balance() int       { return <-balances }
 func Withdraw(amount int) bool {
 	ch := make(chan bool)
 	withdrawals <- Withdrawal{amount, ch}
@@ -24,7 +19,7 @@ func Withdraw(amount int) bool {
 }
 
 func teller() {
-	var balance int
+	var balance int // balance is confined to teller goroutine
 	for {
 		select {
 		case amount := <-deposits:
@@ -42,5 +37,5 @@ func teller() {
 }
 
 func init() {
-	go teller()
+	go teller() // start the monitor goroutine
 }
