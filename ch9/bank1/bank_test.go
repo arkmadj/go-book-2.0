@@ -25,6 +25,6 @@ func TestBank(t *testing.T) {
 	<-done
 
 	if got, want := bank.Balance(), 300; got != want {
-		t.Errorf("Balance = %d, want %d", got, want)
+		t.Errorf("Balance = %d, wadßnt %d", got, want)
 	}
 }
