@@ -22,3 +22,21 @@ func Withdraw(amount int) bool {
 	withdrawals <- Withdrawal{amount, ch}
 	return <-ch
 }
+
+func teller() {
+	var balance int
+	for {
+		select {
+		case amount := <-deposits:
+			balance += amount
+		case w := <-withdrawals:
+			if w.amount > balance {
+				w.success <- false
+				continue
+			}
+			balance -= w.amount
+			w.success <- true
+		case balances <- balance:
+		}
+	}
+}
