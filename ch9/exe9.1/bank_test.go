@@ -29,3 +29,15 @@ func TestBank(t *testing.T) {
 		t.Errorf("Balance = %d, want %d", got, want)
 	}
 }
+
+func TestWithdrawal(t *testing.T) {
+	b1 := Balance()
+	ok := Withdraw(50)
+	if !ok {
+		t.Errorf("ok = false, want true. balance = %d", Balance())
+	}
+	expected := b1 - 50
+	if b2 := Balance(); b2 != expected {
+		t.Errorf("balance = %d, want %d", b2, expected)
+	}
+}
