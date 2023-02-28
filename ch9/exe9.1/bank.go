@@ -12,3 +12,7 @@ var withdrawals = make(chan Withdrawal)
 func Deposits(amount int) {
 	deposits <- amount
 }
+
+func Balance() int {
+	return <-balances
+}
