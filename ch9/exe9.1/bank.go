@@ -6,3 +6,4 @@ type Withdrawal struct {
 }
 
 var deposits = make(chan int)
+var balances = make(chan int)
