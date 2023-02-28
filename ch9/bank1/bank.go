@@ -1,4 +1,4 @@
-package main
+package bank
 
 var deposits = make(chan int)
 var balances = make(chan int)
