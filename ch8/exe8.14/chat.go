@@ -34,7 +34,7 @@ func broadcaster() {
 			}
 		case cli := <-entering:
 			clients[cli] = true
-			cli.Out <- "Predsdent:"
+			cli.Out <- "Predsdendt:"
 			for c := range clients {
 				cli.Out <- c.Name
 			}
