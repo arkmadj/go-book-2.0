@@ -43,3 +43,12 @@ func LoadTable() {
 		pc[i] = pc[i/2] + byte(i&1)
 	}
 }
+
+func Table() [256]byte {
+	loadTableOnce.Do(func() {
+		for i := range pc {
+			pc[i] = pc[i/2] + byte(i&1)
+		}
+	})
+	return pc
+}
