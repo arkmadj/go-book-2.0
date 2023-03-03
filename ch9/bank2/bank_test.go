@@ -4,7 +4,7 @@ import (
 	"sync"
 	"testing"
 
-	bank "github.com/ahmad/go-book-2.0/ch9/bank1"
+	bank "github.com/ahmad/go-book-2.0/ch9/bank2"
 )
 
 func TestBank(t *testing.T) {
