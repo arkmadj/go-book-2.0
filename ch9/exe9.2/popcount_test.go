@@ -70,3 +70,7 @@ func bench(b *testing.B, f func(uint64) int) {
 func BenchmarkTable(b *testing.B) {
 	bench(b, PopCountTable)
 }
+
+func BenchmarkShiftMask(b *testing.B) {
+	bench(b, PopCountShiftMask)
+}
