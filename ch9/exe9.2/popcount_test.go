@@ -66,3 +66,7 @@ func bench(b *testing.B, f func(uint64) int) {
 		f(uint64(i))
 	}
 }
+
+func BenchmarkTable(b *testing.B) {
+	bench(b, PopCountTable)
+}
