@@ -1,5 +1,7 @@
 package popcount
 
+import "sync"
+
 func PopCountShiftMask(x uint64) int {
 	count := 0
 	mask := uint64(1)
@@ -32,3 +34,6 @@ func PopCountClearRightmost(x uint64) int {
 	}
 	return count
 }
+
+var loadTableOnce sync.Once
+var pc [256]byte
