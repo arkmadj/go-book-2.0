@@ -1,6 +1,9 @@
 package popcount
 
-import "sync"
+import (
+	"sync"
+	"testing"
+)
 
 func PopCountShiftMask(x uint64) int {
 	count := 0
@@ -56,4 +59,10 @@ func Table() [256]byte {
 func PopCountTable(x uint64) int {
 	pc := Table()
 	return int(pc[byte(x>>(0*8))] + pc[byte(x>>(1*8))] + pc[byte(x>>(2*8))] + pc[byte(x>>(3*8))] + pc[byte(x>>(4*8))] + pc[byte(x>>(5*8))] + pc[byte(x>>(6*8))] + pc[byte(x>>(7*8))])
+}
+
+func bench(b *testing.B, f func(uint64) int) {
+	for i := 0; i < b.N; i++ {
+		f(uint64(i))
+	}
 }
