@@ -12,3 +12,10 @@ func Deposit(amount int) {
 	balance = balance + amount
 	mu.Unlock()
 }
+
+func Balance() int {
+	mu.Lock()
+	b := balance
+	mu.Unlock()
+	return b
+}
