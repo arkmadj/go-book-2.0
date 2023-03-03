@@ -37,3 +37,9 @@ func PopCountClearRightmost(x uint64) int {
 
 var loadTableOnce sync.Once
 var pc [256]byte
+
+func LoadTable() {
+	for i := range pc {
+		pc[i] = pc[i/2] + byte(i&1)
+	}
+}
