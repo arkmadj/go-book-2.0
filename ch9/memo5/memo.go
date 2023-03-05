@@ -26,3 +26,8 @@ func New(f Func) *Memo {
 }
 
 func (memo *Memo) Close() { close(memo.requests) }
+
+func (e *entry) call(f Func, key string) {
+	e.res.value, e.res.err = f(key)
+	close(e.ready)
+}
