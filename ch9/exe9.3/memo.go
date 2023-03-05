@@ -46,3 +46,5 @@ func (memo *Memo) Get(key string, done <-chan struct{}) (interface{}, error) {
 	fmt.Println("get: return")
 	return res.value, res.err
 }
+
+func (memo *Memo) Close() { close(memo.requests) }
