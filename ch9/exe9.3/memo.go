@@ -17,3 +17,7 @@ type request struct {
 	done     <-chan struct{}
 	response chan<- result
 }
+
+type Memo struct {
+	requests, cancels chan request
+}
