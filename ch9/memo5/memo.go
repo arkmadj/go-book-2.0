@@ -24,3 +24,5 @@ func New(f Func) *Memo {
 	go memo.server(f)
 	return memo
 }
+
+func (memo *Memo) Close() { close(memo.requests) }
