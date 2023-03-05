@@ -9,3 +9,8 @@ type Memo struct {
 }
 
 type Func func(string) (interface{}, error)
+
+type result struct {
+	value interface{}
+	err   error
+}
