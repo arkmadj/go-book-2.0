@@ -7,3 +7,5 @@ type Memo struct {
 	mu    sync.Mutex
 	cache map[string]result
 }
+
+type Func func(string) (interface{}, error)
