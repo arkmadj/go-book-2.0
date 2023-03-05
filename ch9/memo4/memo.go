@@ -11,3 +11,7 @@ type entry struct {
 	res   result
 	ready chan struct{}
 }
+
+func New(f Func) *Memo {
+	return &Memo{f: f, cache: make(map[string]*entry)}
+}
