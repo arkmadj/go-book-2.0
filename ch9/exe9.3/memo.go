@@ -21,3 +21,9 @@ type request struct {
 type Memo struct {
 	requests, cancels chan request
 }
+
+func New(f Func) *Memo {
+	memo := &Memo{make(chan request), make(chan request)}
+	go memo.server(f)
+	return memo
+}
