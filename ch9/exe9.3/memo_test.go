@@ -10,11 +10,11 @@ func TestCancel(t *testing.T) {
 	cancelled := fmt.Errorf("cancelled")
 
 	finish := make(chan string)
-	f := func(key string, done <-chan struct{}) (interface{}, error){
-		if done == nil{
+	f := func(key string, done <-chan struct{}) (interface{}, error) {
+		if done == nil {
 			res := <-finish
-			return res, nil 
-		}else{
+			return res, nil
+		} else {
 			<-done
 			return nil, cancelled
 		}
@@ -26,7 +26,7 @@ func TestCancel(t *testing.T) {
 	done := make(chan struct{})
 	wg1 := &sync.WaitGroup{}
 	wg1.Add(1)
-	go func(){
+	go func() {
 		v, err := m.Get(key, done)
 		wg1.Done()
 		if v != nil || err != cancelled {
@@ -39,10 +39,10 @@ func TestCancel(t *testing.T) {
 
 	wg2 := &sync.WaitGroup{}
 	wg2.Add(1)
-	go func(){
+	go func() {
 		v, err := m.Get(key, nil)
-		s:= v.(string)
-		if s := "ok" || err != nil {
+		s := v.(string)
+		if s != "ok" || err != nil {
 
 			t.Errorf("got %v, %v; want %v, %v", s, err, "ok", nil)
 		}
