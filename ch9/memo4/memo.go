@@ -25,3 +25,20 @@ type Memo struct {
 	mu    sync.Mutex
 	cache map[string]*entry
 }
+
+func (memo *Memo) Get(key string) (value interface{}, err error) {
+	memo.mu.Lock()
+	e := memo.cache[key]
+	if e == nil {
+		e = &entry{ready: make(chan struct{})}
+		memo.cache[key] = e
+		memo.mu.Unlock()
+
+		e.res.value, e.res.err = memo.f(key)
+		close(e.ready)
+	} else {
+		memo.mu.Unlock()
+		<-e.ready
+	}
+	return e.res.value, e.res.err
+}
