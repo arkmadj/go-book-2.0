@@ -11,3 +11,9 @@ type entry struct {
 	res   result
 	ready chan struct{}
 }
+
+type request struct {
+	key      string
+	done     <-chan struct{}
+	response chan<- result
+}
