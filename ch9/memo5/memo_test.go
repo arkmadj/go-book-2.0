@@ -14,3 +14,9 @@ func Test(t *testing.T) {
 	defer m.Close()
 	memotest.Sequential(t, m)
 }
+
+func TestConcurrrent(t *testing.T) {
+	m := memo.New(httpGetBody)
+	defer m.Close()
+	memotest.Concurrent(t, m)
+}
