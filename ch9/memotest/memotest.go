@@ -13,3 +13,5 @@ func httpGetBody(url string) (interface{}, error) {
 	defer resp.Body.Close()
 	return ioutil.ReadAll(resp.Body)
 }
+
+var HTTPGetBody = httpGetBody
