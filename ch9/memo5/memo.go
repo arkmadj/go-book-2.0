@@ -27,6 +27,19 @@ func New(f Func) *Memo {
 
 func (memo *Memo) Close() { close(memo.requests) }
 
+func (memo *Memo) server(f Func) {
+	cache := make(map[string]*entry)
+	for req := range memo.requests {
+		e := cache[req.key]
+		if e == nil {
+			e = &entry{ready: make(chan struct{})}
+			cache[req.key] = e
+			go e.call(f, req.key)
+		}
+		go e.deliver(req.response)
+	}
+}
+
 func (e *entry) call(f Func, key string) {
 	e.res.value, e.res.err = f(key)
 	close(e.ready)
