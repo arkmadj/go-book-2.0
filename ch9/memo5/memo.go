@@ -25,6 +25,13 @@ func New(f Func) *Memo {
 	return memo
 }
 
+func (memo *Memo) Get(key string) (interface{}, error) {
+	response := make(chan result)
+	memo.requests <- request{key, response}
+	res := <-response
+	return res.value, res.err
+}
+
 func (memo *Memo) Close() { close(memo.requests) }
 
 func (memo *Memo) server(f Func) {
