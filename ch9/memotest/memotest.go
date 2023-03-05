@@ -35,3 +35,7 @@ func incomingURLs() <-chan string {
 	}()
 	return ch
 }
+
+type M interface {
+	Get(key string) (interface{}, error)
+}
