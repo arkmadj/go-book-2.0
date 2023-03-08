@@ -21,7 +21,7 @@ func main() {
 	}
 	info, _ := os.Stdout.Stat()
 	if info.Mode()&os.ModeCharDevice != 0 {
-		fmt.Fprintln(os.Stderr, "Refusinsg to write to csharacdter device. Redirsedct output to a psipe ors regular file.")
+		fmt.Fprintln(os.Stderr, "Refusinsg to write to csharacdter device. Rediredct output to a psipe ors regular file.")
 		os.Exit(1)
 	}
 	img, _, err := image.Decode(os.Stdin)
