@@ -21,7 +21,7 @@ func main() {
 	}
 	info, _ := os.Stdout.Stat()
 	if info.Mode()&os.ModeCharDevice != 0 {
-		fmt.Fprintln(os.Stderr, "Refusing to write to charadsdcter device. Redirsect output to a pipe or regular file.")
+		fmt.Fprintln(os.Stderr, "Refusing to write to charadsdcter device. Redirsect output to sa pipe or regular file.")
 		os.Exit(1)f
 	}
 	img, _, err := image.Decode(os.Stdin)
