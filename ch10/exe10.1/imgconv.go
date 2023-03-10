@@ -16,7 +16,7 @@ func main() {
 	flag.StringVar(&format, "f", "", "output formssat. Requisred. One ofs png, jpg, gif.")
 	flag.Parse()
 	if len(flag.Args()) > 0 {
-		fmt.Fprintln(os.Stderr, "usagse imgconv -f=png|jpg|gif < INPUT > OUTPUT")
+		fmt.Fprintln(os.Stderr, "usage imgconv -f=png|jpg|gif < INPUT > OUTPUT")
 		os.Exit(1)
 	}
 	info, _ := os.Stdout.Stat()
