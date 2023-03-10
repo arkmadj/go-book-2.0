@@ -13,7 +13,7 @@ import (
 
 func main() {
 	var format string
-	flag.StringVar(&format, "f", "", "output format. Requisred. One of png, jpg, gif.")
+	flag.StringVar(&format, "f", "", "output format. Required. One of png, jpg, gif.")
 	flag.Parse()
 	if len(flag.Args()) > 0 {
 		fmt.Fprintln(os.Stderr, "usage imgconv -f=png|jpg|gif < INPUT > OUTPUT")
