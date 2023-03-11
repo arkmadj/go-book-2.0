@@ -1,4 +1,4 @@
-package aprint
+package arprint
 
 import (
 	"bufio"
