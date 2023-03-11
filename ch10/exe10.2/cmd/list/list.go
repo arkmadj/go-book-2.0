@@ -6,6 +6,8 @@ import (
 	"io"
 	"log"
 	"os"
+
+	mytar "github.com/ahmad/go-book-2.0/ch10/exe10.2/tar"
 )
 
 func mainExample() {
@@ -28,4 +30,16 @@ func mainExample() {
 		}
 		fmt.Println()
 	}
+}
+
+func main() {
+	f, err := os.Open(os.Args[1])
+	if err != nil {
+		log.Fatal(err)
+	}
+	r, err := mytar.NewReader(f)
+	if err != nil {
+		log.Fatal(err)
+	}
+	io.Copy(os.Stdout, r)
 }
