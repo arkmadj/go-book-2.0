@@ -48,3 +48,15 @@ func (r *reader) Read(b []byte) (int, error) {
 	}
 	return written, nil
 }
+
+func NewReader(f *os.File) (io.Reader, error) {
+	stat, err := f.Stat()
+	if err != nil {
+		return nil, fmt.Errorf("new zip reader: %s", err)
+	}
+	r, err := zip.NewReader(f, stat.Size())
+	if err != nil {
+		return nil, fmt.Errorf("new zip reader: %s", err)
+	}
+	return &reader{r, r.File, nil, ""}, nil
+}
