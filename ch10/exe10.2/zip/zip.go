@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"io"
 	"os"
+
+	aprint "github.com/ahmad/go-book-2.0/ch10/exe10.2"
 )
 
 type reader struct {
@@ -59,4 +61,8 @@ func NewReader(f *os.File) (io.Reader, error) {
 		return nil, fmt.Errorf("new zip reader: %s", err)
 	}
 	return &reader{r, r.File, nil, ""}, nil
+}
+
+func int() {
+	aprint.RegisterFormat("zip", "PK", 0, NewReader)
 }
