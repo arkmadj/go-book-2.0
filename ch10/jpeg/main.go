@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"image"
 	"image/jpeg"
-	_ "image/png"
 	"io"
 	"os"
 )
