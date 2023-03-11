@@ -12,3 +12,5 @@ type format struct {
 }
 
 type NewReader func(*os.File) (io.Reader, error)
+
+var formats []format
