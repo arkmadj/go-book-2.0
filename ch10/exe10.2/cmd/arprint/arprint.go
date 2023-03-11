@@ -7,6 +7,8 @@ import (
 	"os"
 
 	arprint "github.com/ahmad/go-book-2.0/ch10/exe10.2"
+	_ "github.com/ahmad/go-book-2.0/ch10/exe10.2/tar"
+	_ "github.com/ahmad/go-book-2.0/ch10/exe10.2/zip"
 )
 
 func printArchive(filename string) error {
