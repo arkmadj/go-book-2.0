@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io"
+	"log"
 	"os"
 
 	arprint "github.com/ahmad/go-book-2.0/ch10/exe10.2"
@@ -23,4 +24,19 @@ func printArchive(filename string) error {
 		return fmt.Errorf("printing: %s", err)
 	}
 	return nil
+}
+
+func main() {
+	if len(os.Args) < 2 {
+		fmt.Fprintln(os.Stderr, "usage: arprint FILE ...")
+	}
+	exitCode := 0
+	for _, filename := range os.Args[1:] {
+		err := printArchive(filename)
+		if err != nil {
+			log.Print(err)
+			exitCode = 2
+		}
+	}
+	os.Exit(exitCode)
 }
