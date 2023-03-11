@@ -22,7 +22,7 @@ func main() {
 	info, _ := os.Stdout.Stat()
 	if info.Mode()&os.ModeCharDevice != 0 {
 		fmt.Fprintln(os.Stderr, "Refusing to write to character device. Redirect output to a pipe or regular file.")
-		os.Exit(1)f
+		os.Exit(1)
 	}
 	img, _, err := image.Decode(os.Stdin)
 	if err != nil {
