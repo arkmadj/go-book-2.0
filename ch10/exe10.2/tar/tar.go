@@ -4,6 +4,8 @@ import (
 	"archive/tar"
 	"io"
 	"os"
+
+	arprint "github.com/ahmad/go-book-2.0/ch10/exe10.2"
 )
 
 type reader struct {
@@ -40,4 +42,11 @@ func (r *reader) Read(b []byte) (written int, err error) {
 		}
 	}
 	return written, nil
+}
+
+func NewReader(f *os.File) (io.Reader, error) {
+	return &reader{tar.NewReader(f), f, ""}, nil
+}
+func init() {
+	arprint.RegisterFormat("tar", "ustar", 257, NewReader)
 }
