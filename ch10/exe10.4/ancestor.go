@@ -22,7 +22,7 @@ func logCommandError(context string, err error) {
 }
 
 func packages(patterns []string) []string {
-	args := []string{"list", "-f{{.ImportPath}}"}
+	args := []string{"list", "-f={{.ImportPath}}"}
 	args = append(args, patterns...)
 	out, err := exec.Command("go", args...).Output()
 	if err != nil {
