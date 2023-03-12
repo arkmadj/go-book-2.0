@@ -3,9 +3,11 @@ package main
 import (
 	"bufio"
 	"bytes"
+	"fmt"
 	"log"
 	"os"
 	"os/exec"
+	"sort"
 	"strings"
 )
 
@@ -54,4 +56,15 @@ func ancestors(packageNames []string) []string {
 		}
 	}
 	return pkgs
+}
+
+func main() {
+	if len(os.Args) < 2 {
+		os.Exit(0)
+	}
+	pkgs := ancestors(packages(os.Args[1:]))
+	sort.StringSlice(pkgs).Sort()
+	for _, pkg := range pkgs {
+		fmt.Println(pkg)
+	}
 }
