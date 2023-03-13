@@ -57,11 +57,11 @@ func (s *MapIntSet) Copy() *MapIntSet {
 func (s *MapIntSet) String() string {
 	b := &bytes.Buffer{}
 	b.WriteByte('{')
-	for i := range s.m {
+	for i, x := range s.Ints() {
 		if i != 0 {
 			b.WriteByte(' ')
 		}
-		fmt.Fprintf(b, "%d", i)
+		fmt.Fprintf(b, "%d", x)
 	}
 	b.WriteByte('}')
 	return b.String()
