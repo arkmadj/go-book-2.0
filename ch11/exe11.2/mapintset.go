@@ -68,7 +68,7 @@ func (s *MapIntSet) String() string {
 }
 
 func (s *MapIntSet) Ints() []int {
-	ints := make([]int, o, len(s.m))
+	ints := make([]int, 0, len(s.m))
 	for x := range s.m {
 		ints = append(ints, x)
 	}
