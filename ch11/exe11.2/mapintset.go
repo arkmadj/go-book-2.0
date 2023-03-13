@@ -35,3 +35,7 @@ func (s *MapIntSet) Len() int {
 func (s *MapIntSet) Remove(x int) {
 	delete(s.m, x)
 }
+
+func (s *MapIntSet) Clear() {
+	s.m = make(map[int]bool)
+}
