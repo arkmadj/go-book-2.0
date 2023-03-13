@@ -39,3 +39,11 @@ func (s *MapIntSet) Remove(x int) {
 func (s *MapIntSet) Clear() {
 	s.m = make(map[int]bool)
 }
+
+func (s *MapIntSet) Copy() *MapIntSet {
+	copy := make(map[int]bool)
+	for k, v := range s.m {
+		copy[k] = v
+	}
+	return &MapIntSet{copy}
+}
