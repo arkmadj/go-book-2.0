@@ -15,3 +15,9 @@ func (s *MapIntSet) Has(x int) bool {
 func (s *MapIntSet) Add(x int) {
 	s.m[x] = true
 }
+
+func (s *MapIntSet) AddAll(nums ...int) {
+	for _, x := range nums {
+		s.m[x] = true
+	}
+}
