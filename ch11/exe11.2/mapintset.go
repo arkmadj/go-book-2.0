@@ -27,3 +27,7 @@ func (s *MapIntSet) UnionWith(t IntSet) {
 		s.m[x] = true
 	}
 }
+
+func (s *MapIntSet) Len() int {
+	return len(s.m)
+}
