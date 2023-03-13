@@ -1,5 +1,10 @@
 package main
 
+import (
+	"bytes"
+	"fmt"
+)
+
 type MapIntSet struct {
 	m map[int]bool
 }
@@ -46,4 +51,17 @@ func (s *MapIntSet) Copy() *MapIntSet {
 		copy[k] = v
 	}
 	return &MapIntSet{copy}
+}
+
+func (s *MapIntSet) String() string {
+	b := &bytes.Buffer{}
+	b.WriteByte('{')
+	for i := range s.m {
+		if i != 0 {
+			b.WriteByte(' ')
+		}
+		fmt.Fprintf(b, "%d", i)
+	}
+	b.WriteByte('}')
+	return b.String()
 }
