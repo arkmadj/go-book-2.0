@@ -11,3 +11,7 @@ func NewMapIntSet() *MapIntSet {
 func (s *MapIntSet) Has(x int) bool {
 	return s.m[x]
 }
+
+func (s *MapIntSet) Add(x int) {
+	s.m[x] = true
+}
