@@ -31,3 +31,7 @@ func (s *MapIntSet) UnionWith(t IntSet) {
 func (s *MapIntSet) Len() int {
 	return len(s.m)
 }
+
+func (s *MapIntSet) Remove(x int) {
+	delete(s.m, x)
+}
