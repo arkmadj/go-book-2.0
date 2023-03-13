@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"sort"
 )
 
 type MapIntSet struct {
@@ -64,4 +65,13 @@ func (s *MapIntSet) String() string {
 	}
 	b.WriteByte('}')
 	return b.String()
+}
+
+func (s *MapIntSet) Ints() []int {
+	ints := make([]int, o, len(s.m))
+	for x := range s.m {
+		ints = append(ints, x)
+	}
+	sort.IntSlice(ints).Sort()
+	return ints
 }
