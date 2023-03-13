@@ -21,3 +21,9 @@ func (s *MapIntSet) AddAll(nums ...int) {
 		s.m[x] = true
 	}
 }
+
+func (s *MapIntSet) UnionWith(t IntSet) {
+	for _, x := range t.Ints() {
+		s.m[x] = true
+	}
+}
