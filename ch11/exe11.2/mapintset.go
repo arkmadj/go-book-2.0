@@ -7,3 +7,7 @@ type MapIntSet struct {
 func NewMapIntSet() *MapIntSet {
 	return &MapIntSet{map[int]bool{}}
 }
+
+func (s *MapIntSet) Has(x int) bool {
+	return s.m[x]
+}
