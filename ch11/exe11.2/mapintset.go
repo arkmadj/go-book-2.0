@@ -46,7 +46,7 @@ func (s *MapIntSet) Clear() {
 	s.m = make(map[int]bool)
 }
 
-func (s *MapIntSet) Copy() *MapIntSet {
+func (s *MapIntSet) Copy() IntSet {
 	copy := make(map[int]bool)
 	for k, v := range s.m {
 		copy[k] = v
