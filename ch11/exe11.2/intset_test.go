@@ -23,3 +23,13 @@ func TestLenAfterAddingElements(t *testing.T) {
 		}
 	}
 }
+
+func TestRemove(t *testing.T) {
+	for _, s := range newIntSets() {
+		s.Add(0)
+		s.Remove(0)
+		if s.Has(0) {
+			t.Errorf("%T: want zero removed, got %s", s, s)
+		}
+	}
+}
