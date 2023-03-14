@@ -45,12 +45,13 @@ func TestClear(t *testing.T) {
 	}
 }
 
-func TestCopy(t *testing.T){
-	for _, orig := range newIntSets()
-	orig.Add(1)
-	copy := orig.Copy()
-	copy.Add(2)
-	if !copy.Has(1) || orig.Has(2){
-		t.Errorf("%T: want %s, got %s", orig, orig, copy)
+func TestCopy(t *testing.T) {
+	for _, orig := range newIntSets() {
+		orig.Add(1)
+		copy := orig.Copy()
+		copy.Add(2)
+		if !copy.Has(1) || orig.Has(2) {
+			t.Errorf("%T: want %s, got %s", orig, orig, copy)
+		}
 	}
 }
