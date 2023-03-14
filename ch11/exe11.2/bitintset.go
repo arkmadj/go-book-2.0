@@ -98,3 +98,18 @@ func (s *BitIntSet) String() string {
 	buf.WriteByte('}')
 	return buf.String()
 }
+
+func (s *BitIntSet) Ints() []int {
+	var ints []int
+	for i, word := range s.words {
+		if word == 0 {
+			continue
+		}
+		for j := 0; j < 64; j++ {
+			if word&(1<<uint(j)) != 0 {
+				ints = append(ints, 64*i+j)
+			}
+		}
+	}
+	return ints
+}
