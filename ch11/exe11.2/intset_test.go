@@ -33,3 +33,14 @@ func TestRemove(t *testing.T) {
 		}
 	}
 }
+
+func TestClear(t *testing.T) {
+	for _, s := range newIntSets() {
+		s.Add(0)
+		s.Add(1000)
+		s.Clear()
+		if s.Has(0) || s.Has(1000) {
+			t.Errorf("%T: want empty set, got %s", s, s)
+		}
+	}
+}
