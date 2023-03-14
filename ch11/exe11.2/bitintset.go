@@ -22,3 +22,19 @@ func (s *BitIntSet) AddAll(nums ...int) {
 		s.Add(n)
 	}
 }
+
+func (s *BitIntSet) UnionWith(t IntSet) {
+	if bis, ok := t.(*BitIntSet); ok {
+		for i, tword := range bis.words {
+			if i < len(s.words) {
+				s.words[i] |= tword
+			} else {
+				s.words = append(s.words, tword)
+			}
+		}
+	} else {
+		for _, i := range t.Ints() {
+			s.Add(i)
+		}
+	}
+}
