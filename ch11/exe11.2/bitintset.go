@@ -66,3 +66,10 @@ func (s *BitIntSet) Clear() {
 		s.words[i] = 0
 	}
 }
+
+func (s *BitIntSet) Copy() IntSet {
+	new := &BitIntSet{}
+	new.words = make([]uint64, len(s.words))
+	copy(new.words, s.words)
+	return new
+}
