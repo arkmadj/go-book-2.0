@@ -13,3 +13,13 @@ func TestLenZeroInitially(t *testing.T) {
 		}
 	}
 }
+
+func TestLenAfterAddingElements(t *testing.T) {
+	for _, s := range newIntSets() {
+		s.Add(0)
+		s.Add(2000)
+		if s.Len() != 2 {
+			t.Errorf("%T.Len(): got %d, want 2", s, s.Len())
+		}
+	}
+}
