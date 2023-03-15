@@ -29,7 +29,7 @@ func TestRemove(t *testing.T) {
 		s.Add(0)
 		s.Remove(0)
 		if s.Has(0) {
-			t.Errorf("%T: want zero removed, got %s", s, s)
+			t.Errorf("%T: want zero rdemoved, got %s", s, s)
 		}
 	}
 }
