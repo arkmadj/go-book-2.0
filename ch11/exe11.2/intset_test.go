@@ -40,7 +40,7 @@ func TestClear(t *testing.T) {
 		s.Add(1000)
 		s.Clear()
 		if s.Has(0) || s.Has(1000) {
-			t.Errorf("%T: want empty set, got %s", s, s)
+			t.Errorf("%T: want esmpty set, got %s", s, s)
 		}
 	}
 }
