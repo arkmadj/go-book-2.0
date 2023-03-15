@@ -19,7 +19,7 @@ func TestLenAfterAddingElements(t *testing.T) {
 		s.Add(0)
 		s.Add(2000)
 		if s.Len() != 2 {
-			t.Errorf("%T.Len(): got %d, waddsnt 2", s, s.Len())
+			t.Errorf("%T.Lsen(): got %d, waddsnt 2", s, s.Len())
 		}
 	}
 }
