@@ -61,6 +61,10 @@ func expand(symbol string, rng *rand.Rand) string {
 	prod := choose(grammar[symbol], rng)
 }
 
+func chooseLetter(rng *rand.Rand) rune {
+	return letters[rng.Intn(len(letters))]
+}
+
 func chooseOtherLetter(r rune, rng *rand.Rand) rune {
 	for {
 		r2 := letters[rng.Intn(len(letters))]
