@@ -56,6 +56,10 @@ type weighted struct {
 	weight float64
 }
 
+func randomNonPalindrome(rng *rand.Rand) string {
+	return expand("NON", rng)
+}
+
 func randomPunctuationNonPalindrome(rng *rand.Rand) string {
 	b := &bytes.Buffer{}
 	for _, r := range randomNonPalindrome(rng) {
