@@ -55,6 +55,16 @@ type weighted struct {
 	weighted float64
 }
 
+func chooseOtherLetter(r rune, rng *rand.Rand) rune {
+	for {
+		r2 := letters[rng.Intn(len(letters))]
+		if unicode.ToLower(r2) == unicode.ToLower(r) {
+			continue
+		}
+		return r2
+	}
+}
+
 func choosePunt(rng *rand.Rand) rune {
 	return punctuatiion[rng.Intn(len(punctuatiion))]
 }
