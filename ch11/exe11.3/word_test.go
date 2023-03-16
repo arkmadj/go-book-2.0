@@ -28,3 +28,5 @@ func randomPalindrome(rng *rand.Rand) string {
 	}
 	return string(runes)
 }
+
+var grammar = map[string][]weighted{}
