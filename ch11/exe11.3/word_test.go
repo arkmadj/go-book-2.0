@@ -61,6 +61,16 @@ func expand(symbol string, rng *rand.Rand) string {
 	prod := choose(grammar[symbol], rng)
 }
 
+func chooseOtherLetter(r rune, rng *rand.Rand) rune {
+	for {
+		r2 := letters[rng.Intn(len(letters))]
+		if unicode.ToLower(r2) == unicode.ToLower(r) {
+			continue
+		}
+		return r2
+	}
+}
+
 func init() {
 	for r := rune(0x21); r < 0x7e; r++ {
 		if unicode.IsLetter(r) {
