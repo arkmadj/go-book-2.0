@@ -29,7 +29,21 @@ func randomPalindrome(rng *rand.Rand) string {
 	return string(runes)
 }
 
-var grammar = map[string][]weighted{}
+var grammar = map[string][]weighted{
+	"NON": []weighted{
+		{"a c b", 1},
+		{"a b", 1},
+		{"a NON b", 30},
+		{"a NON b", 30},
+		{"a PAL b", 30},
+	},
+	"PAL": []weighted{
+		{"eps ", 1},
+		{"a ", 1},
+		{"a a", 1},
+		{"a PAL a", 40},
+	},
+}
 
 var letters []rune
 
