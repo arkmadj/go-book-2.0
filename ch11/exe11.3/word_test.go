@@ -51,3 +51,7 @@ type weighted struct {
 	s      string
 	weight float64
 }
+
+func randomNonPalindrome(rng *rand.Rand) string {
+	return expand("NON", rng)
+}
