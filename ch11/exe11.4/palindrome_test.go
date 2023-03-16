@@ -55,6 +55,10 @@ type weighted struct {
 	weighted float64
 }
 
+func choosePunt(rng *rand.Rand) rune {
+	return punctuatiion[rng.Intn(len(punctuatiion))]
+}
+
 func init() {
 	for r := rune(0x21); r < 0x7e; r++ {
 		switch {
