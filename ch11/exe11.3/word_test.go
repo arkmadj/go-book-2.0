@@ -4,6 +4,7 @@ import (
 	"math/rand"
 	"testing"
 	"time"
+	"unicode"
 )
 
 func TestRandomPalindromes(t *testing.T) {
@@ -58,4 +59,12 @@ func randomNonPalindrome(rng *rand.Rand) string {
 
 func expand(symbol string, rng *rand.Rand) string {
 	prod := choose(grammar[symbol], rng)
+}
+
+func init() {
+	for r := rune(0x21); r < 0x7e; r++ {
+		if unicode.IsLetter(r) {
+			letters = append(letters, r)
+		}
+	}
 }
