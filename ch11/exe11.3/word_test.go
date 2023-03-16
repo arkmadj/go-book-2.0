@@ -55,3 +55,7 @@ type weighted struct {
 func randomNonPalindrome(rng *rand.Rand) string {
 	return expand("NON", rng)
 }
+
+func expand(symbol string, rng *rand.Rand) string {
+	prod := choose(grammar[symbol], rng)
+}
