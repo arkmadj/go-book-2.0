@@ -1,6 +1,7 @@
 package word
 
 import (
+	"bytes"
 	"math/rand"
 	"testing"
 	"time"
@@ -53,6 +54,17 @@ var punctProb = 0.1
 type weighted struct {
 	s      string
 	weight float64
+}
+
+func randomPunctuationNonPalindrome(rng *rand.Rand) string {
+	b := &bytes.Buffer{}
+	for _, r := range randomNonPalindrome(rng) {
+		if rng.Float64() < punctProb {
+			b.WriteRune(choosePunt(rng))
+		}
+		b.WriteRune(r)
+	}
+	return b.String()
 }
 
 func choose(choices []weighted, rng *rand.Rand) string {
