@@ -22,6 +22,19 @@ func TestRandomPalindromes(t *testing.T) {
 	}
 }
 
+func TestRandomNonPalindromes(t *testing.T) {
+	seed := time.Now().UTC().UnixNano()
+	t.Logf("Random seed: %d", seed)
+	rng := rand.New(rand.NewSource(seed))
+	for i := 0; i < 500; i++ {
+		np := randomNonPalindrome(rng)
+		if IsPalindrome(np) {
+			t.Errorf("IsPalindrome(%q) = true", np)
+		}
+	}
+
+}
+
 func randomPalindrome(rng *rand.Rand) string {
 	n := rng.Intn(25)
 	runes := make([]rune, n)
