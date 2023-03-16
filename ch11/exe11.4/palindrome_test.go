@@ -4,6 +4,7 @@ import (
 	"math/rand"
 	"testing"
 	"time"
+	"unicode"
 )
 
 func TestRandomPalindromes(t *testing.T) {
@@ -52,4 +53,15 @@ var punctProb = 0.1
 type weighted struct {
 	s        string
 	weighted float64
+}
+
+func init() {
+	for r := rune(0x21); r < 0x7e; r++ {
+		switch {
+		case unicode.IsLetter(r):
+			letters = append(letters, r)
+		case unicode.IsPunct(r):
+			punctuatiion = append(punctuatiion, r)
+		}
+	}
 }
