@@ -1,7 +1,10 @@
 package word
 
 import (
+	"bytes"
+	"fmt"
 	"math/rand"
+	"strings"
 	"testing"
 	"time"
 	"unicode"
@@ -59,6 +62,30 @@ func randomNonPalindrome(rng *rand.Rand) string {
 
 func expand(symbol string, rng *rand.Rand) string {
 	prod := choose(grammar[symbol], rng)
+	buf := &bytes.Buffer{}
+
+	var a rune
+	for _, sym := range strings.Fields(prod) {
+		if _, ok := grammar[sym]; ok {
+			buf.WriteString(expand(sym, rng))
+			continue
+		}
+		switch sym {
+		case "a":
+			if a == 0 {
+				a = chooseLetter(rng)
+			}
+			buf.WriteRune(a)
+		case "b":
+			buf.WriteRune(chooseOtherLetter(a, rng))
+		case "c":
+			buf.WriteRune(chooseLetter(rng))
+		case "eps":
+		default:
+			panic(fmt.Sprintf("unexpected symbol %q", sym))
+		}
+	}
+	return buf.String()
 }
 
 func choose(choices []weighted, rng *rand.Rand) string {
