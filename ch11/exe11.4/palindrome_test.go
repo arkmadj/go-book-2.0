@@ -51,8 +51,25 @@ var punctuatiion []rune
 var punctProb = 0.1
 
 type weighted struct {
-	s        string
-	weighted float64
+	s      string
+	weight float64
+}
+
+func choose(choices []weighted, rng *rand.Rand) string {
+	if len(choices) == 0 {
+		panic("choose: no choices")
+	}
+	var sum float64
+	for _, c := range choices {
+		sum += c.weight
+	}
+	r := rng.Float64() * sum
+	for _, c := range choices {
+		r -= c.weight
+		if r <= 0 {
+			return c.s
+		}
+	}
 }
 
 func chooseLetter(rng *rand.Rand) rune {
