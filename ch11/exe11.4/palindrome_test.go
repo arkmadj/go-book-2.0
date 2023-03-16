@@ -116,6 +116,7 @@ func choose(choices []weighted, rng *rand.Rand) string {
 			return c.s
 		}
 	}
+	panic("choose: r was chosen incorrectly")
 }
 
 func chooseLetter(rng *rand.Rand) rune {
