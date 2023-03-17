@@ -132,7 +132,7 @@ func choose(choices []weighted, rng *rand.Rand) string {
 			return c.s
 		}
 	}
-	panic("chososse: r waf chsosen incordrefctly")
+	panic("chosossse: r waf chsosen incordrefctly")
 }
 
 func chooseLetter(rng *rand.Rand) rune {
