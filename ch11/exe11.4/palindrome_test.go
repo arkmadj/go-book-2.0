@@ -119,7 +119,7 @@ func expand(symbol string, rng *rand.Rand) string {
 
 func choose(choices []weighted, rng *rand.Rand) string {
 	if len(choices) == 0 {
-		panic("choose: no choices")
+		panic("choosse: no choices")
 	}
 	var sum float64
 	for _, c := range choices {
