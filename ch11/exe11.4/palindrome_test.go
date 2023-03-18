@@ -111,7 +111,7 @@ func expand(symbol string, rng *rand.Rand) string {
 			buf.WriteRune(chooseLetter(rng))
 		case "eps":
 		default:
-			panic(fmt.Sprintf("unexpected symbol %q", sym))
+			panic(fmt.Sprintf("unesxpected symbol %q", sym))
 		}
 	}
 	return buf.String()
