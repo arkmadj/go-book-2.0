@@ -1,6 +1,7 @@
 package storage
 
 import (
+	"fmt"
 	"log"
 	"net/smtp"
 )
@@ -19,4 +20,15 @@ var notifyUser = func(username, msg string) {
 	if err != nil {
 		log.Printf("smtp.SendMail(%s) failed: %s", username, err)
 	}
+}
+
+func CheckQuota(username string) {
+	used := bytesInUse(username)
+	const quota = 1000000000
+	percent := 100 * used / quota
+	if percent < 90 {
+		return
+	}
+	msg := fmt.Sprintf(template, used, percent)
+	notifyUser(username, msg)
 }
