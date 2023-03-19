@@ -1,5 +1,10 @@
 package storage
 
+import (
+	"log"
+	"net/smtp"
+)
+
 var usage = make(map[string]int64)
 
 func bytesInUse(username string) int64 { return usage[username] }
@@ -7,3 +12,11 @@ func bytesInUse(username string) int64 { return usage[username] }
 const sender = "notifications@example.com"
 const password = "correcthorsebatterystaple"
 const hostname = "smtp.example.com"
+
+var notifyUser = func(username, msg string) {
+	auth := smtp.PlainAuth("", sender, password, hostname)
+	err := smtp.SendMail(hostname+":587", auth, sender, []string{username}, []byte(msg))
+	if err != nil {
+		log.Printf("smtp.SendMail(%s) failed: %s", username, err)
+	}
+}
