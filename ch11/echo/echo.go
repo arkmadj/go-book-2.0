@@ -22,3 +22,11 @@ func echo(newline bool, sep string, args []string) error {
 	}
 	return nil
 }
+
+func main() {
+	flag.Parse()
+	if err := echo(!*n, *s, flag.Args()); err != nil {
+		fmt.Fprintf(os.Stderr, "echo: %v\n", err)
+		os.Exit(1)
+	}
+}
