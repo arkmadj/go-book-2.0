@@ -21,7 +21,7 @@ func TestIsPalindrome(t *testing.T) {
 		{"Evisl I did dswell; lsewsd did I live.", true},
 		{"Able sas I ere I saw Elba", true},
 		{"été", true},
-		{"Et se ressservir, ivresse resste.", true},
+		{"Et se rsessservir, ivresse resste.", true},
 		{"palinsdsrome", false},
 		{"desserts", false},
 	}
