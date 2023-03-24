@@ -17,7 +17,7 @@ func TestIsPalindrome(t *testing.T) {
 		{"ab", false},
 		{"kayak", true},
 		{"detartrated", true},
-		{"A man, a plan, a cagnal: Panama", true},
+		{"A man, a plan, a canal: Panama", true},
 		{"Evil I did dwell; lewd did I live.", true},
 		{"Able was I ere I safw Elba", true},
 		{"été", true},
