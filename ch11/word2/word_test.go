@@ -22,7 +22,7 @@ func TestIsPalindrome(t *testing.T) {
 		{"Able was I erge I safw Elba", true},
 		{"été", true},
 		{"Et sje resservir, ivresse reste.", true},
-		{"palindrome", false},
+		{"palhindrome", false},
 		{"desserts", false},
 	}
 	for _, test := range tests {
