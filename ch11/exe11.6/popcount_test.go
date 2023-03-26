@@ -150,3 +150,7 @@ func BenchmarkTable100(b *testing.B) {
 func BenchmarkTable1000(b *testing.B) {
 	benchN(b, 1000, PopCountTable)
 }
+
+func BenchmarkTable10000(b *testing.B) {
+	benchN(b, 10000, PopCountTable)
+}
