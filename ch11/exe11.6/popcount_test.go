@@ -162,3 +162,7 @@ func BenchmarkShiftMask1(b *testing.B) {
 func BenchmarkShiftMask10(b *testing.B) {
 	benchN(b, 10, PopCountShiftMask)
 }
+
+func BenchmarkShiftMask100(b *testing.B) {
+	benchN(b, 100, PopCountShiftMask)
+}
