@@ -1,5 +1,7 @@
 package popcount
 
+import "testing"
+
 func PopCountShiftMask(x uint64) int {
 	count := 0
 	mask := uint64(1)
@@ -50,4 +52,10 @@ func PopCountTable(x uint64) int {
 		pc[byte(x>>(5*8))] +
 		pc[byte(x>>(6*8))] +
 		pc[byte(x>>(7*8))])
+}
+
+func bench(b *testing.B, f func(uint64) int) {
+	for i := 0; i < b.N; i++ {
+		f(uint64(i))
+	}
 }
