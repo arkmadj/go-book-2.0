@@ -94,3 +94,7 @@ func BenchmarkShiftValue(b *testing.B) {
 func BenchmarkClearRightMost(b *testing.B) {
 	bench(b, PopCountClearRightmost)
 }
+
+func BenchmarkClearRightMost1(b *testing.B) {
+	benchN(b, 1, PopCountClearRightmost)
+}
