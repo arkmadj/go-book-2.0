@@ -67,3 +67,14 @@ func benchN(b *testing.B, n int, f func(uint64) int) {
 		}
 	}
 }
+
+func benchTableN(b *testing.B, n int) {
+	for i := range pc {
+		pc[i] = pc[i/2] + byte(i&1)
+	}
+	for i := 0; i < b.N; i++ {
+		for j := 0; j < n; j++ {
+			PopCountTable(uint64(j))
+		}
+	}
+}
