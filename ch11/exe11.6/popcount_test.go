@@ -134,3 +134,6 @@ func BenchmarkShiftValue1000(b *testing.B) {
 func BenchmarkShiftValue10000(b *testing.B) {
 	benchN(b, 10000, PopCountShiftValue)
 }
+func BenchmarkTable1(b *testing.B) {
+	benchN(b, 1, PopCountTable)
+}
