@@ -78,3 +78,7 @@ func benchTableN(b *testing.B, n int) {
 		}
 	}
 }
+
+func BenchmarkTable(b *testing.B) {
+	bench(b, PopCountTable)
+}
