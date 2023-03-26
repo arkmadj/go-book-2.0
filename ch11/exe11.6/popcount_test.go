@@ -102,3 +102,7 @@ func BenchmarkClearRightMost1(b *testing.B) {
 func BenchmarkClearRightMost10(b *testing.B) {
 	benchN(b, 10, PopCountClearRightmost)
 }
+
+func BenchmarkClearRightMost100(b *testing.B) {
+	benchN(b, 100, PopCountClearRightmost)
+}
